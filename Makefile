@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/19 18:23:29 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/19 18:52:22 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,25 @@ NAME				= cub3D
 INCLUDE				= .
 INCLUDE_FILES		= cub3d.h
 
-LIBMLX_DIR			= minilibx_mms_20210621
-LIBMLX_INCLUDE		= $(LIBMLX_DIR)
-LIBMLX				= libmlx.dylib
+LIB_DIR		= 	library/
+LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK)
+LIB_INC		=	$(LIBFT_INC) $(MLX_INC)
+HDR_INC		=	$(LIB_INC) 
+###	libft
+LIBFT_DIR	=	$(LIB_DIR)libft/
+LIBFT_INC	=	-I $(LIBFT_DIR)
+LIBFT_LNK	=	-L $(LIBFT_DIR) -l ft
+###	mlx
+MLX_DIR 	=	$(LIB_DIR)mlx/
+MLX_INC		=	-I $(MLX_DIR)
+MLX_LNK		=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
+
 
 
 SRCS_DIR 			= srcs
 SRC					= main.c
+
+
 SRCS				= $(addprefix $(SRCS_DIR)/, $(SRC))
 OBJS				= $(SRCS:.c=.o)
 
@@ -32,25 +44,34 @@ CFLAGS				= -Wall -Wextra -Werror
 .PHONY				: all
 all					: $(NAME)
 
-$(NAME)				: $(OBJS)  $(LIBMLX) $(INCLUDE_FILES)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $@
+$(NAME)				: lib_make $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_LNK) -o $@
+
+.PHONY				: lib_make
+lib_make			:
+	@make -C $(LIB_DIR) all
 					
-%.o					: %.c
-	$(CC) $(CFLAGS) -I$(LIBMLX_INCLUDE) -I$(INCLUDE) -c $< -o $@
+%.o					: %.c $(INCLUDE)
+	$(CC) $(CFLAGS) $(LIB_INC) -I $(INCLUDE) -c $< -o $@
 
-$(LIBMLX)			:
-	make -C $(LIBMLX_DIR) all
-	cp $(LIBMLX_DIR)/$(LIBMLX) ./
-
-.PHONY				: clean
+.PHONY				: clean lclean
 clean				:
 	$(RM) $(OBJS)
 
-.PHONY				: fclean
-fclean				: clean
-	$(RM) $(NAME) $(LIBMLX)
-	# make -C $(LIBMLX_DIR) clean
+lclean			:
+	@make -C $(LIB_DIR) lclean
 
-.PHONY				: re
+.PHONY				: fclean lfclean
+fclean				: clean
+	$(RM) $(NAME)
+
+lfclean			:
+	@make -C $(LIB_DIR) lfclean
+
+.PHONY				: re lre
 re					: fclean
 						make all
+
+lre					:
+	@make -C $(LIB_DIR) lre
+
