@@ -3,33 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/19 21:09:21 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/19 22:25:40 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 
 # define CUB3D_H
+
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "libft.h"
 
 typedef struct s_texture
 {
-    int *north;
-    int *south;
-    int *east;
-    int *west;
-}   t_texture;
+	char	**north;
+	char	**south;
+	char	**east;
+	char	**west;
+	int		floor;
+	int		ceiling;
+}	t_texture;
 
 typedef struct s_info
 {
-    t_texture   texture;
-
-}   t_info;
+	t_texture	texture;
+}	t_info;
 
 #endif

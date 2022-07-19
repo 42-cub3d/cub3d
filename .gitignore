@@ -8,4 +8,6 @@ cub3d_en.subject.pdf
 
 *.swp
 
-*.o
+.vscode
+
+.tests
