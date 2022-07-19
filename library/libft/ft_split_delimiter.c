@@ -1,81 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util_string.c                                   :+:      :+:    :+:   */
+/*   ft_split_delimiter.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 22:27:03 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/19 22:27:05 by yongmkim         ###   ########seoul.kr  */
+/*   Created: 2022/07/19 22:37:47 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/07/19 22:47:51 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	char	*temp;
-	size_t	src_len;
-	size_t	dst_len;
-
-	if (!s)
-		return (NULL);
-	src_len = ft_strlen(s);
-	if (start > src_len)
-		start = src_len;
-	dst_len = ft_strlen(s + start);
-	if (dst_len > len)
-		dst_len = len;
-	temp = ft_calloc(dst_len + 1, sizeof(char));
-	if (temp)
-	{
-		ft_memcpy(temp, s + start, dst_len);
-		temp[dst_len] = '\0';
-	}
-	return (temp);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	t_len;
-	char	*temp;
-
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	t_len = ft_strlen(s1) + ft_strlen(s2);
-	temp = ft_calloc(t_len + 1, sizeof(char));
-	if (temp)
-	{
-		ft_strlcat(temp, s1, t_len + 1);
-		ft_strlcat(temp, s2, t_len + 1);
-	}
-	return (temp);
-}
-
-char	*ft_strtrim(char const *s1, char const *set)
-{
-	size_t	front_pos;
-	size_t	rear_pos;
-
-	if (!s1)
-		return (NULL);
-	if (!set)
-		return (ft_strdup(s1));
-	front_pos = 0;
-	rear_pos = ft_strlen(s1);
-	if (0 < rear_pos)
-	{
-		while (ft_strchr(set, s1[front_pos]))
-			front_pos++;
-		while (ft_strchr(set, s1[rear_pos - 1]))
-			rear_pos--;
-	}
-	return (ft_substr(s1, front_pos, rear_pos - front_pos));
-}
 
 static char	**_append_sv(char **org, char *append, size_t *size, size_t cur)
 {
@@ -105,7 +40,36 @@ static char	**_append_sv(char **org, char *append, size_t *size, size_t cur)
 	return (NULL);
 }
 
-char	**ft_split(char const *s, char c)
+static int	_is_delimiter(char c, char *delim)
+{
+	if (!delim)
+		return (0);
+	while (*delim)
+	{
+		if (*delim == c)
+			return (1);
+		delim++;
+	}
+	return (0);
+}
+
+static char	*_strchr_delimiter(char *s, char *delim)
+{
+	while (*s)
+	{
+		if (_is_delimiter(*s, delim))
+			return (s);
+		s++;
+	}
+	if (*delim == '\0')
+	{
+		if (s)
+			return (s);
+	}
+	return (NULL);
+}
+
+char	**ft_split_delimiter(char const *s, char *delim)
 {
 	t_split_info	sp;
 
@@ -116,9 +80,9 @@ char	**ft_split(char const *s, char c)
 	sp.sv_temp = ft_calloc(sp.size, sizeof(char *));
 	while (sp.sv_temp && *s)
 	{
-		if (*s != c)
+		if (!_is_delimiter(*s, delim))
 		{
-			sp.pos = ft_strchr(s, c);
+			sp.pos = _strchr_delimiter((char *)s, delim);
 			if (!sp.pos)
 				sp.pos = (char *)s + ft_strlen(s);
 			sp.s_temp = ft_substr(s, 0, sp.pos - s);

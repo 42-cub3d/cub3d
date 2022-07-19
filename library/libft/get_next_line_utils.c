@@ -3,49 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 15:16:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/19 21:18:09 by wchae            ###   ########.fr       */
+/*   Created: 2022/02/22 16:26:13 by wchae             #+#    #+#             */
+/*   Updated: 2022/07/19 22:23:37 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-int	ft_strchr_find_nl(char *s)
+size_t	gnl_strlen(const char *str)
 {
-	int	pos;
+	size_t	i;
 
-	if (!s)
-		return (0);
-	pos = 0;
-	while (s[pos])
-	{
-		if (s[pos] == '\n')
-			return (pos + 1);
-		pos++;
-	}
-	return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-char	*ft_free(char **s1, char **s2, int keyword)
+char	*gnl_strndup(const char *s1, size_t n)
 {
-	char	*temp;
+	char	*ret;
+	char	*ptr;
 
-	if (keyword == FT_DEL)
-	{
-		if (*s1)
-		{
-			free(*s1);
-			*s1 = NULL;
-		}
-	}
-	else if (keyword == FT_ADD)
-	{
-		temp = ft_strjoin((char *)*s1, *s2);
-		ft_free(s1, NULL, FT_DEL);
-		*s1 = temp;
-	}
+	ret = malloc(n + 1);
+	if (!ret)
+		return (NULL);
+	ptr = ret;
+	while (n--)
+		*ptr++ = *s1++;
+	*ptr = '\0';
+	return (ret);
+}
+
+char	*gnl_strchr(const char *str, int c)
+{
+	char	*ptr;
+
+	ptr = (char *)str;
+	while (*ptr && *ptr != (char)c)
+		ptr++;
+	if (*ptr == (char)c)
+		return (ptr);
 	return (NULL);
+}
+
+char	*gnl_strjoin(char const *s1, char const *s2)
+{
+	char	*ret;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	ret = malloc(gnl_strlen(s1) + gnl_strlen(s2) + 1);
+	if (!ret)
+		return (NULL);
+	while (s1[i])
+	{
+		ret[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		ret[i++] = s2[j++];
+	ret[i] = '\0';
+	return (ret);
 }
