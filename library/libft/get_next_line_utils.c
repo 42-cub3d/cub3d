@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 15:16:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/19 21:04:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/19 21:18:09 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 int	ft_strchr_find_nl(char *s)
 {
