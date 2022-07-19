@@ -5,6 +5,22 @@
 #ifndef LIBFT_H
 
 # include <stddef.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8
+# endif
+# define FT_DEL 0
+# define FT_NEW 1
+# define FT_ADD 2
+
+typedef struct s_gnl_list
+{
+	struct s_gnl_list	*next;
+	char				*save_line;
+	int					fd;
+	ssize_t				read_size;
+}						t_gnl_list;
 
 typedef struct s_split_info
 {
@@ -117,5 +133,13 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/*		get_next_line.c
+**==============================================================================
+*/
+char	*get_next_line(int fd);
+int		ft_strchr_find_nl(char *s);
+char	*ft_free(char **s1, char **s2, int keyword);
+
 
 #endif

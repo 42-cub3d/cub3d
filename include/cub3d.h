@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/19 17:52:25 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/19 21:09:21 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,18 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+typedef struct s_texture
+{
+    int *north;
+    int *south;
+    int *east;
+    int *west;
+}   t_texture;
+
+typedef struct s_info
+{
+    t_texture   texture;
+
+}   t_info;
 
 #endif
