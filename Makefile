@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/19 17:52:21 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/19 18:23:29 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,10 @@ NAME				= cub3D
 INCLUDE				= .
 INCLUDE_FILES		= cub3d.h
 
-LIBMLX_DIR			= minilibx_mms_20200219
+LIBMLX_DIR			= minilibx_mms_20210621
 LIBMLX_INCLUDE		= $(LIBMLX_DIR)
 LIBMLX				= libmlx.dylib
+
 
 SRCS_DIR 			= srcs
 SRC					= main.c
@@ -31,7 +32,7 @@ CFLAGS				= -Wall -Wextra -Werror
 .PHONY				: all
 all					: $(NAME)
 
-$(NAME)				: $(OBJS) $(LIBMLX) $(INCLUDE_FILES)
+$(NAME)				: $(OBJS)  $(LIBMLX) $(INCLUDE_FILES)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $@
 					
 %.o					: %.c
