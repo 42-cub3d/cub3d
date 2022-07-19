@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 00:59:30 by yongmkim         ###   ########.fr       */
+/*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/07/20 01:39:56 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "get_map.h"
 
-int main(int argc, char **argv)
+t_dot	**get_map(int fd)
 {
 
-    if (argc != 2)
-        printf("argc error\n");
-    argv = NULL;
-    return (EXIT_SUCCESS);
 }
