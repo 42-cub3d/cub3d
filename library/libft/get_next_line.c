@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 15:16:22 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/19 21:10:28 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/19 21:18:20 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static t_gnl_list	*ft_list_init(t_gnl_list **head, int fd, int keyword)
 {
