@@ -6,14 +6,13 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/19 18:52:22 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/19 20:26:02 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				= cub3D
 
-INCLUDE				= .
-INCLUDE_FILES		= cub3d.h
+INC_DIR				= include/
 
 LIB_DIR		= 	library/
 LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK)
@@ -30,48 +29,69 @@ MLX_LNK		=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
 
 
 
-SRCS_DIR 			= srcs
-SRC					= main.c
+SRCS_DIR 			= srcs/
+
+OBJS_DIR 			= objs/
+
+SRC					= main.c \
 
 
-SRCS				= $(addprefix $(SRCS_DIR)/, $(SRC))
-OBJS				= $(SRCS:.c=.o)
+OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
-RM					= rm -f
+
+RM					= rm
+RMFLAGS				= -f
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror
 
+
+
+
+
+
 .PHONY				: all
-all					: $(NAME)
+all					: obj_dir $(NAME)
 
-$(NAME)				: lib_make $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIB_LNK) -o $@
+$(NAME)				: lib_make $(OBJECT)
+	$(CC) $(CFLAGS) $(LIB_LNK) $(OBJECT) -o $@
 
-.PHONY				: lib_make
+
+.PHONY				: lib_make obj_dir
+obj_dir				:
+	@mkdir -p $(OBJS_DIR)
+
 lib_make			:
 	@make -C $(LIB_DIR) all
-					
-%.o					: %.c $(INCLUDE)
-	$(CC) $(CFLAGS) $(LIB_INC) -I $(INCLUDE) -c $< -o $@
+
+lib_clean			:
+	@make -C $(LIB_DIR) clean
+
+lib_fclean			:
+	@make -C $(LIB_DIR) fclean
+
+lib_re				:
+	@make -C $(LIB_DIR) re
+
+
+$(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
+	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
+
 
 .PHONY				: clean lclean
 clean				:
-	$(RM) $(OBJS)
+	$(RM) -rf $(OBJS_DIR)
 
-lclean			:
-	@make -C $(LIB_DIR) lclean
+lclean			: lib_clean
 
 .PHONY				: fclean lfclean
 fclean				: clean
-	$(RM) $(NAME)
+	$(RM) $(RMFLAGS) $(NAME)
 
-lfclean			:
-	@make -C $(LIB_DIR) lfclean
+lfclean			: lib_fclean
 
 .PHONY				: re lre
 re					: fclean
 						make all
 
-lre					:
-	@make -C $(LIB_DIR) lre
+lre					: lib_re
 

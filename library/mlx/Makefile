@@ -6,7 +6,7 @@
 #    By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 14:57:37 by yongmkim          #+#    #+#              #
-#    Updated: 2022/07/19 18:08:53 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/19 20:24:21 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,8 +106,8 @@ clean		:
 	@rm -f $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *.swiftsourceinfo *~
 	@printf "   $(_INFO) $(_CLEAN) - clean $(_DONE)\n"
 
-fclean		:
-	@rm -f $(NAME) $(OBJ) $(MODULE_OBJ) $(C_OBJ) *.swiftdoc *.swiftsourceinfo *~
+fclean		: clean
+	@rm -f $(NAME)
 	@rm -f ../../$(NAME)
 	@printf "   $(_INFO) $(_CLEAN) - fclean $(_DONE)\n"
 
