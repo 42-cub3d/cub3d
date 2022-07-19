@@ -7,3 +7,5 @@ a.out
 cub3d_en.subject.pdf
 
 *.swp
+
+*.o

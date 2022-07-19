@@ -1,26 +1,32 @@
 /* ************************************************************************** */
-/**//**//*****//**//*   By: *//**//*   Created:   by *//*   Updated:   by *//**/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/19 22:23:51 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/07/19 22:23:58 by yongmkim         ###   ########seoul.kr  */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
-# include <stddef.h>
+//# include <stddef.h>
+# include <stdlib.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 8
+#  define BUFFER_SIZE 48
 # endif
-# define FT_DEL 0
-# define FT_NEW 1
-# define FT_ADD 2
 
-typedef struct s_gnl_list
-{
-	struct s_gnl_list	*next;
-	char				*save_line;
-	int					fd;
-	ssize_t				read_size;
-}						t_gnl_list;
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
+
+# define SUCCESS 1
+# define END_OF_FILE 0
+# define ERROR -1
 
 typedef struct s_split_info
 {
@@ -137,9 +143,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /*		get_next_line.c
 **==============================================================================
 */
-char	*get_next_line(int fd);
-int		ft_strchr_find_nl(char *s);
-char	*ft_free(char **s1, char **s2, int keyword);
-
+int		get_next_line(int fd, char **line);
+size_t	gnl_strlen(const char *str);
+char	*gnl_strndup(const char *s, size_t n);
+char	*gnl_strjoin(char const *s1, char const *s2);
+char	*gnl_strchr(const char *str, int c);
 
 #endif

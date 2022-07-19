@@ -1,9 +1,16 @@
 /* ************************************************************************** */
-/**//**//*****//**//*   By: *//**//*   Created:   by *//*   Updated:   by *//**/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_util_string.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/19 22:27:03 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/07/19 22:27:05 by yongmkim         ###   ########seoul.kr  */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
