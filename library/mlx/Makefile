@@ -5,11 +5,39 @@
 #                                                     +:+ +:+         +:+      #
 #    By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/07/19 17:38:27 by yongmkim          #+#    #+#              #
-#    Updated: 2022/07/19 17:50:07 by yongmkim         ###   ########.fr        #
+#    Created: 2022/04/21 14:57:37 by yongmkim          #+#    #+#              #
+#    Updated: 2022/07/19 17:44:02 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-#	Color  =====================================================================
+
+
+NAME		=	libmlx.dylib
+
+MODULE_SRC	=	mlx_image.swift\
+				mlx_window.swift \
+				mlx_init.swift
+
+SRC			=	interface.swift $(MODULE_SRC)
+
+C_SRC		=	mlx_xpm.c\
+				mlx_png.c\
+				mlx_string_put.c
+
+OBJ_DIR		=	
+
+MODULE_OBJ	=	$(addprefix $(OBJ_DIR), $(MODULE_SRC:.swift=.swiftmodule))
+OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.swift=.o))
+C_OBJ		=	$(addprefix $(OBJ_DIR), $(C_SRC:.c=.o))
+
+
+
+CFLAGS		=	-O3
+
+INC			=	-I.
+HDR			=	mlx.h
+#OPTI=-Ounchecked
+
+#	Color
 GREEN		=	\e[38;5;118m
 YELLOW		=	\e[38;5;226m
 ORANGE		=	\e[38;5;214m
@@ -24,46 +52,21 @@ _NAME_B		=	[$(GREEN)$(NAME_B)$(RESET)]
 _PROG		=	$(_INFO) [$(ORANGE)$(NAME)$(RESET)] - Compile $(YELLOW)
 _DONE		=	$(GREEN)✓$(RESET)
 
+####
 #	Loading bar
 SHELL		=	/bin/bash
 sp			=	/-\|/
 idx			=	0
-#	Make  ======================================================================
-
-NAME		=	libmlx.dylib
-
-MODULE_SRC	=	mlx_image.swift \
-				mlx_window.swift\
-				mlx_init.swift
-
-SRC			=	interface.swift $(MODULE_SRC)
-
-C_SRC		=	mlx_xpm.c \
-				mlx_png.c \
-				mlx_string_put.c
-
-OBJ_DIR		=	
-
-MODULE_OBJ	=	$(MODULE_SRC:.swift=.swiftmodule)
-OBJ			=	$(SRC:.swift=.o)
-C_OBJ		=	$(C_SRC:.c=.o)
-
-CFLAGS		=	-O3
-
-INC			=	-I.
-HDR			=	mlx.h
-#OPTI=-Ounchecked
-
-
-
-
 
 
 
 #	Make  ======================================================================
-all			:	$(NAME)
+all			:	 $(NAME)
 
-$(NAME)		:	$(MODULE_OBJ) $(OBJ) $(C_OBJ)
+obj_dir		:
+	@mkdir -p $(OBJ_DIR)
+
+$(NAME)		: $(MODULE_OBJ) $(OBJ) $(C_OBJ)
 	@printf "\b$(_DONE)\n"
 	@swiftc $(OPTI) $(INC) -o $(NAME) -emit-library $(OBJ) $(C_OBJ) -lz
 	@cp libmlx.dylib ../../

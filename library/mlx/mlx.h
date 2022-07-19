@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mlx.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/21 15:34:05 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/04/21 15:34:17 by yongmkim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /*
 ** mlx.h for MinilibX in 
 ** 
@@ -34,10 +46,9 @@
 **
 */
 
-
 #ifndef MLX_H
 
-#define	MLX_H
+# define	MLX_H
 
 
 void	*mlx_init();
@@ -141,9 +152,9 @@ int	mlx_do_key_autorepeatoff(void *mlx_ptr);
 int	mlx_do_key_autorepeaton(void *mlx_ptr);
 int	mlx_do_sync(void *mlx_ptr);
 
-#define MLX_SYNC_IMAGE_WRITABLE		1
-#define MLX_SYNC_WIN_FLUSH_CMD		2
-#define MLX_SYNC_WIN_CMD_COMPLETED	3
+# define MLX_SYNC_IMAGE_WRITABLE		1
+# define MLX_SYNC_WIN_FLUSH_CMD		2
+# define MLX_SYNC_WIN_CMD_COMPLETED	3
 int	mlx_sync(int cmd, void *param);
 /*
 ** image_writable can loop forever if no flush occurred. Flush is always done by mlx_loop.
