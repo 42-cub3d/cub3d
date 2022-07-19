@@ -117,7 +117,7 @@ $(NAME)		:	$(OBJECT)
 		@if [ $(idx) -gt 0 ]; then\
 			printf "\b$(_DONE)\n";\
 		fi
-		$(AR) $(AR_FLAG) $@ $^
+		@$(AR) $(AR_FLAG) $@ $^
 		@printf "$(_SUCCESS) $(_NAME) - $(_PART) $(_DONE)\n"
 
 #==============================================================================
@@ -134,10 +134,10 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 		$(eval t_idx = $(shell expr $(idx) % 4 + 1))
 		$(eval chr = $(shell echo $(sp) | cut -c $(t_idx)))
 		@if [ $(idx) = 1 ]; then\
-			printf "   $(_prog) ";\
+			printf "   $(_PROG) ";\
 		fi
 		@printf "\b$(chr)"
-		$(CC) $(CFLAG) -o $@ -c $<
+		@$(CC) $(CFLAG) -o $@ -c $<
 #@$(CC) $(CFLAG) $(LIB_LNK) -o $@ -c $<
 
 #==============================================================================
@@ -147,18 +147,18 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 c			:	clean
 clear		:	clean
 clean		:
-		$(RM) -rf $(OBJ_DIR)
-# @printf "   $(_INFO) $(_CLEAN) - clean $(_DONE)\n"
+		@$(RM) -rf $(OBJ_DIR)
+		@printf "   $(_INFO) $(_CLEAN) - clean $(_DONE)\n"
 f			:	fclean
 fclear		:	fclean
 fclean		:
-		make clean
-		$(RM) -f $(NAME)
-# @printf "   $(_INFO) $(_CLEAN) - fclean $(_DONE)\n"
+		@make clean
+		@$(RM) -f $(NAME)
+		@printf "   $(_INFO) $(_CLEAN) - fclean $(_DONE)\n"
 
 re			:
-		make fclean
-		make all
+		@make fclean
+		@make all
 
 b			:	bonus
 bonus		:

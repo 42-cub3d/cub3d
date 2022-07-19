@@ -6,7 +6,7 @@
 #    By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/20 17:15:09 by yongmkim          #+#    #+#              #
-#    Updated: 2022/07/19 18:00:05 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/19 18:10:27 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,20 +20,20 @@ all			:
 		@make -C $(MLX_DIR)
 
 
-clean		:
+lclean		:
 		@make -C $(LIBFT_DIR) clean
-#		@make -C $(MLX_DIR) clean
+		@make -C $(MLX_DIR) clean
 
-fclean		:
+lfclean		:
 		@make -C $(LIBFT_DIR) fclean
-#		@make -C $(MLX_DIR) fclean
+		@make -C $(MLX_DIR) fclean
 
-re			:
-#		@make fclean
-#		@make all
+lre			:
+		@make lfclean
+		@make all
 
-clear		:	clean
+lclear		:	lclean
 
-fclear		:	fclean
+lfclear		:	lfclean
 
-.PHONY		:	all clean fclean re clear\
+.PHONY		:	all lclean lfclean lre lclear lfclear \
