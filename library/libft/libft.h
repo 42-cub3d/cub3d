@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 22:23:51 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/19 22:23:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/19 22:46:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,10 @@ size_t	gnl_strlen(const char *str);
 char	*gnl_strndup(const char *s, size_t n);
 char	*gnl_strjoin(char const *s1, char const *s2);
 char	*gnl_strchr(const char *str, int c);
+
+/*		ft_split_delimiter.c
+**==============================================================================
+*/
+char	**ft_split_delimiter(char const *s, char *delim);
 
 #endif

@@ -47,6 +47,7 @@ SRC			=	ft_libc_ctype_convert.c \
 				ft_util_string.c \
 				get_next_line.c \
 				get_next_line_utils.c \
+				ft_split_delimiter.c \
 
 SRC_B		=	ft_list_lib_util.c \
 				ft_list_lib.c \
