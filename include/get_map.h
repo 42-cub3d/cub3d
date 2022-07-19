@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   get_map.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/19 21:41:07 by yongmkim         ###   ########seoul.kr  */
+/*   Created: 2022/07/19 21:38:13 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/07/19 21:41:59 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
+#ifndef GET_MAP_H
+# define GET_MAP_H
 
-# define CUB3D_H
-# include <math.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-
-typedef struct s_texture
+enum e_map_flag
 {
-	int	*north;
-	int	*south;
-	int	*east;
-	int	*west;
-}	t_texture;
-
-typedef struct s_info
-{
-	t_texture	texture;
-
-}	t_info;
+	FIELD = 1 << 1,
+	WALL = 1 << 2,
+	SPACE = 1 << 3,
+	POS_N = 1 << 4,
+	POS_W = 1 << 5,
+	POS_S = 1 << 6,
+	POS_E = 1 << 7,
+	END_LINE = 1 << 8,
+	WRONG = 1 << 9,
+	DOOR_OPEND = 1 << 10,
+	DOOR_CLOSED = 1 << 11,
+	SPRITE = 1 << 12,
+	DOOR = DOOR_OPEND | DOOR_CLOSED,
+	PLAYER = POS_N | POS_S | POS_E | POS_W
+};
 
 #endif
