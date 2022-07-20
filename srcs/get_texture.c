@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/20 23:01:36 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/20 23:45:53 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	get_texture(t_texture *texture, int map_fd)
 			ft_exit("get_next_line_error");
 		comma_cnt = count_comma(line);
 		splited_line = ft_split_delimiter(line, ", \n");
-		// ft_testchar(splited_line);
-		if (!splited_line || !*splited_line)
+		printf("here\n");
+		if (!*splited_line)
 		{
 			free_line(&line, &splited_line);
 			continue ;
