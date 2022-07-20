@@ -6,7 +6,11 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
+<<<<<<< HEAD
+#    Updated: 2022/07/20 23:39:14 by wchae            ###   ########.fr        #
+=======
 #    Updated: 2022/07/20 21:21:53 by yongmkim         ###   ########.fr        #
+>>>>>>> bc7b30ae707a3ccd612b88ed11125cf226030601
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +21,7 @@ INC_DIR				= include/
 LIB_DIR		= 	library/
 LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK)
 LIB_INC		=	$(LIBFT_INC) $(MLX_INC)
-HDR_INC		=	$(LIB_INC) 
+HDR_INC		=	$(LIB_INC)
 ###	libft
 LIBFT_DIR	=	$(LIB_DIR)libft/
 LIBFT_INC	=	-I $(LIBFT_DIR)
@@ -33,9 +37,13 @@ SRCS_DIR 			= srcs/
 
 OBJS_DIR 			= objs/
 
+<<<<<<< HEAD
+SRC					= main.c parse_map.c get_texture.c get_color.c\
+=======
 SRC					= get_map.c \
 					  check_map_error.c \
 
+>>>>>>> bc7b30ae707a3ccd612b88ed11125cf226030601
 
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
@@ -44,7 +52,7 @@ OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 RM					= rm
 RMFLAGS				= -f
 CC					= cc
-CFLAGS				= -Wall -Wextra -Werror
+CFLAGS				= -Wall -Wextra -Werror -g -fsanitize=address
 
 SNTZ				=	-g -fsanitize=address -fno-omit-frame-pointer
 MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
