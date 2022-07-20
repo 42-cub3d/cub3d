@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/19 22:25:40 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/20 20:18:21 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,16 @@ typedef struct s_info
 {
 	t_texture	texture;
 }	t_info;
+
+#define NORTH "NO"
+#define SOUTH "SO"
+#define WEST "WE"
+#define EAST "EA"
+#define FLOOR "F"
+#define CELLING "C"
+
+/* PARSE MAP */
+void	get_texture(t_texture *texture, int map_fd);
+int		get_color(char **line);
 
 #endif
