@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/19 20:26:02 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/20 21:13:11 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INC_DIR				= include/
 LIB_DIR		= 	library/
 LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK)
 LIB_INC		=	$(LIBFT_INC) $(MLX_INC)
-HDR_INC		=	$(LIB_INC) 
+HDR_INC		=	$(LIB_INC)
 ###	libft
 LIBFT_DIR	=	$(LIB_DIR)libft/
 LIBFT_INC	=	-I $(LIBFT_DIR)
@@ -33,7 +33,7 @@ SRCS_DIR 			= srcs/
 
 OBJS_DIR 			= objs/
 
-SRC					= main.c \
+SRC					= main.c parse_map.c get_texture.c get_color.c\
 
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
@@ -42,7 +42,7 @@ OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 RM					= rm
 RMFLAGS				= -f
 CC					= cc
-CFLAGS				= -Wall -Wextra -Werror
+CFLAGS				= -Wall -Wextra -Werror -g #-fsanitize=address
 
 
 
