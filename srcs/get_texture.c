@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/20 23:45:53 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 01:49:20 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,20 @@ size_t	count_comma(char *str)
 	return (cnt);
 }
 
-static void	free_line(char **line, char ***splitted_line)
+static void	free_line(char **line, char ***splited_line)
 {
 	size_t	i;
 
 	free(*line);
 	*line = NULL;
 	i = 0;
-	while ((*splitted_line)[i])
+	while ((*splited_line)[i])
 	{
-		free((*splitted_line)[i]);
+		free((*splited_line)[i]);
 		i++;
 	}
-	free(*splitted_line);
-	*splitted_line = NULL;
+	free(*splited_line);
+	*splited_line = NULL;
 }
 
 static	void	get_texture_content(t_texture *t, char **line, size_t comma_cnt)
@@ -84,9 +84,10 @@ void	get_texture(t_texture *texture, int map_fd)
 	{
 		if (get_next_line(map_fd, &line) < 0)
 			ft_exit("get_next_line_error");
+		if (!line)
+			ft_exit("");
 		comma_cnt = count_comma(line);
 		splited_line = ft_split_delimiter(line, ", \n");
-		printf("here\n");
 		if (!*splited_line)
 		{
 			free_line(&line, &splited_line);

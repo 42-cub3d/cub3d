@@ -6,25 +6,26 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:52:00 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 01:49:49 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-//TEST
-void	ft_exit(char *err)
+void	ft_exit(char *err_msg)
 {
-	if(err)
-		printf("%s\n",err);
-	printf("error exit\n");
-	exit (EXIT_FAILURE);
+	if(err_msg)
+	{
+		ft_putendl_fd(err_msg, 2);
+	}
+	else 
+		ft_putendl_fd(strerror(errno), 2);
+	exit(EXIT_FAILURE);
 }
-//TEST
+
 int	main(int argc, char **argv)
 {
     if (argc != 2)
-        printf("argc error\n");
+        ft_exit("Need .cub map file");
 	parse_map(argv);
-	printf("SUCCESS\n");
     return (EXIT_SUCCESS);
 }

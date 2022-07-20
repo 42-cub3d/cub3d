@@ -7,3 +7,5 @@ libmlx.dylib
 *.swiftmodule
 
 *.swiftsourceinfo
+
+*.o
