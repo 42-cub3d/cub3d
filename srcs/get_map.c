@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:19:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 01:30:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static void	_init_info(t_map_info *info)
+static void	_init_info(t_map_parse *info)
 {
 	info->temp_map = ft_calloc(sizeof(char *), 2);
-	info->map.width = 0;
-	info->map.height = 0;
 	info->map.map = NULL;
 	info->temp = NULL;
 	info->str_vec_size = 2;
@@ -28,7 +26,7 @@ static void	_init_info(t_map_info *info)
 	info->temp_length = 0;
 }
 
-static int	_append_map(t_map_info *info, size_t cur)
+static int	_append_map(t_map_parse *info, size_t cur)
 {
 	char	**temp;
 
@@ -38,12 +36,12 @@ static int	_append_map(t_map_info *info, size_t cur)
 		while (info->temp_map && *temp)
 			free(*(temp++));
 		free(info->temp_map);
-		return (-1);
+		return (MAP_FAILURE);
 	}
 	if (cur < info->str_vec_size - 1)
 	{
 		info->temp_map[cur] = info->temp;
-		return (0);
+		return (MAP_SUCCESS);
 	}
 	info->str_vec_size <<= 1;
 	temp = ft_calloc(info->str_vec_size, sizeof(char *));
@@ -54,10 +52,10 @@ static int	_append_map(t_map_info *info, size_t cur)
 		info->temp_map = temp;
 		return (_append_map(info, info->cur));
 	}
-	return (-1);
+	return (MAP_FAILURE);
 }
 
-static int	_resize_map(t_map_info *info)
+static int	_resize_map(t_map_parse *info)
 {
 	size_t	idx;
 
@@ -71,7 +69,7 @@ static int	_resize_map(t_map_info *info)
 			info->map.map[idx] = (char *)malloc(sizeof(char) \
 													* (info->max_length + 1));
 			if (!info->map.map[idx])
-				return (-1);
+				return (MAP_FAILURE);
 			info->map.map[idx][info->max_length] = '\0';
 			ft_memset(info->map.map[idx], ' ', info->max_length);
 			if (idx != 0 && idx != (info->cur + 1))
@@ -81,14 +79,14 @@ static int	_resize_map(t_map_info *info)
 		}
 		info->map.width = info->max_length;
 		info->map.height = idx;
-		return (0);
+		return (MAP_SUCCESS);
 	}
-	return (-1);
+	return (MAP_FAILURE);
 }
 
 t_map	get_map(int fd)
 {
-	t_map_info	info;
+	t_map_parse	info;
 
 	_init_info(&info);
 	info.gnl_check = get_next_line(fd, &info.temp);
@@ -108,6 +106,7 @@ t_map	get_map(int fd)
 	return (check_map_error(info.map));
 }
 
+
 /*
 #include <stdio.h>
 #include <fcntl.h>
@@ -124,9 +123,9 @@ int main(int argc, char **argv)
 			printf("success get_map\n");
 			printf("width : %zu\n", map.width);
 			printf("height : %zu\n", map.height);
-			printf("px : %zu\n", map.px);
-			printf("py : %zu\n", map.py);
-			printf("pdir : %d\n", map.pdir);
+			printf("px : %zu\n", map.p_info.px);
+			printf("py : %zu\n", map.p_info.py);
+			printf("pdir : %d\n", map.p_info.pdir);
 			printf("------------------\n");
 			size_t 	idx = 0;
 			while (map.map[idx])
