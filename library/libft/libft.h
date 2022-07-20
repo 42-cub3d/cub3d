@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 22:23:51 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:09:22 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/20 22:44:44 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 48
+#  define BUFFER_SIZE 1024
 # endif
 
 # ifndef OPEN_MAX

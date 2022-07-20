@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+         #
+#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/20 17:15:09 by yongmkim          #+#    #+#              #
-#    Updated: 2022/07/19 20:22:04 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/20 22:33:50 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ fclean		:
 		@make -C $(MLX_DIR) fclean
 
 re			:
-		@make lfclean
+		@make fclean
 		@make all
 
 clear		:	clean

@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/20 22:16:28 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/20 23:01:36 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	count_comma(char *str)
 {
 	size_t	cnt;
 
+	if (!str)
+		return (0);
 	cnt = 0;
 	while (*str)
 	{
@@ -52,12 +54,22 @@ static	void	get_texture_content(t_texture *t, char **line, size_t comma_cnt)
 		t->east = ft_strdup(line[1]);
 	else if (ft_strcmp(line[0], WEST) == 0 && !line[2])
 		t->west = ft_strdup(line[1]);
-	else if (ft_strcmp(line[0], FLOOR) && (comma_cnt == 2))
+	else if (ft_strcmp(line[0], FLOOR) == 0 && (comma_cnt == 2))
 		t->floor = get_color(line);
-	else if (ft_strcmp(line[0], CELLING) && (comma_cnt == 2))
+	else if (ft_strcmp(line[0], CELLING) == 0 && (comma_cnt == 2))
 		t->ceiling = get_color(line);
 	else
 		ft_exit("from_get_texture_content");
+}
+
+//for test
+void	ft_testchar(char **str)
+{
+	while (*str)
+	{
+		printf("test : %s\n",*str);
+		str++;
+	}
 }
 
 void	get_texture(t_texture *texture, int map_fd)
@@ -74,10 +86,11 @@ void	get_texture(t_texture *texture, int map_fd)
 			ft_exit("get_next_line_error");
 		comma_cnt = count_comma(line);
 		splited_line = ft_split_delimiter(line, ", \n");
-		if (!*splited_line)
+		// ft_testchar(splited_line);
+		if (!splited_line || !*splited_line)
 		{
 			free_line(&line, &splited_line);
-			return ;
+			continue ;
 		}
 		if (!splited_line[1])
 			ft_exit("splited_line_error");

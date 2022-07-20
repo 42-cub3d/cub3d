@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/20 21:13:11 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/20 22:53:25 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 RM					= rm
 RMFLAGS				= -f
 CC					= cc
-CFLAGS				= -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS				= -Wall -Wextra -Werror -g -fsanitize=address
 
 
 

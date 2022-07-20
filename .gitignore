@@ -11,3 +11,5 @@ cub3d_en.subject.pdf
 .vscode
 
 .tests
+*.o
+*.dylib
