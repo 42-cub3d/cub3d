@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 19:33:40 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 21:58:50 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ typedef struct s_map
 	size_t		width;
 	size_t		height;
 	char		**map;
-	t_player	player_info;
+	size_t		px;
+	size_t		py;
+	int			pdir;
 }				t_map;
 
 typedef struct s_map_info
@@ -53,5 +55,8 @@ typedef struct s_map_info
 	size_t	max_length;
 	size_t	temp_length;
 }			t_map_info;
+
+t_map	get_map(int fd);
+t_map	check_map_error(t_map map);
 
 #endif

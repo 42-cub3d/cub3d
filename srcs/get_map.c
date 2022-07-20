@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 19:25:15 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:02:38 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,12 @@ static int	_resize_map(t_map_info *info)
 {
 	size_t	idx;
 
-	info->map.map = (char **)malloc(sizeof(char *) * (info->cur + 1));
+	info->map.map = (char **)malloc(sizeof(char *) * (info->cur + 2 + 1));
 	if (info->map.map)
 	{
 		idx = 0;
-		info->map.map[info->cur] = NULL;
-		while (idx < info->cur)
+		info->map.map[info->cur + 2] = NULL;
+		while (idx < info->cur + 2)
 		{
 			info->map.map[idx] = (char *)malloc(sizeof(char) \
 													* (info->max_length + 1));
@@ -74,8 +74,9 @@ static int	_resize_map(t_map_info *info)
 				return (-1);
 			info->map.map[idx][info->max_length] = '\0';
 			ft_memset(info->map.map[idx], ' ', info->max_length);
-			ft_memcpy(info->map.map[idx], info->temp_map[idx], \
-												ft_strlen(info->temp_map[idx]));
+			if (idx != 0 && idx != (info->cur + 1))
+			ft_memcpy(info->map.map[idx], info->temp_map[idx - 1], \
+												ft_strlen(info->temp_map[idx - 1]));
 			idx++;
 		}
 		info->map.width = info->max_length;
@@ -106,3 +107,34 @@ t_map	get_map(int fd)
 		ft_exit();
 	return (check_map_error(info.map));
 }
+
+/*
+#include <stdio.h>
+#include <fcntl.h>
+int main(int argc, char **argv)
+{
+	if (argc == 2)
+	{
+		printf("hi!\n");
+		int fd = open(argv[1], O_RDONLY);
+
+		t_map	map = get_map(fd);
+		if (map.map)
+		{
+			printf("success get_map\n");
+			printf("width : %zu\n", map.width);
+			printf("height : %zu\n", map.height);
+			printf("px : %zu\n", map.px);
+			printf("py : %zu\n", map.py);
+			printf("pdir : %d\n", map.pdir);
+			printf("------------------\n");
+			size_t 	idx = 0;
+			while (map.map[idx])
+			{
+				printf("%s\n", map.map[idx]);
+				idx++;
+			}
+		}
+	}
+}
+*/

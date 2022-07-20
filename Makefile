@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/20 17:33:40 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/20 21:21:53 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ SRCS_DIR 			= srcs/
 OBJS_DIR 			= objs/
 
 SRC					= get_map.c \
+					  check_map_error.c \
+
 
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

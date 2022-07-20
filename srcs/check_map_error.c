@@ -6,48 +6,64 @@
 /*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 20:25:50 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:02:24 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_map.h"
+#include "libft.h"
 
-
-				if (!check_player)
-				{
-					check_player |= 1;
-					map.player_info.px = p.px;
-					map.player_info.py = p.py;
-					map.player_info.pdir = map.map[p.py][p.px];
-				}
-				else
-					ft_exit();
-
-
-static int	_check_wall(size_t x, size_t y, )
+static int	_check_wall(size_t x, size_t y, t_map map)
 {
+	int	flag;
+
+	flag = 0;
+	if ((0 < x && !ft_strchr("1 ", map.map[y][x - 1]))
+		|| (0 < y && !ft_strchr("1 ", map.map[y - 1][x]))
+		|| (x + 1 < map.width && !ft_strchr("1 ", map.map[y][x + 1]))
+		|| (y + 1 < map.height && !ft_strchr("1 ", map.map[y + 1][x])))
+		return (-1);
+	return (0);
+}
+
+static int	_check_player(t_player *p, t_map *map, char dir)
+{
+	if (p->pdir)
+		return (-1);
+	p->pdir = dir;
+	map->px = p->px;
+	map->py = p->py;
+	if (dir == 'E')
+		map->pdir = 1;
+	else if (dir == 'W')
+		map->pdir = 2;
+	else if (dir == 'S')
+		map->pdir = 3;
+	else if (dir == 'N')
+		map->pdir = 4;
+	return (0);
 }
 
 t_map	check_map_error(t_map map)
 {
 	t_player	p;
 	
-	p.px = 0;
 	p.py = 0;
-	p.check_player = 0;
+	p.pdir = 0;
 	while (p.py < map.height)
 	{
+		p.px = 0;
 		while (p.px < map.width)
 		{
 			if (map.map[p.py][p.px] == ' ')
 			{
-				if (_check_wall(p.px, p.py, map.map))
+				if (_check_wall(p.px, p.py, map))
 					ft_exit();
-				// check x + 1 || y + 1 is "1" or " "
 			}
 			else if (ft_strchr("EWSN", map.map[p.py][p.px])) 
 			{
-				// init player info
+				if (_check_player(&p, &map, map.map[p.py][p.px]))
+					ft_exit();
 			}
 			else if (!ft_strchr("01", map.map[p.py][p.px]))
 				ft_exit();
@@ -55,4 +71,7 @@ t_map	check_map_error(t_map map)
 		}
 		p.py++;
 	}
+	if (!p.pdir)
+		ft_exit();
+	return (map);
 }
