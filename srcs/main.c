@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/19 21:39:12 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/20 16:52:28 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	if (argc != 2)
-		printf("argc error\n");
-	argv = NULL;
-	return (EXIT_SUCCESS);
+    if (argc != 2)
+        printf("argc error\n");
+    argv = NULL;
+    return (EXIT_SUCCESS);
 }

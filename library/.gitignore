@@ -1,0 +1,9 @@
+libft.a
+
+libmlx.dylib
+
+*.swiftdoc
+
+*.swiftmodule
+
+*.swiftsourceinfo
