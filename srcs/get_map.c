@@ -6,26 +6,13 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 17:58:30 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:25:15 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_map.h"
 #include "libft.h"
 #include <stdlib.h>
-
-
-
-
-
-
-#include <stdio.h>
-#include <fcntl.h>
-void	ft_exit(void)
-{
-	printf("ft_exit\n");
-	exit(-1);
-}
 
 static void	_init_info(t_map_info *info)
 {
@@ -117,30 +104,5 @@ t_map	get_map(int fd)
 	}
 	if (info.gnl_check || _resize_map(&info))
 		ft_exit();
-	return (info.map);
-}
-
-int main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		int fd = open(argv[1], O_RDONLY);
-
-		if (fd > 0)
-		{
-			t_map temp = get_map(fd);
-			if (temp.map)
-			{
-				printf("is it, %zu %zu\n", temp.width, temp.height);
-			}
-
-			size_t	idx = 0;
-			while (temp.map[idx])
-			{
-				printf("%s$\n", temp.map[idx]);
-				idx++;
-			}
-			close(fd);
-		}
-	}
+	return (check_map_error(info.map));
 }

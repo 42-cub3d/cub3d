@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 17:21:26 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:33:40 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,20 @@ enum e_map_check
 	PLAYER = POS_N | POS_S | POS_E | POS_W
 };
 
+typedef struct s_player
+{
+	size_t	px;
+	size_t	py;
+	int		pdir;
+}			t_player;
+
 typedef struct s_map
 {
-	size_t	width;
-	size_t	height;
-	char	**map;
-}			t_map;
+	size_t		width;
+	size_t		height;
+	char		**map;
+	t_player	player_info;
+}				t_map;
 
 typedef struct s_map_info
 {
