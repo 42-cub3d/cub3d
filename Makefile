@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/19 20:26:02 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/20 17:33:40 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ SRCS_DIR 			= srcs/
 
 OBJS_DIR 			= objs/
 
-SRC					= main.c \
+SRC					= get_map.c \
 
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
@@ -44,6 +44,9 @@ RMFLAGS				= -f
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror
 
+SNTZ				=	-g -fsanitize=address -fno-omit-frame-pointer
+MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
+						-fPIE -pie -fno-omit-frame-pointer
 
 
 
@@ -94,4 +97,12 @@ re					: fclean
 						make all
 
 lre					: lib_re
+
+.PHONY				: sntz m mem
+sntz		:	CFLAGS+=$(SNTZ)
+sntz		:	all
+
+m			:	mem
+mem			:	CFLAGS+=$(MEM)
+mem			:	all
 

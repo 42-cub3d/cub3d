@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 15:51:04 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:21:26 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_map_info
 {
 	char	**temp_map;
 	t_map	map;
-	char	*temp
+	char	*temp;
 	size_t	str_vec_size;
 	size_t	cur;
 	int		gnl_check;
