@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 01:30:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 02:13:51 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_map.h"
-#include "libft.h"
+#include "cub3d.h"
 #include <stdlib.h>
 
 static void	_init_info(t_map_parse *info)
@@ -93,7 +93,7 @@ t_map	get_map(int fd)
 	while (info.gnl_check > 0)
 	{
 		if (_append_map(&info, info.cur))
-			ft_exit();
+			ft_exit(NULL);
 		info.temp_length = ft_strlen(info.temp);
 		if (info.temp_length > info.max_length)
 			info.max_length = info.temp_length;
@@ -102,7 +102,7 @@ t_map	get_map(int fd)
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
 	if (info.gnl_check || _resize_map(&info))
-		ft_exit();
+		ft_exit(NULL);
 	return (check_map_error(info.map));
 }
 

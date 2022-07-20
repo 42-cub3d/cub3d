@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:10:22 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/20 22:00:13 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 02:11:02 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_texture	*init_texture(void)
 /*
 	map 구조체추가 필요
 */
-void	parse_map(char **argv)
+void	parse_map(t_info *info, char **argv)
 {
 	int			map_fd;
 	t_texture	*texture;
@@ -49,5 +49,6 @@ void	parse_map(char **argv)
 	map_fd = open_valid_map(argv[1]);
 	texture = init_texture();
 	get_texture(texture, map_fd);
-	//map parse & valid
+	info->texture = texture;
+	info->map = get_map(map_fd);
 }
