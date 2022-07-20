@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:02:38 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:19:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static int	_resize_map(t_map_info *info)
 			info->map.map[idx][info->max_length] = '\0';
 			ft_memset(info->map.map[idx], ' ', info->max_length);
 			if (idx != 0 && idx != (info->cur + 1))
-			ft_memcpy(info->map.map[idx], info->temp_map[idx - 1], \
-												ft_strlen(info->temp_map[idx - 1]));
+				ft_memcpy(info->map.map[idx], info->temp_map[idx - 1], \
+											ft_strlen(info->temp_map[idx - 1]));
 			idx++;
 		}
 		info->map.width = info->max_length;

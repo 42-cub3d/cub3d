@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:02:24 by yongmkim         ###   ########.fr       */
+/*   Updated: 2022/07/20 22:22:00 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	_check_player(t_player *p, t_map *map, char dir)
 t_map	check_map_error(t_map map)
 {
 	t_player	p;
-	
+
 	p.py = 0;
 	p.pdir = 0;
 	while (p.py < map.height)
@@ -55,12 +55,9 @@ t_map	check_map_error(t_map map)
 		p.px = 0;
 		while (p.px < map.width)
 		{
-			if (map.map[p.py][p.px] == ' ')
-			{
-				if (_check_wall(p.px, p.py, map))
-					ft_exit();
-			}
-			else if (ft_strchr("EWSN", map.map[p.py][p.px])) 
+			if (map.map[p.py][p.px] == ' ' && (_check_wall(p.px, p.py, map)))
+				ft_exit();
+			else if (ft_strchr("EWSN", map.map[p.py][p.px]))
 			{
 				if (_check_player(&p, &map, map.map[p.py][p.px]))
 					ft_exit();
