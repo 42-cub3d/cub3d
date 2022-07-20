@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:22:00 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 01:29:22 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,57 @@
 
 static int	_check_wall(size_t x, size_t y, t_map map)
 {
-	int	flag;
-
-	flag = 0;
 	if ((0 < x && !ft_strchr("1 ", map.map[y][x - 1]))
-		|| (0 < y && !ft_strchr("1 ", map.map[y - 1][x]))
-		|| (x + 1 < map.width && !ft_strchr("1 ", map.map[y][x + 1]))
-		|| (y + 1 < map.height && !ft_strchr("1 ", map.map[y + 1][x])))
-		return (-1);
-	return (0);
+	|| (0 < y && !ft_strchr("1 ", map.map[y - 1][x]))
+	|| (x + 1 < map.width && !ft_strchr("1 ", map.map[y][x + 1]))
+	|| (y + 1 < map.height && !ft_strchr("1 ", map.map[y + 1][x]))
+	|| ((0 < x && 0 < y)
+		&& !ft_strchr("1 ", map.map[y - 1][x - 1]))
+	|| ((x + 1 < map.width && 0 < y)
+		&& !ft_strchr("1 ", map.map[y - 1][x + 1]))
+	|| ((0 < x && y + 1 < map.height)
+		&& !ft_strchr("1 ", map.map[y + 1][x - 1]))
+	|| ((x + 1 < map.width && y + 1 < map.height)
+		&& !ft_strchr("1 ", map.map[y + 1][x + 1])))
+		return (MAP_FAILURE);
+	return (MAP_SUCCESS);
 }
 
 static int	_check_player(t_player *p, t_map *map, char dir)
 {
 	if (p->pdir)
-		return (-1);
+		return (MAP_FAILURE);
 	p->pdir = dir;
-	map->px = p->px;
-	map->py = p->py;
+	map->p_info.px = p->px;
+	map->p_info.py = p->py;
 	if (dir == 'E')
-		map->pdir = 1;
+		map->p_info.pdir = POS_E;
 	else if (dir == 'W')
-		map->pdir = 2;
+		map->p_info.pdir = POS_W;
 	else if (dir == 'S')
-		map->pdir = 3;
+		map->p_info.pdir = POS_S;
 	else if (dir == 'N')
-		map->pdir = 4;
-	return (0);
+		map->p_info.pdir = POS_N;
+	return (MAP_SUCCESS);
+}
+
+static void	_check_error_case(t_map *map, t_player *p)
+{
+	char	monad;
+
+	monad = map->map[p->py][p->px];
+	if (monad == ' ')
+	{
+		if (_check_wall(p->px, p->py, *map))
+			ft_exit();
+	}
+	else if (ft_strchr("EWSN", monad))
+	{
+		if (_check_player(p, map, monad))
+			ft_exit();
+	}
+	else if (!ft_strchr("01", monad))
+		ft_exit();
 }
 
 t_map	check_map_error(t_map map)
@@ -55,15 +79,7 @@ t_map	check_map_error(t_map map)
 		p.px = 0;
 		while (p.px < map.width)
 		{
-			if (map.map[p.py][p.px] == ' ' && (_check_wall(p.px, p.py, map)))
-				ft_exit();
-			else if (ft_strchr("EWSN", map.map[p.py][p.px]))
-			{
-				if (_check_player(&p, &map, map.map[p.py][p.px]))
-					ft_exit();
-			}
-			else if (!ft_strchr("01", map.map[p.py][p.px]))
-				ft_exit();
+			_check_error_case(&map, &p);
 			p.px++;
 		}
 		p.py++;
