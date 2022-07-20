@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 02:07:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/20 15:51:04 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,23 @@ enum e_map_check
 	PLAYER = POS_N | POS_S | POS_E | POS_W
 };
 
-typedef struct s_dot
+typedef struct s_map
 {
-	int		type;
-	size_t	x;
-	size_t	y;
-}			t_dot;
+	size_t	width;
+	size_t	height;
+	char	**map;
+}			t_map;
 
 typedef struct s_map_info
 {
-	t_dot	**map;
 	char	**temp_map;
+	t_map	map;
 	char	*temp
 	size_t	str_vec_size;
 	size_t	cur;
 	int		gnl_check;
-	int		player_check;
-	size_t	width;
-	size_t	height;
+	size_t	max_length;
+	size_t	temp_length;
 }			t_map_info;
 
 #endif
