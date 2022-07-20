@@ -6,11 +6,13 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 02:16:51 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/20 11:52:37 by yongmkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_map.h"
+#include "libft.h"
+#include <stdlib.h>
 
 static void	_init_info(t_map_info *info)
 {
@@ -48,6 +50,7 @@ static int	_append_map(t_map_info *info)
 	{
 		ft_memcpy(temp, info->temp_map, info->cur * (sizeof(char *)));
 		free(info->temp_map);
+		info->temp_map = temp;
 		return (_append_map(info));
 	}
 	return (-1);
