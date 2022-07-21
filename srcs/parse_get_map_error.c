@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_get_map_error.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:35:40 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/22 02:32:46 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ static void	_check_error_case(t_map *map, t_player *p)
 	if (monad == ' ')
 	{
 		if (_check_wall(p->px, p->py, *map))
-			ft_exit("map wall error");
+			ft_exit("map wall error", 0);
 	}
 	else if (ft_strchr("EWSN", monad))
 	{
 		if (_check_player(p, map, monad))
-			ft_exit("map player error");
+			ft_exit("map player error", 0);
 	}
 	else if (!ft_strchr("01", monad))
-		ft_exit("map invalid character");
+		ft_exit("map invalid character", 0);
 }
 
 t_map	check_map_error(t_map map)
@@ -84,6 +84,6 @@ t_map	check_map_error(t_map map)
 		p.py++;
 	}
 	if (!p.pdir)
-		ft_exit("map player direction error");
+		ft_exit("map player direction error", 0);
 	return (map);
 }

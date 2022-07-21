@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 18:08:59 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 02:16:28 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_texture
 	char	*west;
 	int		floor;
 	int		ceiling;
-}	t_texture;
+}			t_texture;
 
 typedef struct s_info	t_info;
 
@@ -80,6 +80,5 @@ int		get_color(char **line);
 void	parse_map(t_info *info, char **argv);
 t_map	get_map(int fd);
 t_map	check_map_error(t_map map);
-void	print_map(t_map map);
 
 #endif

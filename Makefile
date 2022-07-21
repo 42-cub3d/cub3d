@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/21 22:17:02 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/22 01:43:43 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,7 @@ lfclean			: lib_fclean
 
 .PHONY				: re lre
 re					: fclean
-						make all
+	make all
 
 lre					: lib_re
 
