@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/21 02:11:54 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/21 17:16:53 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,8 @@ SRC					= main.c\
 					parse_map.c\
 					get_texture.c\
 					get_color.c\
-					get_map.c\
-					check_map_error.c 
+					map_get_map.c\
+					map_get_map_error.c\
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 

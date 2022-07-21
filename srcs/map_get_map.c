@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:12:23 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:15:10 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_map	get_map(int fd)
 		if (info.temp)
 		{
 			if (_append_map(&info, info.cur))
-				ft_exit();
+				ft_exit(NULL);
 			info.null_check |= 1;
 			info.temp_length = ft_strlen(info.temp);
 			if (info.temp_length > info.max_length)
@@ -105,7 +105,7 @@ t_map	get_map(int fd)
 			info.temp = NULL;
 		}
 		else if (info.null_check)
-			ft_exit();
+			ft_exit(NULL);
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
 	if (info.gnl_check || _resize_map(&info))
