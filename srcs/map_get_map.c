@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                          :+:      :+:    :+:   */
+/*   map_get_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 01:30:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 10:45:43 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	_init_info(t_map_parse *info)
 	info->str_vec_size = 2;
 	info->cur = 0;
 	info->gnl_check = -1;
+	info->null_check = 0;
 	info->max_length = 0;
 	info->temp_length = 0;
 }
@@ -92,13 +93,19 @@ t_map	get_map(int fd)
 	info.gnl_check = get_next_line(fd, &info.temp);
 	while (info.gnl_check > 0)
 	{
-		if (_append_map(&info, info.cur))
+		if (info.temp)
+		{
+			if (_append_map(&info, info.cur))
+				ft_exit();
+			info.null_check |= 1;
+			info.temp_length = ft_strlen(info.temp);
+			if (info.temp_length > info.max_length)
+				info.max_length = info.temp_length;
+			info.cur++;
+			info.temp = NULL;
+		}
+		else if (info.null_check)
 			ft_exit();
-		info.temp_length = ft_strlen(info.temp);
-		if (info.temp_length > info.max_length)
-			info.max_length = info.temp_length;
-		info.cur++;
-		info.temp = NULL;
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
 	if (info.gnl_check || _resize_map(&info))
