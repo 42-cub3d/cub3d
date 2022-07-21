@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 18:18:01 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 02:32:04 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	_init_info(t_map_parse *info)
 {
 	info->temp_map = ft_calloc(sizeof(char *), 2);
 	if (!info->temp_map)
-		ft_exit("map malloc error");
+		ft_exit("map malloc error", 1);
 	info->map.map = NULL;
 	info->temp = NULL;
 	info->str_vec_size = 2;
@@ -77,18 +77,6 @@ static int	_resize_map(t_map_parse *info)
 	return (MAP_FAILURE);
 }
 
-void	print_map(t_map map)
-{
-	size_t	idx;
-
-	idx = 0;
-	while (map.map[idx])
-	{
-		printf("%s\n", map.map[idx]);
-		idx++;
-	}
-}
-
 t_map	get_map(int fd)
 {
 	t_map_parse	info;
@@ -100,7 +88,7 @@ t_map	get_map(int fd)
 		if (info.temp)
 		{
 			if (_append_map(&info, info.cur))
-				ft_exit("map append error");
+				ft_exit("map append error", 1);
 			info.temp_length = ft_strlen(info.temp);
 			if (info.temp_length > info.max_length)
 				info.max_length = info.temp_length;
@@ -110,6 +98,6 @@ t_map	get_map(int fd)
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
 	if (info.gnl_check || _resize_map(&info))
-		ft_exit("map alloc error");
+		ft_exit("map alloc error", 1);
 	return (check_map_error(info.map));
 }

@@ -6,25 +6,78 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 19:10:38 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 02:28:45 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include "mlx.h"
 
-void	ft_exit(char *err_msg)
+void	ft_exit(char *err_msg, int errno_manual)
 {
-	perror(err_msg);
+	write(2, "error\n", 6);
+	if (!errno_manual)
+		errno = errno_manual;
+	if (errno)
+		perror(err_msg);
+	else
+	{
+		write(2, err_msg, ft_strlen(err_msg));
+		write(2, "\n", 1);
+	}
 	exit(EXIT_FAILURE);
 }
 
+void	ft_flush_info(t_info *info)
+{
+	size_t	i;
+
+	i = 0;
+	while (info->map.map[i])
+	{
+		free(info->map.map[i]);
+		i++;
+	}
+	free(info->map.map);
+	free(info->texture.east);
+	free(info->texture.west);
+	free(info->texture.south);
+	free(info->texture.north);
+	mlx_destroy_window(info->mlx.mlx, info->mlx.win);
+	mlx_destroy_image(info->mlx.mlx, info->mlx.img);
+	free(info->mlx.mlx);
+}
+
+static void	_print_info(t_info *info)
+{
+	size_t	idx;
+
+	printf("[texture]\nE: %s\nW: %s\nS: %s\nN: %s\n", info->texture.east, \
+				info->texture.west, info->texture.south, info->texture.north);
+
+	printf("\n[player]\ndir: %d\nx: %zu\ny: %zu\n", info->map.p_info.pdir, \
+									info->map.p_info.px, info->map.p_info.py);
+	idx = 0;
+	printf("\n[map]\nwidth: %zu\nheight: %zu\n", info->map.width, \
+															info->map.height);
+	while (info->map.map[idx])
+	{
+		printf("%s\n", info->map.map[idx]);
+		idx++;
+	}
+}
 int	main(int argc, char **argv)
 {
-	t_info *info;
-	info = ft_calloc(1, sizeof(t_info));
+	t_info	info;
+
 	if (argc != 2)
-		ft_exit("Need .cub map file");
-	parse_map(info, argv);
-	free(info);
+		ft_exit("./cub3d <map_file>", 0);
+	parse_map(&info, argv);
+	ft_mlx_init(&info.mlx);
+	_print_info(&info);
+	ft_event_handler(&info);
+	// add ray casting part
+	mlx_loop(info.mlx.mlx);
+	ft_flush_info(&info);
 	return (EXIT_SUCCESS);
 }

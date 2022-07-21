@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_get_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/21 17:37:38 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/22 02:31:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	count_comma(char *str)
+static size_t	count_comma(char *str)
 {
 	size_t	cnt;
 
@@ -59,17 +59,7 @@ static	void	get_texture_content(t_texture *t, char **line, size_t comma_cnt)
 	else if (ft_strcmp(line[0], CELLING) == 0 && (comma_cnt == 2))
 		t->ceiling = get_color(line);
 	else
-		ft_exit("from_get_texture_content");
-}
-
-//for test
-void	ft_testchar(char **str)
-{
-	while (*str)
-	{
-		printf("test : %s\n",*str);
-		str++;
-	}
+		ft_exit("from_get_texture_content", 0);
 }
 
 void	get_texture(t_texture *texture, int map_fd)
@@ -83,9 +73,9 @@ void	get_texture(t_texture *texture, int map_fd)
 	while (i < 6)
 	{
 		if (get_next_line(map_fd, &line) < 0)
-			ft_exit("get_next_line_error");
+			ft_exit("get_next_line_error", 1);
 		if (!line)
-			ft_exit("get texture line error");
+			ft_exit("get texture line error", 1);
 		comma_cnt = count_comma(line);
 		splited_line = ft_split_delimiter(line, ", \n");
 		if (!*splited_line)
@@ -94,7 +84,7 @@ void	get_texture(t_texture *texture, int map_fd)
 			continue ;
 		}
 		if (!splited_line[1])
-			ft_exit("splited_line_error");
+			ft_exit("splited_line_error", 0);
 		get_texture_content(texture, splited_line, comma_cnt);
 		free_line(&line, &splited_line);
 		i++;
