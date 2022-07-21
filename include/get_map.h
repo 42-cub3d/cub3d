@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:31:19 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:46:48 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int		get_color(char **line);
 void	parse_map(t_info *info, char **argv);
 t_map	get_map(int fd);
 t_map	check_map_error(t_map map);
+void	print_map(t_map map);
 
 #endif

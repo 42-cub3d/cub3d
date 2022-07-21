@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_get_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:34:39 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:46:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,18 @@ static int	_resize_map(t_map_parse *info)
 		return (MAP_SUCCESS);
 	}
 	return (MAP_FAILURE);
+}
+
+void	print_map(t_map map)
+{
+	size_t	idx;
+
+	idx = 0;
+	while (map.map[idx])
+	{
+		printf("%s\n", map.map[idx]);
+		idx++;
+	}
 }
 
 t_map	get_map(int fd)
