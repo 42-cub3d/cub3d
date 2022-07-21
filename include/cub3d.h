@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/21 01:50:09 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 02:10:52 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include "libft.h"
+# include "get_map.h"
 
 typedef struct s_texture
 {
@@ -35,7 +36,8 @@ typedef struct s_texture
 
 typedef struct s_info
 {
-	t_texture	texture;
+	t_texture	*texture;
+	t_map		map;
 }	t_info;
 
 #define NORTH "NO"
@@ -48,8 +50,7 @@ typedef struct s_info
 /* PARSE MAP */
 void	get_texture(t_texture *texture, int map_fd);
 int		get_color(char **line);
-void	parse_map(char **argv);
-
+void	parse_map(t_info *info, char **argv);
 void	ft_exit(char *err_msg);
 
 

@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 01:51:57 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:13:18 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_map_parse
 	char	*temp;
 	size_t	str_vec_size;
 	size_t	cur;
+	int		null_check;
 	int		gnl_check;
 	size_t	max_length;
 	size_t	temp_length;

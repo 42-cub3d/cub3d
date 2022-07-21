@@ -6,11 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/07/20 23:39:14 by wchae            ###   ########.fr        #
-=======
-#    Updated: 2022/07/20 21:21:53 by yongmkim         ###   ########.fr        #
->>>>>>> bc7b30ae707a3ccd612b88ed11125cf226030601
+#    Updated: 2022/07/21 17:16:53 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,14 +33,12 @@ SRCS_DIR 			= srcs/
 
 OBJS_DIR 			= objs/
 
-<<<<<<< HEAD
-SRC					= main.c parse_map.c get_texture.c get_color.c\
-=======
-SRC					= get_map.c \
-					  check_map_error.c \
-
->>>>>>> bc7b30ae707a3ccd612b88ed11125cf226030601
-
+SRC					= main.c\
+					parse_map.c\
+					get_texture.c\
+					get_color.c\
+					map_get_map.c\
+					map_get_map_error.c\
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 

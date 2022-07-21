@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:57:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/20 22:17:27 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 02:02:29 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ int	get_color(char **line)
 	b = get_color_content(line[3]);
 	if (line[4])
 		ft_exit("get color error");
-	return ((r << 16) + (g << 8)+ b);
+	return ((r << 16) + (g << 8) + b);
 }
