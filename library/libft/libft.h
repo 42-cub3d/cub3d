@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 22:23:51 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:44:44 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:32:32 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*ft_strdup(const char *s1);
 **==============================================================================
 */
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-void	*memmove(void *dst, const void *src, size_t len);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 
