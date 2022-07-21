@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:46:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 18:18:01 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 static void	_init_info(t_map_parse *info)
 {
 	info->temp_map = ft_calloc(sizeof(char *), 2);
+	if (!info->temp_map)
+		ft_exit("map malloc error");
 	info->map.map = NULL;
 	info->temp = NULL;
 	info->str_vec_size = 2;
 	info->cur = 0;
 	info->gnl_check = -1;
-	info->null_check = 0;
 	info->max_length = 0;
 	info->temp_length = 0;
 }
@@ -30,14 +31,6 @@ static int	_append_map(t_map_parse *info, size_t cur)
 {
 	char	**temp;
 
-	if (cur < 0)
-	{
-		temp = info->temp_map;
-		while (info->temp_map && *temp)
-			free(*(temp++));
-		free(info->temp_map);
-		return (MAP_FAILURE);
-	}
 	if (cur < info->str_vec_size - 1)
 	{
 		info->temp_map[cur] = info->temp;
@@ -108,49 +101,15 @@ t_map	get_map(int fd)
 		{
 			if (_append_map(&info, info.cur))
 				ft_exit("map append error");
-			info.null_check |= 1;
 			info.temp_length = ft_strlen(info.temp);
 			if (info.temp_length > info.max_length)
 				info.max_length = info.temp_length;
 			info.cur++;
 			info.temp = NULL;
 		}
-		else if (info.null_check)
-			ft_exit("map blink error");
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
 	if (info.gnl_check || _resize_map(&info))
 		ft_exit("map alloc error");
 	return (check_map_error(info.map));
 }
-
-/*
-#include <stdio.h>
-#include <fcntl.h>
-int main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		printf("hi!\n");
-		int fd = open(argv[1], O_RDONLY);
-
-		t_map	map = get_map(fd);
-		if (map.map)
-		{
-			printf("success get_map\n");
-			printf("width : %zu\n", map.width);
-			printf("height : %zu\n", map.height);
-			printf("px : %zu\n", map.p_info.px);
-			printf("py : %zu\n", map.p_info.py);
-			printf("pdir : %d\n", map.p_info.pdir);
-			printf("------------------\n");
-			size_t 	idx = 0;
-			while (map.map[idx])
-			{
-				printf("%s\n", map.map[idx]);
-				idx++;
-			}
-		}
-	}
-}
-*/

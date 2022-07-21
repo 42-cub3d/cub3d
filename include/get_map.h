@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:46:48 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 18:08:59 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ enum e_return_code
 
 enum e_player
 {
-	POS_E = 1,
+	POS_E = 0,
+	POS_N = 1,
 	POS_W = 2,
-	POS_S = 3,
-	POS_N = 4
+	POS_S = 3
 };
 
 typedef struct s_player
@@ -58,7 +58,6 @@ typedef struct s_map_parse
 	char	*temp;
 	size_t	str_vec_size;
 	size_t	cur;
-	int		null_check;
 	int		gnl_check;
 	size_t	max_length;
 	size_t	temp_length;
@@ -73,6 +72,7 @@ typedef struct s_texture
 	int		floor;
 	int		ceiling;
 }	t_texture;
+
 typedef struct s_info	t_info;
 
 void	get_texture(t_texture *texture, int map_fd);
