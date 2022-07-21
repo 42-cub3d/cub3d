@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:13:18 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:31:19 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 # define GET_MAP_H
 # include <stddef.h>
+
+# define NORTH "NO"
+# define SOUTH "SO"
+# define WEST "WE"
+# define EAST "EA"
+# define FLOOR "F"
+# define CELLING "C"
 
 enum e_return_code
 {
@@ -57,6 +64,20 @@ typedef struct s_map_parse
 	size_t	temp_length;
 }			t_map_parse;
 
+typedef struct s_texture
+{
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor;
+	int		ceiling;
+}	t_texture;
+typedef struct s_info	t_info;
+
+void	get_texture(t_texture *texture, int map_fd);
+int		get_color(char **line);
+void	parse_map(t_info *info, char **argv);
 t_map	get_map(int fd);
 t_map	check_map_error(t_map map);
 

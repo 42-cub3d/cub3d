@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 02:09:27 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:27:01 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 void	ft_exit(char *err_msg)
 {
-	if (err_msg)
-		ft_putendl_fd(err_msg, 2);
-	else
-		ft_putendl_fd(strerror(errno), 2);
+	perror(err_msg);
 	exit(EXIT_FAILURE);
 }
 
