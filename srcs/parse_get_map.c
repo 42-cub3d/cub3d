@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_get_map.c                                      :+:      :+:    :+:   */
+/*   parse_get_map.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:15:10 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:34:39 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_map.h"
 #include "cub3d.h"
 #include <stdlib.h>
 
@@ -96,7 +95,7 @@ t_map	get_map(int fd)
 		if (info.temp)
 		{
 			if (_append_map(&info, info.cur))
-				ft_exit(NULL);
+				ft_exit("map append error");
 			info.null_check |= 1;
 			info.temp_length = ft_strlen(info.temp);
 			if (info.temp_length > info.max_length)
@@ -105,11 +104,11 @@ t_map	get_map(int fd)
 			info.temp = NULL;
 		}
 		else if (info.null_check)
-			ft_exit(NULL);
+			ft_exit("map blink error");
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
 	if (info.gnl_check || _resize_map(&info))
-		ft_exit(NULL);
+		ft_exit("map alloc error");
 	return (check_map_error(info.map));
 }
 

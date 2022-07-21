@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_texture.c                                      :+:      :+:    :+:   */
+/*   parse_get_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/21 01:49:20 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:37:38 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	get_texture(t_texture *texture, int map_fd)
 		if (get_next_line(map_fd, &line) < 0)
 			ft_exit("get_next_line_error");
 		if (!line)
-			ft_exit("");
+			ft_exit("get texture line error");
 		comma_cnt = count_comma(line);
 		splited_line = ft_split_delimiter(line, ", \n");
 		if (!*splited_line)

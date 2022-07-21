@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map_error.c                                  :+:      :+:    :+:   */
+/*   parse_get_map_error.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 02:15:16 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 17:35:40 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "get_map.h"
 
 static int	_check_wall(size_t x, size_t y, t_map map)
 {
@@ -57,15 +56,15 @@ static void	_check_error_case(t_map *map, t_player *p)
 	if (monad == ' ')
 	{
 		if (_check_wall(p->px, p->py, *map))
-			ft_exit(NULL);
+			ft_exit("map wall error");
 	}
 	else if (ft_strchr("EWSN", monad))
 	{
 		if (_check_player(p, map, monad))
-			ft_exit(NULL);
+			ft_exit("map player error");
 	}
 	else if (!ft_strchr("01", monad))
-		ft_exit(NULL);
+		ft_exit("map invalid character");
 }
 
 t_map	check_map_error(t_map map)
@@ -85,6 +84,6 @@ t_map	check_map_error(t_map map)
 		p.py++;
 	}
 	if (!p.pdir)
-		ft_exit(NULL);
+		ft_exit("map player direction error");
 	return (map);
 }
