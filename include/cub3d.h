@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/21 17:27:52 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/21 21:43:04 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,26 @@
 # include "libft.h"
 # include "get_map.h"
 
+# define WIDTH 1600
+# define HEIGHT 900
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*img_data;
+	int		bpp;
+	int		size;
+	int		endian;
+}			t_mlx;
+
 typedef struct s_info
 {
 	t_texture	*texture;
 	t_map		map;
-}	t_info;
+	t_mlx		*mlx;
+}				t_info;
 
 void	ft_exit(char *err_msg);
 
