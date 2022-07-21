@@ -6,16 +6,18 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 21:35:24 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/21 22:24:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_event.h"
 #include "cub3d.h"
+#include "mlx.h"
 
 static void	_key_move(int key, t_info *info)
 {
-
+	(void)key;
+	(void)info;
 
 
 	//ft_render
@@ -24,6 +26,8 @@ static void	_key_move(int key, t_info *info)
 static void	_key_view(int key, t_info *info)
 {
 
+	(void)key;
+	(void)info;
 
 	//ft_render
 }
@@ -39,7 +43,7 @@ static int	_key_press(int key, t_info *info)
 		_key_move(key, info);
 	else if (key == KC_LEFT || key == KC_RIGHT)
 		_key_view(key, info);
-	return (0);
+	return (1);
 }
 
 static int	_close_cube_three_d(t_info *info)

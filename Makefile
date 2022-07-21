@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
+#    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/21 17:29:53 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/21 22:17:02 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ SRC					= main.c\
 					parse_get_color.c\
 					parse_get_map.c\
 					parse_get_map_error.c\
+					mlx_init.c\
+					mlx_key_event.c\
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
