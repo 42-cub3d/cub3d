@@ -6,12 +6,36 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 11:08:18 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 11:11:53 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+
+static void	_print_info(t_info *info)
+{
+	size_t	idx;
+
+	printf("[texture]\nE: %s\nW: %s\nS: %s\nN: %s\n", \
+													info->texture.east, \
+													info->texture.west, \
+													info->texture.south, \
+													info->texture.north);
+	printf("\n[player]\ndir: %d\nx: %zu\ny: %zu\n", \
+													info->map.p_info.pdir, \
+													info->map.p_info.px, \
+													info->map.p_info.py);
+	idx = 0;
+	printf("\n[map]\nwidth: %zu\nheight: %zu\n", \
+													info->map.width, \
+													info->map.height);
+	while (info->map.map[idx])
+	{
+		printf("%s<\n", info->map.map[idx]);
+		idx++;
+	}
+}
 
 void	ft_exit(char *err_msg, int errno_mode)
 {
@@ -46,40 +70,18 @@ void	ft_flush_info(t_info *info)
 	free(info->mlx.mlx);
 }
 
-static void	_print_info(t_info *info)
-{
-	size_t	idx;
-
-	printf("[texture]\nE: %s\nW: %s\nS: %s\nN: %s\n", \
-													info->texture.east, \
-													info->texture.west, \
-													info->texture.south, \
-													info->texture.north);
-	printf("\n[player]\ndir: %d\nx: %zu\ny: %zu\n", \
-													info->map.p_info.pdir, \
-													info->map.p_info.px, \
-													info->map.p_info.py);
-	idx = 0;
-	printf("\n[map]\nwidth: %zu\nheight: %zu\n", \
-													info->map.width, \
-													info->map.height);
-	while (info->map.map[idx])
-	{
-		printf("%s<\n", info->map.map[idx]);
-		idx++;
-	}
-}
-
+/*
 void	handler(void)
 {
 	system("leaks cub3D");
 }
+*/
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	atexit(handler);
+	//atexit(handler);
 	if (argc != 2)
 		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);
