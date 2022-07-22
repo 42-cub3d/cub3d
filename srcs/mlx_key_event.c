@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 02:02:18 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 09:30:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static void	_key_move(int key, t_info *info)
 {
 	(void)key;
 	(void)info;
-
-
-	//ft_render
+	ft_re_render(info);
 }
 
 static void	_key_view(int key, t_info *info)
@@ -28,8 +26,7 @@ static void	_key_view(int key, t_info *info)
 
 	(void)key;
 	(void)info;
-
-	//ft_render
+	ft_re_render(info);
 }
 
 static int	_key_press(int key, t_info *info)

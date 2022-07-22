@@ -6,19 +6,17 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 02:28:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 10:08:23 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 
-void	ft_exit(char *err_msg, int errno_manual)
+void	ft_exit(char *err_msg, int errno_mode)
 {
 	write(2, "error\n", 6);
-	if (!errno_manual)
-		errno = errno_manual;
-	if (errno)
+	if (errno_mode)
 		perror(err_msg);
 	else
 	{
