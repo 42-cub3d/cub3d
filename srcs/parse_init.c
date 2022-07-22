@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:10:22 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 16:12:00 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/23 08:30:37 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,5 @@ void	parse_map(t_info *info, char **argv)
 	get_texture(&texture, map_fd);
 	info->texture = texture;
 	info->map = get_map(map_fd);
+	close(map_fd);
 }

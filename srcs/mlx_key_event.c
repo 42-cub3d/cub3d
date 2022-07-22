@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 23:12:56 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/23 08:31:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,21 @@ static void	_key_view(int key, t_info *info)
 	ft_ray_casting(info);
 }
 
+static int	_close_cube_three_d(t_info *info)
+{
+	ft_flush_info(info);
+	exit(0);
+}
+
 static int	_key_press(int key, t_info *info)
 {
 	if (key == KC_ESC)
-	{
-		ft_flush_info(info);
-		exit(0);
-	}
+		_close_cube_three_d(info);
 	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D)
 		_key_move(key, info);
 	else if (key == KC_LEFT || key == KC_RIGHT)
 		_key_view(key, info);
 	return (1);
-}
-
-static int	_close_cube_three_d(t_info *info)
-{
-	ft_flush_info(info);
-	exit(0);
 }
 
 void	ft_event_handler(t_info *info)
