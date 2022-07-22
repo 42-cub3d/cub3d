@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 23:15:59 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/23 08:42:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_flush_info(t_info *info);
 void	ft_mlx_init(t_mlx *org);
 void	ft_draw_vertical(t_info *info, int x, int y1, int y2);
 void	ft_re_render(t_info *info);
-void	ft_img_clear(t_mlx *mlx);
+void	ft_img_clear(t_info *info);
 void	ft_event_handler(t_info *info);
 
 #endif

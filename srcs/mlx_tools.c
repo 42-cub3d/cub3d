@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 22:48:46 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/23 08:43:29 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)temp = color;
 }
 
-void	ft_img_clear(t_mlx *mlx)
+void	ft_img_clear(t_info *info)
 {
 	int	i;
 	int	size;
@@ -38,10 +38,13 @@ void	ft_img_clear(t_mlx *mlx)
 
 	i = 0;
 	size = WIDTH * HEIGHT;
-	temp = (int *)(mlx->img_data);
+	temp = (int *)(info->mlx.img_data);
 	while (i < size)
 	{
-		temp[i] = 0x000000;
+		if (i < size / 2)
+			temp[i] = info->texture.ceiling;
+		else
+			temp[i] = info->texture.floor;
 		i++;
 	}
 }

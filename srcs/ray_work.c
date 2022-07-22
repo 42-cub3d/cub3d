@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 22:49:32 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/23 08:42:33 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	ft_ray_casting(t_info *info)
 	t_draw	draw;
 
 	x = 0;
-	ft_img_clear(&info->mlx);
+	ft_img_clear(info);
 	while (x < WIDTH)
 	{
 		draw.line_height = (int)(HEIGHT / get_perp_wall_dist(info, x));
