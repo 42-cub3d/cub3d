@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/22 10:24:27 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/22 12:25:41 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC_DIR				= include/
 
 LIB_DIR		= 	library/
 LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK)
-LIB_INC		=	$(LIBFT_INC) $(MLX_INC)
+LIB_INC		=	$(LIBFT_INC) $(MLX_INC) -I $(INC_DIR)
 HDR_INC		=	$(LIB_INC)
 ###	libft
 LIBFT_DIR	=	$(LIB_DIR)libft/
@@ -83,7 +83,7 @@ lib_re				:
 
 
 $(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
-	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(LIB_INC) -c $< -o $@
 
 
 .PHONY				: clean lclean
