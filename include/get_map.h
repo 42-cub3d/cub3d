@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 02:16:28 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 10:33:00 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_map_parse
 	size_t	str_vec_size;
 	size_t	cur;
 	int		gnl_check;
-	size_t	max_length;
+	size_t	len;
 	size_t	temp_length;
 }			t_map_parse;
 

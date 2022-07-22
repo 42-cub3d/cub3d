@@ -6,40 +6,40 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 10:12:09 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 11:03:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <stdlib.h>
 
-static int	_resize_map(t_map_parse *info)
+static void	_resize_map(t_map_parse *info)
 {
 	size_t	idx;
 
 	info->map.map = (char **)malloc(sizeof(char *) * (info->cur + 2 + 1));
-	if (info->map.map)
+	if (!info->map.map)
+		ft_exit("resize_map malloc error", 1);
+	idx = 0;
+	info->map.map[info->cur + 2] = NULL;
+	while (idx < info->cur + 2)
 	{
-		idx = 0;
-		info->map.map[info->cur + 2] = NULL;
-		while (idx < info->cur + 2)
+		info->map.map[idx] = (char *)malloc(sizeof(char) * (info->len + 1));
+		if (!info->map.map[idx])
+			ft_exit("resize_map malloc error", 1);
+		info->map.map[idx][info->len] = '\0';
+		ft_memset(info->map.map[idx], ' ', info->len);
+		if (idx != 0 && idx != (info->cur + 1))
 		{
-			info->map.map[idx] = (char *)malloc(sizeof(char) \
-													* (info->max_length + 1));
-			if (!info->map.map[idx])
-				return (MAP_FAILURE);
-			info->map.map[idx][info->max_length] = '\0';
-			ft_memset(info->map.map[idx], ' ', info->max_length);
-			if (idx != 0 && idx != (info->cur + 1))
-				ft_memcpy(info->map.map[idx], info->temp_map[idx - 1], \
-											ft_strlen(info->temp_map[idx - 1]));
-			idx++;
+			ft_memcpy(info->map.map[idx], info->temp_map[idx - 1], \
+										ft_strlen(info->temp_map[idx - 1]));
+			free(info->temp_map[idx - 1]);
 		}
-		info->map.width = info->max_length;
-		info->map.height = idx;
-		return (MAP_SUCCESS);
+		idx++;
 	}
-	return (MAP_FAILURE);
+	free(info->temp_map);
+	info->map.width = info->len;
+	info->map.height = idx;
 }
 
 static void	_init_info(t_map_parse *info)
@@ -52,7 +52,7 @@ static void	_init_info(t_map_parse *info)
 	info->str_vec_size = 2;
 	info->cur = 0;
 	info->gnl_check = -1;
-	info->max_length = 0;
+	info->len = 0;
 	info->temp_length = 0;
 }
 
@@ -81,8 +81,8 @@ static void	_append_map(t_map_parse *info, size_t cur)
 static void	_get_width(t_map_parse *info)
 {
 	info->temp_length = ft_strlen(info->temp);
-	if (info->temp_length > info->max_length)
-		info->max_length = info->temp_length;
+	if (info->temp_length > info->len)
+		info->len = info->temp_length;
 }
 
 t_map	get_map(int fd)
@@ -104,7 +104,8 @@ t_map	get_map(int fd)
 			ft_exit("gnl error", 1);
 		info.gnl_check = get_next_line(fd, &info.temp);
 	}
-	if (info.gnl_check || _resize_map(&info))
-		ft_exit("map alloc error", 1);
+	if (info.gnl_check)
+		ft_exit("gnl error", 1);
+	_resize_map(&info);
 	return (check_map_error(info.map));
 }

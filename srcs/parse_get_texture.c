@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 02:31:36 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 10:58:01 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,18 @@ static size_t	count_comma(char *str)
 	return (cnt);
 }
 
-static void	free_line(char **line, char ***splited_line)
+static void	free_line(char *line, char **splited_line)
 {
 	size_t	i;
 
-	free(*line);
-	*line = NULL;
+	free(line);
 	i = 0;
-	while ((*splited_line)[i])
+	while ((splited_line)[i])
 	{
-		free((*splited_line)[i]);
+		free((splited_line)[i]);
 		i++;
 	}
-	free(*splited_line);
+	free(splited_line);
 	*splited_line = NULL;
 }
 
@@ -66,7 +65,6 @@ void	get_texture(t_texture *texture, int map_fd)
 {
 	char	*line;
 	char	**splited_line;
-	size_t	comma_cnt;
 	size_t	i;
 
 	i = 0;
@@ -75,18 +73,17 @@ void	get_texture(t_texture *texture, int map_fd)
 		if (get_next_line(map_fd, &line) < 0)
 			ft_exit("get_next_line_error", 1);
 		if (!line)
-			ft_exit("get texture line error", 1);
-		comma_cnt = count_comma(line);
+			ft_exit("get texture line error", 0);
 		splited_line = ft_split_delimiter(line, ", \n");
 		if (!*splited_line)
 		{
-			free_line(&line, &splited_line);
+			free_line(line, splited_line);
 			continue ;
 		}
 		if (!splited_line[1])
 			ft_exit("splited_line_error", 0);
-		get_texture_content(texture, splited_line, comma_cnt);
-		free_line(&line, &splited_line);
+		get_texture_content(texture, splited_line, count_comma(line));
+		free_line(line, splited_line);
 		i++;
 	}
 }
