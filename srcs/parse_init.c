@@ -6,11 +6,12 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:10:22 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 09:21:24 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 16:12:00 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <fcntl.h>
 
 static int	open_valid_map(char *argv)
 {

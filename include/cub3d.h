@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 10:08:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 19:26:52 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 # define CUB3D_H
 
-# include <math.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <errno.h>
-# include <string.h>
-# include <fcntl.h>
 
 # include "libft.h"
 # include "get_map.h"
+# include "ray_casting.h"
 
 # define WIDTH 1600
 # define HEIGHT 900
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
 
 typedef struct s_mlx
 {
@@ -44,6 +44,7 @@ typedef struct s_info
 	t_texture	texture;
 	t_map		map;
 	t_mlx		mlx;
+	t_ray		ray;
 }				t_info;
 
 /*
