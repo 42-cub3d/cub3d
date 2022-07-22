@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 09:30:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 22:54:39 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,39 @@ static void	_key_move(int key, t_info *info)
 {
 	(void)key;
 	(void)info;
-	ft_re_render(info);
 }
 
 static void	_key_view(int key, t_info *info)
 {
+	double	old_dir_x;
+	double	old_plane_x;
 
-	(void)key;
-	(void)info;
-	ft_re_render(info);
+	old_dir_x = info->ray.dir_x;
+	if (key == KC_RIGHT)
+	{
+		info->ray.dir_x = info->ray.dir_x * cos(-ROT_SPEED) - \
+											info->ray.dir_y * sin(-ROT_SPEED);
+		info->ray.dir_y = old_dir_x * sin(-ROT_SPEED) + \
+											info->ray.dir_y * cos(-ROT_SPEED);
+		old_plane_x = info->ray.plane_x;
+		info->ray.plane_x = info->ray.plane_x * cos(-ROT_SPEED) - \
+											info->ray.plane_y * sin(-ROT_SPEED);
+		info->ray.plane_y = old_plane_x * sin(-ROT_SPEED) + \
+											info->ray.plane_y * cos(-ROT_SPEED);
+	}
+	else
+	{
+		info->ray.dir_x = info->ray.dir_x * cos(ROT_SPEED) - \
+											info->ray.dir_y * sin(ROT_SPEED);
+		info->ray.dir_y = old_dir_x * sin(ROT_SPEED) + \
+											info->ray.dir_y * cos(ROT_SPEED);
+		old_plane_x = info->ray.plane_x;
+		info->ray.plane_x = info->ray.plane_x * cos(ROT_SPEED) - \
+											info->ray.plane_y * sin(ROT_SPEED);
+		info->ray.plane_y = old_plane_x * sin(ROT_SPEED) + \
+											info->ray.plane_y * cos(ROT_SPEED);
+	}
+	ft_ray_casting(info);
 }
 
 static int	_key_press(int key, t_info *info)

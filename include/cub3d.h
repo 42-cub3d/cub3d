@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 19:26:52 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 22:59:54 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <errno.h>
+# include <math.h>
 
 # include "libft.h"
 # include "get_map.h"
@@ -27,6 +28,8 @@
 # define HEIGHT 900
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
+# define ROT_SPEED 0.07
+# define MOVE_SPEED 0.15
 
 typedef struct s_mlx
 {
@@ -57,8 +60,9 @@ void	ft_flush_info(t_info *info);
 **      mlx part
 */
 void	ft_mlx_init(t_mlx *org);
-void	ft_put_pixel(t_mlx *mlx, int x, int y, int color);
+void	ft_draw_vertical(t_info *info, int x, int y1, int y2);
 void	ft_re_render(t_info *info);
+void	ft_img_clear(t_mlx *mlx);
 void	ft_event_handler(t_info *info);
 
 #endif
