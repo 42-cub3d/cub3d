@@ -6,13 +6,13 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 19:57:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 02:33:36 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 09:22:14 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_color_content(char *str)
+static int	get_color_content(char *str)
 {
 	char	*tmp;
 	size_t	i;

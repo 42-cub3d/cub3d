@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 02:29:17 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 10:08:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_info
 /*
 **		util
 */
-void	ft_exit(char *err_msg, int errno_manual);
+void	ft_exit(char *err_msg, int errno_mode);
 void	ft_flush_info(t_info *info);
 
 /*
