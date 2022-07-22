@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 22:45:48 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 23:36:07 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ void	ft_flush_info(t_info *info)
 	free(info->mlx.mlx);
 }
 
-// void	handler(void)
-// {
-// 	system("leaks cub3D");
-// }
+static void	handler(void)
+{
+	system("leaks cub3D");
+}
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	// atexit(handler);
+	atexit(handler);
 	if (argc != 2)
 		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);
