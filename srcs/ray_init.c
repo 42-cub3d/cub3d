@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:47 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 21:55:49 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 22:58:33 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 static	void	_set_start_vector_unit(t_info *info)
 {
-	if (info->map.p_info.pdir == POS_E)
-	{
-		info->ray.dir_x = 1;
-		info->ray.dir_y = 0;
-	}
-	else if (info->map.p_info.pdir == POS_W)
-	{
-		info->ray.dir_x = -1;
-		info->ray.dir_y = 0;
-	}
-	else if (info->map.p_info.pdir == POS_S)
-	{
-		info->ray.dir_x = 0;
-		info->ray.dir_y = -1;
-	}
-	else if (info->map.p_info.pdir == POS_N)
-	{
-		info->ray.dir_x = 0;
-		info->ray.dir_y = 1;
-	}
+	// if (info->map.p_info.pdir == POS_E)
+	// {
+	// 	info->ray.dir_x = 1;
+	// 	info->ray.dir_y = 0;
+	// }
+	// else if (info->map.p_info.pdir == POS_W)
+	// {
+	// 	info->ray.dir_x = -1;
+	// 	info->ray.dir_y = 0;
+	// }
+	// else if (info->map.p_info.pdir == POS_S)
+	// {
+	// 	info->ray.dir_x = 0;
+	// 	info->ray.dir_y = -1;
+	// }
+	// else if (info->map.p_info.pdir == POS_N)
+	// {
+	// 	info->ray.dir_x = 0;
+	// 	info->ray.dir_y = 1;
+	// }
+	info->ray.dir_x = -1;
+	info->ray.dir_y = 0;
 }
 
 void	ft_ray_init(t_info *info)

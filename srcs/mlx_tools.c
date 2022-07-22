@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 10:43:48 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 22:48:46 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_re_render(t_info *info)
 	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
 }
 
-void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
+static void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*temp;
 	int		idx;
@@ -28,6 +28,37 @@ void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 	idx = (y * mlx->size) + (x * (mlx->bpp / 8));
 	temp = mlx->img_data + idx;
 	*(unsigned int *)temp = color;
+}
+
+void	ft_img_clear(t_mlx *mlx)
+{
+	int	i;
+	int	size;
+	int	*temp;
+
+	i = 0;
+	size = WIDTH * HEIGHT;
+	temp = (int *)(mlx->img_data);
+	while (i < size)
+	{
+		temp[i] = 0x000000;
+		i++;
+	}
+}
+
+void	ft_draw_vertical(t_info *info, int x, int y1, int y2)
+{
+	int		color;
+	int		i;
+
+	i = y1;
+	while (i <= y2)
+	{
+		// color  set texture file
+		color = 0xFFFFFF;
+		ft_put_pixel(&info->mlx, x, i, color);
+		i++;
+	}
 }
 
 void	ft_mlx_init(t_mlx *org)

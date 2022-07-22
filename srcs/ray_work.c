@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 22:09:33 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 22:49:32 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	ft_ray_casting(t_info *info)
 	t_draw	draw;
 
 	x = 0;
+	ft_img_clear(&info->mlx);
 	while (x < WIDTH)
 	{
 		draw.line_height = (int)(HEIGHT / get_perp_wall_dist(info, x));
@@ -97,7 +98,8 @@ void	ft_ray_casting(t_info *info)
 		draw.draw_end = draw.line_height / 2 + HEIGHT / 2;
 		if (draw.draw_end >= HEIGHT)
 			draw.draw_end = HEIGHT - 1;
-		printf("%d %d %d %d\n", x, draw.draw_start, draw.draw_end, draw.line_height);
+		ft_draw_vertical(info, x, draw.draw_start, draw.draw_end);
 		x++;
 	}
+	ft_re_render(info);
 }
