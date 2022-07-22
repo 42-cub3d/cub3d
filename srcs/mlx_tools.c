@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_init.c                                         :+:      :+:    :+:   */
+/*   mlx_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 02:29:34 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 10:43:48 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 void	ft_re_render(t_info *info)
 {
-	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, \
-														info->mlx.img, 0, 0);
+	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
 }
 
 void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
@@ -38,7 +37,7 @@ void	ft_mlx_init(t_mlx *org)
 	mlx.mlx = mlx_init();
 	if (!mlx.mlx)
 		ft_exit("mlx init error", 1);
-	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "cub3d");
+	mlx.win = mlx_new_window(mlx.mlx, WIDTH, HEIGHT, "cub3D");
 	if (!mlx.win)
 		ft_exit("mlx window error", 1);
 	mlx.img = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);

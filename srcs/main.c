@@ -5,13 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 10:08:23 by yongmkim         ###   ########seoul.kr  */
+/*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
+/*   Updated: 2022/07/22 11:11:53 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
+
+static void	_print_info(t_info *info)
+{
+	size_t	idx;
+
+	printf("[texture]\nE: %s\nW: %s\nS: %s\nN: %s\n", \
+													info->texture.east, \
+													info->texture.west, \
+													info->texture.south, \
+													info->texture.north);
+	printf("\n[player]\ndir: %d\nx: %zu\ny: %zu\n", \
+													info->map.p_info.pdir, \
+													info->map.p_info.px, \
+													info->map.p_info.py);
+	idx = 0;
+	printf("\n[map]\nwidth: %zu\nheight: %zu\n", \
+													info->map.width, \
+													info->map.height);
+	while (info->map.map[idx])
+	{
+		printf("%s<\n", info->map.map[idx]);
+		idx++;
+	}
+}
 
 void	ft_exit(char *err_msg, int errno_mode)
 {
@@ -46,33 +70,23 @@ void	ft_flush_info(t_info *info)
 	free(info->mlx.mlx);
 }
 
-static void	_print_info(t_info *info)
+/*
+void	handler(void)
 {
-	size_t	idx;
-
-	printf("[texture]\nE: %s\nW: %s\nS: %s\nN: %s\n", info->texture.east, \
-				info->texture.west, info->texture.south, info->texture.north);
-
-	printf("\n[player]\ndir: %d\nx: %zu\ny: %zu\n", info->map.p_info.pdir, \
-									info->map.p_info.px, info->map.p_info.py);
-	idx = 0;
-	printf("\n[map]\nwidth: %zu\nheight: %zu\n", info->map.width, \
-															info->map.height);
-	while (info->map.map[idx])
-	{
-		printf("%s\n", info->map.map[idx]);
-		idx++;
-	}
+	system("leaks cub3D");
 }
+*/
+
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
+	//atexit(handler);
 	if (argc != 2)
-		ft_exit("./cub3d <map_file>", 0);
+		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);
-	ft_mlx_init(&info.mlx);
 	_print_info(&info);
+	ft_mlx_init(&info.mlx);
 	ft_event_handler(&info);
 	// add ray casting part
 	mlx_loop(info.mlx.mlx);

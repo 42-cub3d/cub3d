@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/22 01:43:43 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/22 10:24:27 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC					= main.c\
 					parse_get_color.c\
 					parse_get_map.c\
 					parse_get_map_error.c\
-					mlx_init.c\
+					mlx_tools.c\
 					mlx_key_event.c\
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
