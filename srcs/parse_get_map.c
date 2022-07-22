@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 19:07:49 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 19:31:56 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,21 @@ static void	_resize_map(t_map_parse *info)
 {
 	size_t	idx;
 
-	info->map.map = (char **)malloc(sizeof(char *) * (info->cur + 2 + 1));
+	info->map.map = (char **)malloc(sizeof(char *) * (info->cur + 1));
 	if (!info->map.map)
 		ft_exit("resize_map malloc error", 1);
 	idx = 0;
-	info->map.map[info->cur + 2] = NULL;
-	while (idx < info->cur + 2)
+	info->map.map[info->cur] = NULL;
+	while (idx < info->cur)
 	{
 		info->map.map[idx] = (char *)malloc(sizeof(char) * (info->len + 1));
 		if (!info->map.map[idx])
 			ft_exit("resize_map malloc error", 1);
 		info->map.map[idx][info->len] = '\0';
 		ft_memset(info->map.map[idx], ' ', info->len);
-		if (idx != 0 && idx != (info->cur + 1))
-		{
-			ft_memcpy(info->map.map[idx], info->temp_map[idx - 1], \
-										ft_strlen(info->temp_map[idx - 1]));
-			free(info->temp_map[idx - 1]);
-		}
+		ft_memcpy(info->map.map[idx], info->temp_map[idx], \
+									ft_strlen(info->temp_map[idx]));
+		free(info->temp_map[idx]);
 		idx++;
 	}
 	free(info->temp_map);
