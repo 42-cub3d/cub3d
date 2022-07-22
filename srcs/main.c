@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 19:50:28 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 20:55:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int	main(int argc, char **argv)
 	_print_info(&info);
 	ft_mlx_init(&info.mlx);
 	ft_event_handler(&info);
-	// add ray casting part
+	ft_ray_init(&info);
+	ft_ray_casting(&info);
 	mlx_loop(info.mlx.mlx);
 	ft_flush_info(&info);
 	return (EXIT_SUCCESS);
