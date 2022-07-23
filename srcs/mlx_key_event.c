@@ -74,6 +74,7 @@ static int	_close_cube_three_d(t_info *info)
 {
 	ft_flush_info(info);
 	exit(0);
+return (1);
 }
 
 static int	_key_press(int key, t_info *info)
