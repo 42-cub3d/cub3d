@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:25:21 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 21:44:59 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define FLOOR "F"
 # define CELLING "C"
 
+typedef enum e_texture_dir		t_texture_dir;
+
 enum e_return_code
 {
 	MAP_SUCCESS = 0,
@@ -34,6 +36,14 @@ enum e_player
 	POS_W = 1 << 1,
 	POS_S = 1 << 2,
 	POS_N = 1 << 3
+};
+
+enum e_texture_dir
+{
+	T_EAST = 0,
+	T_WEST,
+	T_SOUTH,
+	T_NORTH,
 };
 
 typedef struct s_player
@@ -63,6 +73,15 @@ typedef struct s_map_parse
 	size_t	temp_length;
 }			t_map_parse;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_img;
+
 typedef struct s_texture
 {
 	char	*north;
@@ -71,6 +90,8 @@ typedef struct s_texture
 	char	*west;
 	int		floor;
 	int		ceiling;
+	int		*textures[8];
+
 }			t_texture;
 
 typedef struct s_info	t_info;
