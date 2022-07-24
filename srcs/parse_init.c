@@ -6,14 +6,14 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:10:22 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/23 08:30:37 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 01:30:15 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include <fcntl.h>
 
-static int	open_valid_map(char *argv)
+static int	_open_valid_map(char *argv)
 {
 	int	map_fd;
 
@@ -32,7 +32,7 @@ void	parse_map(t_info *info, char **argv)
 	int			map_fd;
 	t_texture	texture;
 
-	map_fd = open_valid_map(argv[1]);
+	map_fd = _open_valid_map(argv[1]);
 	get_texture(&texture, map_fd);
 	info->texture = texture;
 	info->map = get_map(map_fd);

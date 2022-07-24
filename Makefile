@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/24 21:41:21 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/25 02:18:20 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,13 @@ SRC					:= main.c\
 					parse_get_color.c\
 					parse_get_map.c\
 					parse_get_map_error.c\
+					parse_get_texture_img.c\
 					mlx_tools.c\
 					mlx_key_event.c\
 					mlx_key_move.c\
 					mlx_key_rotate_view.c\
 					ray_work.c\
+					ray_init.c\
 
 OBJECT				:= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 

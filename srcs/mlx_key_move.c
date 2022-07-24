@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 00:41:13 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 02:17:50 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ void	key_move(int key, t_info *info)
 		_key_leftward(info);
 	else if (key == KC_D)
 		_key_rightward(info);
-	ft_ray_casting(info, RENDER);
+	else
+		return ;
+	ft_ray_casting(info);
 }

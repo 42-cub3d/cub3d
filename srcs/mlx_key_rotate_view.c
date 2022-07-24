@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:36:17 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 21:39:50 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 02:26:19 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,41 @@ static void	_rotate_left(t_info *info)
 										info->ray.plane_y * cos(-ROT_SPEED);
 }
 
+static void	_set_dir_vector(int key, t_info *info)
+{
+	info->ray.plane_x = 0;
+	info->ray.plane_y = 0;
+	info->ray.dir_x = 0;
+	info->ray.dir_y = 0;
+	if (key == KC_L)
+	{
+		info->ray.dir_x = 1;
+		info->ray.plane_y = 0.66;
+	}
+	else if (key == KC_J)
+	{
+		info->ray.dir_x = -1;
+		info->ray.plane_y = -0.66;
+	}
+	else if (key == KC_K)
+	{
+		info->ray.dir_y = 1;
+		info->ray.plane_x = -0.66;
+	}
+	else if (key == KC_I)
+	{
+		info->ray.dir_y = -1;
+		info->ray.plane_x = 0.66;
+	}
+}
+
 void	key_rotate_view(int key, t_info *info)
 {
 	if (key == KC_LEFT)
 		_rotate_left(info);
 	else if (key == KC_RIGHT)
 		_rotate_right(info);
-	ft_ray_casting(info, RENDER);
+	else
+		_set_dir_vector(key, info);
+	ft_ray_casting(info);
 }

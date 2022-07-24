@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 00:30:38 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 02:17:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,10 @@ int	main(int argc, char **argv)
 		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);
 	ft_mlx_init(&info.mlx);
+	set_texture_img(&info);
 	ft_event_handler(&info);
-	ft_ray_casting(&info, INIT | RENDER);
+	ft_ray_setting(&info);
+	ft_ray_casting(&info);
 	_print_info(&info);
 	mlx_loop(info.mlx.mlx);
 	ft_flush_info(&info);
