@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:57:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 20:53:56 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	_dda_loop(t_info *info, t_cast_info *beam)
 		{
 			beam->side_dist_x += beam->delta_dist_x;
 			beam->map_x += beam->step_x;
-			beam->side = 0;
+			beam->side = X_HIT;
 		}
 		else
 		{
 			beam->side_dist_y += beam->delta_dist_y;
 			beam->map_y += beam->step_y;
-			beam->side = 1;
+			beam->side = Y_HIT;
 		}
 		if (info->map.map[beam->map_y][beam->map_x] == '1')
 			beam->hit = 1;

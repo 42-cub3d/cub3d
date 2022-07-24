@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:32:24 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 19:57:48 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void _print_player_info(t_info *info)
 {
 	printf("\n---\n");
+	printf("field value     : ( %c )\n", info->map.map[(int)info->ray.p_y][(int)info->ray.p_x]);
 	printf("Player  position: (x: %f, y: %f)\n", info->ray.p_x, info->ray.p_y);
 	printf("Player direction: (x_d:%f, y_d:%f)\n", info->ray.dir_x, info->ray.dir_y);
 }

@@ -6,14 +6,14 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:56:06 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 20:15:15 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 
-static void	_print_info(t_info *info)
+void	_print_info(t_info *info)
 {
 	size_t	idx;
 
@@ -32,7 +32,7 @@ static void	_print_info(t_info *info)
 	idx = 0;
 	while (info->map.map[idx])
 	{
-		printf("%s<\n", info->map.map[idx]);
+		printf("%3zu: %s<\n", idx, info->map.map[idx]);
 		idx++;
 	}
 }
