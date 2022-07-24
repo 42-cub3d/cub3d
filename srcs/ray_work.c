@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 20:53:56 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 22:30:27 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static void	_dda_loop(t_info *info, t_cast_info *beam)
 		if (info->map.map[beam->map_y][beam->map_x] == '1')
 			beam->hit = 1;
 	}
-	if (!beam->side)
+	if (beam->side == X_HIT)
 		beam->perp_wall_dist = (beam->map_x - info->ray.p_x + \
 									(1 - beam->step_x) / 2) / beam->ray_dir_x;
-	else
+	else if (beam->side == Y_HIT)
 		beam->perp_wall_dist = (beam->map_y - info->ray.p_y + \
 									(1 - beam->step_y) / 2) / beam->ray_dir_y;
 }
@@ -113,17 +113,29 @@ void	ft_ray_casting(t_info *info, int mode)
 		info->ray.p_x = info->map.p_info.px;
 		info->ray.p_y = info->map.p_info.py;
 		info->ray.plane_x = 0;
-		info->ray.plane_y = 0.66;
+		info->ray.plane_y = 0;
 		info->ray.dir_x = 0;
 		info->ray.dir_y = 0;
-		if (info->map.p_info.pdir & POS_N)
-			info->ray.dir_y = -1;
-		else if (info->map.p_info.pdir & POS_S)
-			info->ray.dir_y = 1;
-		else if (info->map.p_info.pdir & POS_E)
+		if (info->map.p_info.pdir & POS_E)
+		{
 			info->ray.dir_x = 1;
+			info->ray.plane_y = 0.66;
+		}
 		else if (info->map.p_info.pdir & POS_W)
+		{
 			info->ray.dir_x = -1;
+			info->ray.plane_y = -0.66;
+		}
+		else if (info->map.p_info.pdir & POS_S)
+		{
+			info->ray.dir_y = 1;
+			info->ray.plane_x = -0.66;
+		}
+		else if (info->map.p_info.pdir & POS_N)
+		{
+			info->ray.dir_y = -1;
+			info->ray.plane_x = 0.66;
+		}
 	}
 	if (mode & RENDER)
 		_ft_ray_casting(info);
