@@ -55,7 +55,7 @@ SRC_B		=	ft_list_lib_util.c \
 #==============================================================================
 #	Directory
 #==============================================================================
-OBJ_DIR		=	object/
+OBJ_DIR		=
 SRC_DIR		=
 INC_DIR		=
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
@@ -126,12 +126,6 @@ $(NAME)		:	$(OBJECT)
 #==============================================================================
 #	Object file, library Make
 #==============================================================================
-.PHONY		:	obj_dir
-obj_dir		:
-		@mkdir -p $(OBJ_DIR)
-
-$(OBJECT)	:	| obj_dir
-
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 		$(eval idx = $(shell expr $(idx) + 1))
 		$(eval t_idx = $(shell expr $(idx) % 4 + 1))
@@ -141,7 +135,6 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 		fi
 		@printf "\b$(chr)"
 		@$(CC) $(CFLAG) -o $@ -c $<
-#@$(CC) $(CFLAG) $(LIB_LNK) -o $@ -c $<
 
 #==============================================================================
 #	clean fclean re
@@ -150,7 +143,7 @@ $(OBJ_DIR)%.o:	$(SRC_DIR)%.c
 c			:	clean
 clear		:	clean
 clean		:
-		@$(RM) -rf $(OBJ_DIR)
+		@$(RM) -rf $(OBJ) $(OBJ_B)
 		@printf "   $(_INFO) $(_CLEAN) - clean $(_DONE)\n"
 f			:	fclean
 fclear		:	fclean

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 19:31:56 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:02:12 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	_resize_map(t_map_parse *info)
 		info->map.map[idx][info->len] = '\0';
 		ft_memset(info->map.map[idx], ' ', info->len);
 		ft_memcpy(info->map.map[idx], info->temp_map[idx], \
-									ft_strlen(info->temp_map[idx]));
+												ft_strlen(info->temp_map[idx]));
 		free(info->temp_map[idx]);
 		idx++;
 	}
@@ -74,13 +74,6 @@ static void	_append_map(t_map_parse *info, size_t cur)
 	ft_exit("map append error", 1);
 }
 
-static void	_get_width(t_map_parse *info)
-{
-	info->temp_length = ft_strlen(info->temp);
-	if (info->temp_length > info->len)
-		info->len = info->temp_length;
-}
-
 t_map	get_map(int fd)
 {
 	t_map_parse	info;
@@ -92,7 +85,9 @@ t_map	get_map(int fd)
 		if (info.temp)
 		{
 			_append_map(&info, info.cur);
-			_get_width(&info);
+			info.temp_length = ft_strlen(info.temp);
+			if (info.temp_length > info.len)
+				info.len = info.temp_length;
 			info.cur++;
 			info.temp = NULL;
 		}

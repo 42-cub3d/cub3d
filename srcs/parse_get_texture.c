@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/22 10:58:01 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 20:19:02 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	free_line(char *line, char **splited_line)
 		i++;
 	}
 	free(splited_line);
-	*splited_line = NULL;
 }
 
 static	void	get_texture_content(t_texture *t, char **line, size_t comma_cnt)
