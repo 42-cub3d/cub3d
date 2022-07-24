@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 22:21:28 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:31:48 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,17 @@ void	ft_img_clear(t_info *info)
 	}
 }
 
-void	ft_draw_vertical(t_info *info, int x, int y1, int y2)
+void	ft_draw_vertical(t_info *info, int x, int start, int end)
 {
 	int		color;
-	int		i;
 
-	i = y1;
-	while (i <= y2)
+	while (start <= end)
 	{
 		set_texture(info);
 		// color  set texture file
 		color = 0xFFFFFF;
-		ft_put_pixel(&info->mlx, x, i, color);
-		i++;
+		ft_put_pixel(&info->mlx, x, start, color);
+		start++;
 	}
 }
 
