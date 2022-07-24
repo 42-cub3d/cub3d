@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/23 08:42:33 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 15:58:10 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	_set_dda_step(t_info *info, t_cast_info *beam)
 	}
 }
 
-static float	get_perp_wall_dist(t_info *info, int x)
+static float	_get_perp_wall_dist(t_info *info, int x)
 {
 	t_cast_info	beam;
 
@@ -85,13 +85,15 @@ static float	get_perp_wall_dist(t_info *info, int x)
 void	ft_ray_casting(t_info *info)
 {
 	int		x;
+	float	perp_wall_dist;
 	t_draw	draw;
 
 	x = 0;
 	ft_img_clear(info);
 	while (x < WIDTH)
 	{
-		draw.line_height = (int)(HEIGHT / get_perp_wall_dist(info, x));
+		perp_wall_dist = _get_perp_wall_dist(info, x);
+		draw.line_height = (int)(HEIGHT / perp_wall_dist);
 		draw.draw_start = -draw.line_height / 2 + HEIGHT / 2;
 		if (draw.draw_start < 0)
 			draw.draw_start = 0;
