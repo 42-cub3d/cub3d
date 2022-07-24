@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/24 17:02:59 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/24 18:53:32 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ SRC					:= main.c\
 					parse_get_map_error.c\
 					mlx_tools.c\
 					mlx_key_event.c\
-					ray_init.c\
 					ray_work.c\
 
 OBJECT				:= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))

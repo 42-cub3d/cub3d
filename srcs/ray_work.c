@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 15:58:10 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:57:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static float	_get_perp_wall_dist(t_info *info, int x)
 	return (beam.perp_wall_dist);
 }
 
-void	ft_ray_casting(t_info *info)
+static void	_ft_ray_casting(t_info *info)
 {
 	int		x;
 	float	perp_wall_dist;
@@ -104,4 +104,27 @@ void	ft_ray_casting(t_info *info)
 		x++;
 	}
 	ft_re_render(info);
+}
+
+void	ft_ray_casting(t_info *info, int mode)
+{
+	if (mode & INIT)
+	{
+		info->ray.p_x = info->map.p_info.px;
+		info->ray.p_y = info->map.p_info.py;
+		info->ray.plane_x = 0;
+		info->ray.plane_y = 0.66;
+		info->ray.dir_x = 0;
+		info->ray.dir_y = 0;
+		if (info->map.p_info.pdir & POS_N)
+			info->ray.dir_y = -1;
+		else if (info->map.p_info.pdir & POS_S)
+			info->ray.dir_y = 1;
+		else if (info->map.p_info.pdir & POS_E)
+			info->ray.dir_x = 1;
+		else if (info->map.p_info.pdir & POS_W)
+			info->ray.dir_x = -1;
+	}
+	if (mode & RENDER)
+		_ft_ray_casting(info);
 }

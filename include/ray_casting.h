@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 21:59:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:55:55 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_draw
 	int		draw_end;
 }			t_draw;
 
-void	ft_ray_init(t_info *info);
-void	ft_ray_casting(t_info *info);
+void	ft_ray_casting(t_info *info, int mode);
 
 #endif

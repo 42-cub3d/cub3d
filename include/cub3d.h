@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/23 08:42:16 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:54:24 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define TEXTURE_HEIGHT 64
 # define ROT_SPEED 0.15
 # define MOVE_SPEED 0.5
+# define INIT 1
+# define RENDER 2
 
 typedef struct s_mlx
 {

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/23 08:31:16 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:55:51 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	_key_move(int key, t_info *info)
 										info->ray.dir_x	* MOVE_SPEED)] == '0')
 			info->ray.p_x -= info->ray.dir_x * MOVE_SPEED;
 	}
-	ft_ray_casting(info);
+	ft_ray_casting(info, RENDER);
 }
 
 static void	_key_view(int key, t_info *info)
@@ -43,7 +43,7 @@ static void	_key_view(int key, t_info *info)
 	double	old_plane_x;
 
 	old_dir_x = info->ray.dir_x;
-	if (key == KC_RIGHT)
+	if (key == KC_LEFT)
 	{
 		info->ray.dir_x = info->ray.dir_x * cos(-ROT_SPEED) - \
 											info->ray.dir_y * sin(-ROT_SPEED);
@@ -55,7 +55,7 @@ static void	_key_view(int key, t_info *info)
 		info->ray.plane_y = old_plane_x * sin(-ROT_SPEED) + \
 											info->ray.plane_y * cos(-ROT_SPEED);
 	}
-	else
+	else if (key == KC_RIGHT)
 	{
 		info->ray.dir_x = info->ray.dir_x * cos(ROT_SPEED) - \
 											info->ray.dir_y * sin(ROT_SPEED);
@@ -67,7 +67,7 @@ static void	_key_view(int key, t_info *info)
 		info->ray.plane_y = old_plane_x * sin(ROT_SPEED) + \
 											info->ray.plane_y * cos(ROT_SPEED);
 	}
-	ft_ray_casting(info);
+	ft_ray_casting(info, RENDER);
 }
 
 static int	_close_cube_three_d(t_info *info)

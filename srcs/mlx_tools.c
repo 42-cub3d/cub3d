@@ -6,15 +6,23 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 16:03:28 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:32:24 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 #include "mlx.h"
 
+static void _print_player_info(t_info *info)
+{
+	printf("\n---\n");
+	printf("Player  position: (x: %f, y: %f)\n", info->ray.p_x, info->ray.p_y);
+	printf("Player direction: (x_d:%f, y_d:%f)\n", info->ray.dir_x, info->ray.dir_y);
+}
+
 void	ft_re_render(t_info *info)
 {
+	_print_player_info(info);
 	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
 }
 
