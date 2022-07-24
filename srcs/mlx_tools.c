@@ -6,24 +6,14 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 21:46:03 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:21:28 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 #include "mlx.h"
-
-static void _print_player_info(t_info *info)
-{
-	printf("\n---\n");
-	printf("field value     : ( %c )\n", info->map.map[(int)info->ray.p_y][(int)info->ray.p_x]);
-	printf("Player  position: (x: %f, y: %f)\n", info->ray.p_x, info->ray.p_y);
-	printf("Player direction: (x_d:%f, y_d:%f)\n", info->ray.dir_x, info->ray.dir_y);
-}
 
 void	ft_re_render(t_info *info)
 {
-	_print_player_info(info);
 	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
 }
 

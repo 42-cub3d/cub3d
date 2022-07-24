@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 20:15:15 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 21:32:54 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ void	_print_info(t_info *info)
 		printf("%3zu: %s<\n", idx, info->map.map[idx]);
 		idx++;
 	}
+	printf("\nfield value     : ( %c )\n", info->map.map[(int)info->ray.p_y][(int)info->ray.p_x]);
+	printf("Player  position: (x  :%f, y  :%f)\n", info->ray.p_x, info->ray.p_y);
+	printf("Player direction: (x_d:%f, y_d:%f)\n", info->ray.dir_x, info->ray.dir_y);
 }
 
 void	ft_exit(char *err_msg, int errno_mode)

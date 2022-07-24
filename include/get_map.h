@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 21:44:59 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:25:39 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_texture
 	char	*west;
 	int		floor;
 	int		ceiling;
-	int		*textures[8];
+	int		*textures[4];
 
 }			t_texture;
 

@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:30:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/24 22:09:59 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:30:37 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,24 @@ t_img	*get_img(t_info *info, t_texture_dir dir, int *width, int *height)
 	return (img);
 }
 
+void	set_texture_buffer(int *texture_value, int width, int height, t_img *img)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			texture_value[width * y + x] = ((int *)(img->addr))[y * width + x];
+			x++;
+		}
+		y++;
+	}
+}
+
 int	*load_image(t_info *info, t_texture_dir dir)
 {
 	t_img	*img;
@@ -58,7 +76,7 @@ int	*load_image(t_info *info, t_texture_dir dir)
 	if ((img->bits_per_pixel != 32) || (img->endian != 0))
 		ft_exit("MLX ERROR", 1);
 	texture_value = malloc(sizeof(int) * width * height);
-	set_texture_buffer(ret, width, height, img);
+	set_texture_buffer(texture_value, width, height, img);
 	mlx_destroy_image(info->mlx, img->img);
 	free(img);
 	img = NULL;
