@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 02:32:46 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/22 19:34:21 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,26 @@ static void	_check_error_case(t_map *map, t_player *p)
 	char	monad;
 
 	monad = map->map[p->py][p->px];
-	if (monad == ' ')
+	if (monad == '0')
+	{
+		if ((!p->px || !p->py \
+			|| p->px == map->width - 1 || p->py == map->height - 1))
+			ft_exit("map field unclosed error", 0);
+	}
+	else if (monad == ' ')
 	{
 		if (_check_wall(p->px, p->py, *map))
-			ft_exit("map wall error", 0);
+			ft_exit("map wall unclosed error", 0);
 	}
 	else if (ft_strchr("EWSN", monad))
 	{
+		if ((!p->px || !p->py \
+			|| p->px == map->width - 1 || p->py == map->height - 1))
+			ft_exit("map player unclosed error", 0);
 		if (_check_player(p, map, monad))
 			ft_exit("map player error", 0);
 	}
-	else if (!ft_strchr("01", monad))
+	else if (!ft_strchr("1", monad))
 		ft_exit("map invalid character", 0);
 }
 

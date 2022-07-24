@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/22 10:24:27 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/22 21:59:36 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INC_DIR				= include/
 
 LIB_DIR		= 	library/
 LIB_LNK		=	$(LIBFT_LNK) $(MLX_LNK)
-LIB_INC		=	$(LIBFT_INC) $(MLX_INC)
+LIB_INC		=	$(LIBFT_INC) $(MLX_INC) -I $(INC_DIR)
 HDR_INC		=	$(LIB_INC)
 ###	libft
 LIBFT_DIR	=	$(LIB_DIR)libft/
@@ -41,6 +41,8 @@ SRC					= main.c\
 					parse_get_map_error.c\
 					mlx_tools.c\
 					mlx_key_event.c\
+					ray_init.c\
+					ray_work.c\
 
 OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
@@ -83,7 +85,7 @@ lib_re				:
 
 
 $(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
-	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
+	$(CC) $(CFLAGS) $(LIB_INC) -c $< -o $@
 
 
 .PHONY				: clean lclean

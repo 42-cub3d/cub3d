@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 09:30:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/23 08:31:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,75 @@
 
 static void	_key_move(int key, t_info *info)
 {
-	(void)key;
-	(void)info;
-	ft_re_render(info);
+	if (key == KC_W)
+	{
+		if (info->map.map[(int)(info->ray.p_y + info->ray.dir_y * MOVE_SPEED)]\
+													[(int)info->ray.p_x] == '0')
+			info->ray.p_y += info->ray.dir_y * MOVE_SPEED;
+		if (info->map.map[(int)info->ray.p_y][(int)(info->ray.p_x + \
+										info->ray.dir_y	* MOVE_SPEED)] == '0')
+			info->ray.p_x += info->ray.dir_x * MOVE_SPEED;
+	}
+	else if (key == KC_S)
+	{
+		if (info->map.map[(int)(info->ray.p_y - info->ray.dir_y * MOVE_SPEED)]\
+													[(int)info->ray.p_x] == '0')
+			info->ray.p_y -= info->ray.dir_y * MOVE_SPEED;
+		if (info->map.map[(int)info->ray.p_y][(int)(info->ray.p_x - \
+										info->ray.dir_x	* MOVE_SPEED)] == '0')
+			info->ray.p_x -= info->ray.dir_x * MOVE_SPEED;
+	}
+	ft_ray_casting(info);
 }
 
 static void	_key_view(int key, t_info *info)
 {
+	double	old_dir_x;
+	double	old_plane_x;
 
-	(void)key;
-	(void)info;
-	ft_re_render(info);
-}
-
-static int	_key_press(int key, t_info *info)
-{
-	if (key == KC_ESC)
+	old_dir_x = info->ray.dir_x;
+	if (key == KC_RIGHT)
 	{
-		ft_flush_info(info);
-		exit(0);
+		info->ray.dir_x = info->ray.dir_x * cos(-ROT_SPEED) - \
+											info->ray.dir_y * sin(-ROT_SPEED);
+		info->ray.dir_y = old_dir_x * sin(-ROT_SPEED) + \
+											info->ray.dir_y * cos(-ROT_SPEED);
+		old_plane_x = info->ray.plane_x;
+		info->ray.plane_x = info->ray.plane_x * cos(-ROT_SPEED) - \
+											info->ray.plane_y * sin(-ROT_SPEED);
+		info->ray.plane_y = old_plane_x * sin(-ROT_SPEED) + \
+											info->ray.plane_y * cos(-ROT_SPEED);
 	}
-	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D)
-		_key_move(key, info);
-	else if (key == KC_LEFT || key == KC_RIGHT)
-		_key_view(key, info);
-	return (1);
+	else
+	{
+		info->ray.dir_x = info->ray.dir_x * cos(ROT_SPEED) - \
+											info->ray.dir_y * sin(ROT_SPEED);
+		info->ray.dir_y = old_dir_x * sin(ROT_SPEED) + \
+											info->ray.dir_y * cos(ROT_SPEED);
+		old_plane_x = info->ray.plane_x;
+		info->ray.plane_x = info->ray.plane_x * cos(ROT_SPEED) - \
+											info->ray.plane_y * sin(ROT_SPEED);
+		info->ray.plane_y = old_plane_x * sin(ROT_SPEED) + \
+											info->ray.plane_y * cos(ROT_SPEED);
+	}
+	ft_ray_casting(info);
 }
 
 static int	_close_cube_three_d(t_info *info)
 {
 	ft_flush_info(info);
 	exit(0);
+}
+
+static int	_key_press(int key, t_info *info)
+{
+	if (key == KC_ESC)
+		_close_cube_three_d(info);
+	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D)
+		_key_move(key, info);
+	else if (key == KC_LEFT || key == KC_RIGHT)
+		_key_view(key, info);
+	return (1);
 }
 
 void	ft_event_handler(t_info *info)
