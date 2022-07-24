@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/24 15:52:59 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/07/24 16:49:28 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ MLX_LNK		=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
 
 SRCS_DIR 			= srcs/
 
-OBJS_DIR 			= objs/
+OBJS_DIR 			= srcs/
 
 SRC					= main.c\
 					parse_init.c\
@@ -61,14 +61,15 @@ MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
 
 
 .PHONY				: all
-all					: obj_dir $(NAME)
+all					: $(NAME)
 
 $(NAME)				: lib_make $(OBJECT)
 	$(CC) $(CFLAGS) $(LIB_LNK) $(OBJECT) -o $@
 
 
-.PHONY				: lib_make obj_dir
-obj_dir				:
+.PHONY				: lib_make
+
+make_dir			:
 	@mkdir -p $(OBJS_DIR)
 
 lib_make			:
@@ -90,7 +91,7 @@ $(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
 
 .PHONY				: clean lclean
 clean				:
-	$(RM) -rf $(OBJS_DIR)
+	$(RM) -rf $(OBJECT)
 
 lclean			: lib_clean
 
