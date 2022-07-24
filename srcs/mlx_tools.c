@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 22:12:48 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 03:32:31 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,9 @@ void	ft_img_clear(t_info *info)
 	}
 }
 
-void	ft_draw_vertical(t_info *info, int x, int start, int end)
+void	ft_put_color(t_info *info, int x, int y, int color)
 {
-	int		color;
-
-	while (start <= end)
-	{
-		// color  set texture file
-		color = 0xFFFFFF;
-		ft_put_pixel(&info->mlx, x, start, color);
-		start++;
-	}
+	ft_put_pixel(&info->mlx, x, y, color);
 }
 
 void	ft_mlx_init(t_mlx *org)
@@ -77,7 +69,7 @@ void	ft_mlx_init(t_mlx *org)
 		ft_exit("mlx image error", 1);
 	mlx.img_data = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size, \
 															&mlx.endian);
-	if (!mlx.img_data)
+	if (!mlx.img_data || mlx.bpp != 32 || mlx.endian != 0)
 		ft_exit("mlx image_data error", 1);
 	*org = mlx;
 }

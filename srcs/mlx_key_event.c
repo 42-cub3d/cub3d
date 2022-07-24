@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 21:37:33 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 02:24:03 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	_key_press(int key, t_info *info)
 		_close_cube_three_d(info);
 	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D)
 		key_move(key, info);
-	else if (key == KC_LEFT || key == KC_RIGHT)
+	else if (key == KC_LEFT || key == KC_RIGHT \
+	|| key == KC_I || key == KC_J || key == KC_K || key == KC_L)
 		key_rotate_view(key, info);
 	else if (key == KC_M)
 		_print_info(info);

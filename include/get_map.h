@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:25:21 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 01:28:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # define EAST "EA"
 # define FLOOR "F"
 # define CELLING "C"
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
+
+typedef enum e_texture_dir
+{
+	T_EAST = 0,
+	T_WEST,
+	T_SOUTH,
+	T_NORTH,
+}			t_texture_dir;
 
 enum e_return_code
 {
@@ -35,6 +45,15 @@ enum e_player
 	POS_S = 1 << 2,
 	POS_N = 1 << 3
 };
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		size;
+	int		endian;
+}			t_img;
 
 typedef struct s_player
 {
@@ -71,6 +90,7 @@ typedef struct s_texture
 	char	*west;
 	int		floor;
 	int		ceiling;
+	int		*textures[4];
 }			t_texture;
 
 typedef struct s_info	t_info;
@@ -80,5 +100,6 @@ int		get_color(char **line);
 void	parse_map(t_info *info, char **argv);
 t_map	get_map(int fd);
 t_map	check_map_error(t_map map);
+void	set_texture_img(t_info *info);
 
 #endif

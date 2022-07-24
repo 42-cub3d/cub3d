@@ -6,13 +6,13 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/24 20:19:02 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 02:01:09 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static size_t	count_comma(char *str)
+static size_t	_count_comma(char *str)
 {
 	size_t	cnt;
 
@@ -28,7 +28,7 @@ static size_t	count_comma(char *str)
 	return (cnt);
 }
 
-static void	free_line(char *line, char **splited_line)
+static void	_free_line(char *line, char **splited_line)
 {
 	size_t	i;
 
@@ -42,19 +42,24 @@ static void	free_line(char *line, char **splited_line)
 	free(splited_line);
 }
 
-static	void	get_texture_content(t_texture *t, char **line, size_t comma_cnt)
+static	void	_get_texture_content(t_texture *t, char **line, size_t comma_nb)
 {
-	if (ft_strcmp(line[0], NORTH) == 0 && !line[2])
-		t->north = ft_strdup(line[1]);
-	else if (ft_strcmp(line[0], SOUTH) == 0 && !line[2])
-		t->south = ft_strdup(line[1]);
-	else if (ft_strcmp(line[0], EAST) == 0 && !line[2])
-		t->east = ft_strdup(line[1]);
-	else if (ft_strcmp(line[0], WEST) == 0 && !line[2])
-		t->west = ft_strdup(line[1]);
-	else if (ft_strcmp(line[0], FLOOR) == 0 && (comma_cnt == 2))
+	if (!line[2])
+	{
+		if (ft_strcmp(line[0], NORTH) == 0)
+			t->north = ft_strdup(line[1]);
+		else if (ft_strcmp(line[0], SOUTH) == 0)
+			t->south = ft_strdup(line[1]);
+		else if (ft_strcmp(line[0], EAST) == 0)
+			t->east = ft_strdup(line[1]);
+		else if (ft_strcmp(line[0], WEST) == 0)
+			t->west = ft_strdup(line[1]);
+		else
+			ft_exit("from_get_texture_content", 0);
+	}
+	else if (comma_nb == 2 && ft_strcmp(line[0], FLOOR) == 0)
 		t->floor = get_color(line);
-	else if (ft_strcmp(line[0], CELLING) == 0 && (comma_cnt == 2))
+	else if (comma_nb == 2 && ft_strcmp(line[0], CELLING) == 0)
 		t->ceiling = get_color(line);
 	else
 		ft_exit("from_get_texture_content", 0);
@@ -76,13 +81,13 @@ void	get_texture(t_texture *texture, int map_fd)
 		splited_line = ft_split_delimiter(line, ", \n");
 		if (!*splited_line)
 		{
-			free_line(line, splited_line);
+			_free_line(line, splited_line);
 			continue ;
 		}
 		if (!splited_line[1])
 			ft_exit("splited_line_error", 0);
-		get_texture_content(texture, splited_line, count_comma(line));
-		free_line(line, splited_line);
+		_get_texture_content(texture, splited_line, _count_comma(line));
+		_free_line(line, splited_line);
 		i++;
 	}
 }
