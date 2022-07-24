@@ -120,7 +120,7 @@ $(NAME)		:	$(OBJECT)
 		@if [ $(idx) -gt 0 ]; then\
 			printf "\b$(_DONE)\n";\
 		fi
-		@$(AR) $(AR_FLAG) $@ $^
+		$(AR) $(AR_FLAG) $@ $^
 		@printf "$(_SUCCESS) $(_NAME) - $(_PART) $(_DONE)\n"
 
 #==============================================================================
