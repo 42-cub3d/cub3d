@@ -6,11 +6,12 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 22:31:48 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:32:51 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "cub3d.h"
 
 void	ft_re_render(t_info *info)
 {

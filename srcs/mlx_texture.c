@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:30:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/24 22:30:37 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:35:49 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 static char	*get_path(t_texture *texture, t_texture_dir dir)
 {
-	if (type == TEX_EAST)
+	if (dir == T_EAST)
 		return (texture->east);
-	else if (type == TEX_WEST)
+	else if (dir == T_WEST)
 		return (texture->west);
-	else if (type == TEX_SOUTH)
+	else if (dir == T_SOUTH)
 		return (texture->south);
-	else if (type == TEX_NORTH)
+	else if (dir == T_NORTH)
 		return (texture->north);
 	else
 		ft_exit("TEXTURE FILE ERROR", 1);
@@ -37,8 +37,8 @@ t_img	*get_img(t_info *info, t_texture_dir dir, int *width, int *height)
 	char	*path;
 
 	img	= malloc(sizeof(t_img));
-	mlx = info->mlx;
-	path = get_path(info->texture, dir);
+	mlx = &info->mlx;
+	path = get_path(&info->texture, dir);
 	img->img = mlx_xpm_file_to_image(mlx, path, width, height);
 	if (!img->img || *width !=64 || *height != 64)
 		ft_exit("TEXTURE PIXEL MUST BE 64", 0);
@@ -70,14 +70,14 @@ int	*load_image(t_info *info, t_texture_dir dir)
 	int		height;
 	int		*texture_value;
 
-	img = get_img(info->texture, dir, &width, &height);
+	img = get_img(info, dir, &width, &height);
 	img->addr = mlx_get_data_addr(img->img, &(img->bits_per_pixel), \
 										&(img->line_length), &(img->endian));
 	if ((img->bits_per_pixel != 32) || (img->endian != 0))
 		ft_exit("MLX ERROR", 1);
 	texture_value = malloc(sizeof(int) * width * height);
 	set_texture_buffer(texture_value, width, height, img);
-	mlx_destroy_image(info->mlx, img->img);
+	mlx_destroy_image(&info->mlx, img->img);
 	free(img);
 	img = NULL;
 	return (texture_value);

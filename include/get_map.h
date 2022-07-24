@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 22:25:39 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:33:37 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ int		get_color(char **line);
 void	parse_map(t_info *info, char **argv);
 t_map	get_map(int fd);
 t_map	check_map_error(t_map map);
+void	set_texture(t_info *info);
 
 #endif

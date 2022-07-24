@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/24 21:41:21 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/24 22:33:18 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC					:= main.c\
 					parse_get_map.c\
 					parse_get_map_error.c\
 					mlx_tools.c\
+					mlx_texture.c\
 					mlx_key_event.c\
 					mlx_key_move.c\
 					mlx_key_rotate_view.c\
