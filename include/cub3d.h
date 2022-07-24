@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/23 08:42:16 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 20:47:37 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@
 # define HEIGHT 900
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define ROT_SPEED 0.15
-# define MOVE_SPEED 0.5
+# define ROT_SPEED 0.09
+# define MOVE_SPEED 0.25
+# define INIT 1
+# define RENDER 2
+# define X_HIT 0
+# define Y_HIT 1
 
 typedef struct s_mlx
 {
@@ -50,6 +54,7 @@ typedef struct s_info
 	t_ray		ray;
 }				t_info;
 
+void	_print_info(t_info *info);
 /*
 **		util
 */

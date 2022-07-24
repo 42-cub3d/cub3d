@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/22 10:33:00 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 18:25:21 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ enum e_return_code
 
 enum e_player
 {
-	POS_E = 0,
-	POS_N = 1,
-	POS_W = 2,
-	POS_S = 3
+	POS_E = 1 << 0,
+	POS_W = 1 << 1,
+	POS_S = 1 << 2,
+	POS_N = 1 << 3
 };
 
 typedef struct s_player
