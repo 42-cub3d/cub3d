@@ -6,11 +6,11 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/24 16:49:28 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/24 17:02:59 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				= cub3D
+NAME				:= cub3D
 
 INC_DIR				= include/
 
@@ -31,9 +31,9 @@ MLX_LNK		=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
 
 SRCS_DIR 			= srcs/
 
-OBJS_DIR 			= srcs/
+OBJS_DIR 			= objs/
 
-SRC					= main.c\
+SRC					:= main.c\
 					parse_init.c\
 					parse_get_texture.c\
 					parse_get_color.c\
@@ -44,7 +44,7 @@ SRC					= main.c\
 					ray_init.c\
 					ray_work.c\
 
-OBJECT				= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
+OBJECT				:= $(addprefix $(OBJS_DIR), $(SRC:.c=.o))
 
 
 RM					= rm
@@ -60,14 +60,11 @@ MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
 
 
 
-.PHONY				: all
-all					: $(NAME)
+.PHONY				: all lib_make
+all					: lib_make make_dir $(NAME)
 
-$(NAME)				: lib_make $(OBJECT)
+$(NAME)				: $(OBJECT)
 	$(CC) $(CFLAGS) $(LIB_LNK) $(OBJECT) -o $@
-
-
-.PHONY				: lib_make
 
 make_dir			:
 	@mkdir -p $(OBJS_DIR)
@@ -91,7 +88,7 @@ $(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
 
 .PHONY				: clean lclean
 clean				:
-	$(RM) -rf $(OBJECT)
+	$(RM) -rf $(OBJS_DIR)
 
 lclean			: lib_clean
 
