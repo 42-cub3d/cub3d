@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 19:57:48 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/24 21:46:03 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_draw_vertical(t_info *info, int x, int y1, int y2)
 	i = y1;
 	while (i <= y2)
 	{
+		set_texture(info);
 		// color  set texture file
 		color = 0xFFFFFF;
 		ft_put_pixel(&info->mlx, x, i, color);
