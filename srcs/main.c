@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 02:17:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 02:35:11 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,11 @@ void	_print_info(t_info *info)
 
 void	ft_exit(char *err_msg, int errno_mode)
 {
-	write(2, "error: ", 7);
+	ft_putstr_fd("Error: ", 2);
 	if (errno_mode)
 		perror(err_msg);
 	else
-	{
-		write(2, err_msg, ft_strlen(err_msg));
-		write(2, "\n", 1);
-	}
+		ft_putendl_fd(err_msg, 2);
 	exit(EXIT_FAILURE);
 }
 
