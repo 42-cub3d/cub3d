@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/25 11:11:01 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/25 17:17:45 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,9 @@ re					: fclean
 	make all
 
 lre					: lib_re
+
+.PHONY				: bonus
+bonus				: all
 
 .PHONY				: sntz m mem
 sntz		:	CFLAGS+=$(SNTZ)
