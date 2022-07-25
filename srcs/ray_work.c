@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 16:26:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 17:12:46 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static t_draw	_get_wallx(t_info *info, int x)
 		beam.draw.draw_start = 0;
 	beam.draw.draw_end = beam.draw.line_height / 2 + HEIGHT / 2;
 	if (beam.draw.draw_end >= HEIGHT)
-		beam.draw.draw_end = HEIGHT - 1;
+		beam.draw.draw_end = HEIGHT;
 	if (beam.draw.side == X_HIT)
 		beam.draw.wallx = info->ray.p_y + beam.perp_walld * beam.draw.ray_dir_y;
 	else if (beam.draw.side == Y_HIT)
