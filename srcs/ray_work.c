@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 11:19:50 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 16:26:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ void	ft_ray_casting(t_info *info)
 			draw.tex_y = (int)draw.tex_pos & (TEXTURE_HEIGHT - 1);
 			draw.tex_pos += draw.tex_step;
 			draw.color = info->cur_tex[draw.tex_x + draw.tex_y * TEXTURE_WIDTH];
-			// if (draw.side == Y_HIT)
-			// 	draw.color = (draw.color >> 1) & 0x7F7F7F;
+			if (draw.side == Y_HIT)
+				draw.color = (draw.color >> 1) & 0x7F7F7F;
 			ft_put_color(info, x, draw.draw_start, draw.color);
 			draw.draw_start++;
 		}
