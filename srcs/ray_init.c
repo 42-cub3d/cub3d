@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 02:11:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 17:31:46 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 17:40:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	_vector_init(t_info *info)
 
 void	ft_ray_setting(t_info *info)
 {
-	info->ray.p_x = info->map.p_info.px + 0.01;
-	info->ray.p_y = info->map.p_info.py + 0.01;
+	info->ray.p_x = info->map.p_info.px + 1E-03;
+	info->ray.p_y = info->map.p_info.py + 1E-03;
 	info->ray.plane_x = 0;
 	info->ray.plane_y = 0;
 	info->ray.dir_x = 0;
