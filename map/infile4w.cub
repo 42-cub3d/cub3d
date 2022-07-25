@@ -1,14 +1,13 @@
-NO ./img/bluestone.xpm
+NO ./img/diamond_block.xpm
 
 
 
-SO ./img/colorstone.xpm
+SO ./img/gold_block.xpm
 
 
-WE ./img/greystone.xpm
+WE ./img/grass_block.xpm
 
-EA ./img/redbrick.xpm
-
+EA ./img/stone_bricks.xpm
 
 
 F 176,129,18
