@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 02:35:11 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 16:03:43 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,10 @@ void	ft_flush_info(t_info *info)
 	free(info->mlx.mlx);
 }
 
-// static void	handler(void)
-// {
-// 	system("leaks cub3D");
-// }
-
 int	main(int argc, char **argv)
 {
 	t_info	info;
 
-	// atexit(handler);
 	if (argc != 2)
 		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);

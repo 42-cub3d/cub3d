@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_get_texture_img.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 11:21:09 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 16:20:55 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*_get_path(t_texture *texture, t_texture_dir dir)
 	else if (dir == T_NORTH)
 		path = texture->north;
 	else
-		ft_exit("texture dir error", 1);
+		ft_exit("Texture Direction Error", 1);
 	return (path);
 }
 
