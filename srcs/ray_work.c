@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 03:40:39 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 11:04:25 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static t_draw	_get_wallx(t_info *info, int x)
 	return (beam.draw);
 }
 
-static void _get_tex_pos(t_info *info, t_draw draw)
+static t_draw	_get_tex_pos(t_info *info, t_draw draw)
 {
 	draw.tex_x = (int)(draw.wallx * (double)TEXTURE_WIDTH);
 	if ((draw.side == X_HIT && draw.ray_dir_x > 0) \
@@ -105,44 +105,42 @@ static void _get_tex_pos(t_info *info, t_draw draw)
 	draw.tex_step = 1.0 * TEXTURE_HEIGHT / draw.line_height;
 	draw.tex_pos = (draw.draw_start - HEIGHT / 2 + draw.line_height / 2) * \
 																draw.tex_step;
-	info->draw = draw;
-	if (info->draw.side == X_HIT)
+	if (draw.side == X_HIT)
 	{
-		if (info->ray.p_x < info->draw.map_x)
+		if (info->ray.p_x < draw.map_x)
 			info->cur_tex = info->texture.textures[T_EAST];
 		else
 			info->cur_tex = info->texture.textures[T_WEST];
 	}
-	else if (info->draw.side == Y_HIT)
+	else if (draw.side == Y_HIT)
 	{
-		if (info->ray.p_y < info->draw.map_y)
+		if (info->ray.p_y < draw.map_y)
 			info->cur_tex = info->texture.textures[T_NORTH];
 		else
 			info->cur_tex = info->texture.textures[T_SOUTH];
 	}
+	return (draw);
 }
 
 void	ft_ray_casting(t_info *info)
 {
-	int	x;
-	int y;
+	int		x;
+	t_draw	draw;
 
 	x = 0;
 	ft_img_clear(info);
 	while (x < WIDTH)
 	{
-		_get_tex_pos(info, _get_wallx(info, x));
-		y = info->draw.draw_start;
-		while (y < info->draw.draw_end)
+		draw = _get_tex_pos(info, _get_wallx(info, x));
+		while (draw.draw_start < draw.draw_end)
 		{
-			info->draw.tex_y = (int)info->draw.tex_pos & (TEXTURE_HEIGHT - 1);
-			info->draw.tex_pos += info->draw.tex_step;
-			info->draw.color = info->cur_tex[info->draw.tex_x + \
-											(info->draw.tex_y * TEXTURE_WIDTH)];
-			if (info->draw.side == Y_HIT)
-				info->draw.color = (info->draw.color >> 1) & 0x7F7F7F;
-			ft_put_color(info, x, y, info->draw.color);
-			y++;
+			draw.tex_y = (int)draw.tex_pos & (TEXTURE_HEIGHT - 1);
+			draw.tex_pos += draw.tex_step;
+			draw.color = info->cur_tex[draw.tex_x + draw.tex_y * TEXTURE_WIDTH];
+			// if (draw.side == Y_HIT)
+			// 	draw.color = (draw.color >> 1) & 0x7F7F7F;
+			ft_put_color(info, x, draw.draw_start, draw.color);
+			draw.draw_start++;
 		}
 		x++;
 	}

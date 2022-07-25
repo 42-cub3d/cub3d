@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 02:24:03 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 11:04:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	_close_cube_three_d(t_info *info)
 {
 	ft_flush_info(info);
 	exit(0);
-return (1);
+	return (1);
 }
 
 static int	_key_press(int key, t_info *info)

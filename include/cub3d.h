@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/25 03:33:14 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 11:00:14 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_info
 	t_map		map;
 	t_mlx		mlx;
 	t_ray		ray;
-	t_draw		draw;
 	int			*cur_tex;
 }				t_info;
 
