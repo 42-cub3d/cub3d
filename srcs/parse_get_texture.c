@@ -6,11 +6,50 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:53:11 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/25 02:01:09 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 11:13:44 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	_get_color_content(char *str)
+{
+	char	*tmp;
+	size_t	i;
+	int		value;
+
+	value = 0;
+	if (!str)
+		ft_exit("get_color_error_NULL", 0);
+	i = 0;
+	tmp = ft_strtrim(str, ", \n\t");
+	while (tmp[i])
+	{
+		if (!ft_isdigit(tmp[i]))
+			ft_exit("get_color not digit", 0);
+		value *= 10;
+		value += tmp[i] - '0';
+		if (255 < value)
+			ft_exit("get_color out of range", 0);
+		i++;
+	}
+	free(tmp);
+	return (value);
+}
+
+static int	_get_color(char **line)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = _get_color_content(line[1]);
+	g = _get_color_content(line[2]);
+	b = _get_color_content(line[3]);
+	if (line[4])
+		ft_exit("get color error", 0);
+	return ((r << 16) + (g << 8) + b);
+}
 
 static size_t	_count_comma(char *str)
 {
@@ -26,20 +65,6 @@ static size_t	_count_comma(char *str)
 		str++;
 	}
 	return (cnt);
-}
-
-static void	_free_line(char *line, char **splited_line)
-{
-	size_t	i;
-
-	free(line);
-	i = 0;
-	while ((splited_line)[i])
-	{
-		free((splited_line)[i]);
-		i++;
-	}
-	free(splited_line);
 }
 
 static	void	_get_texture_content(t_texture *t, char **line, size_t comma_nb)
@@ -58,9 +83,9 @@ static	void	_get_texture_content(t_texture *t, char **line, size_t comma_nb)
 			ft_exit("from_get_texture_content", 0);
 	}
 	else if (comma_nb == 2 && ft_strcmp(line[0], FLOOR) == 0)
-		t->floor = get_color(line);
+		t->floor = _get_color(line);
 	else if (comma_nb == 2 && ft_strcmp(line[0], CELLING) == 0)
-		t->ceiling = get_color(line);
+		t->ceiling = _get_color(line);
 	else
 		ft_exit("from_get_texture_content", 0);
 }
@@ -81,13 +106,15 @@ void	get_texture(t_texture *texture, int map_fd)
 		splited_line = ft_split_delimiter(line, ", \n");
 		if (!*splited_line)
 		{
-			_free_line(line, splited_line);
+			free(line);
+			ft_free_strv(splited_line);
 			continue ;
 		}
 		if (!splited_line[1])
 			ft_exit("splited_line_error", 0);
 		_get_texture_content(texture, splited_line, _count_comma(line));
-		_free_line(line, splited_line);
+		free(line);
+		ft_free_strv(splited_line);
 		i++;
 	}
 }

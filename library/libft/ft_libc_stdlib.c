@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libc_stdlib.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 22:25:32 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/20 22:20:59 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/25 11:12:13 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,17 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return (*s2 - *s1);
+}
+
+void	ft_free_strv(char **strv)
+{
+	size_t	i;
+
+	i = 0;
+	while (strv[i])
+	{
+		free(strv[i]);
+		i++;
+	}
+	free(strv);
 }

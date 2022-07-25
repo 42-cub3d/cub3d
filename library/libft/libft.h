@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 22:23:51 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 17:32:32 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/25 11:12:43 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
+void	ft_free_strv(char **strv);
 
 /*		ft_util_io.c
 **==============================================================================

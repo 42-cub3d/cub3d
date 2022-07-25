@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 02:01:39 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 11:21:09 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,20 @@ static void	_set_texture_buffer(int *texture_img, t_img *img)
 
 static char	*_get_path(t_texture *texture, t_texture_dir dir)
 {
+	char	*path;
+
+	path = NULL;
 	if (dir == T_EAST)
-		return (texture->east);
+		path = texture->east;
 	else if (dir == T_WEST)
-		return (texture->west);
+		path = texture->west;
 	else if (dir == T_SOUTH)
-		return (texture->south);
+		path = texture->south;
 	else if (dir == T_NORTH)
-		return (texture->north);
+		path = texture->north;
 	else
 		ft_exit("texture dir error", 1);
-	return (NULL);
+	return (path);
 }
 
 static t_img	_get_img(t_info *info, t_texture_dir dir)

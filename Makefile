@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/25 02:18:20 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/25 11:11:01 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,6 @@ OBJS_DIR 			= objs/
 SRC					:= main.c\
 					parse_init.c\
 					parse_get_texture.c\
-					parse_get_color.c\
 					parse_get_map.c\
 					parse_get_map_error.c\
 					parse_get_texture_img.c\

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 11:04:25 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/25 11:19:50 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,9 @@ static t_draw	_get_tex_pos(t_info *info, t_draw draw)
 	else if (draw.side == Y_HIT)
 	{
 		if (info->ray.p_y < draw.map_y)
-			info->cur_tex = info->texture.textures[T_NORTH];
-		else
 			info->cur_tex = info->texture.textures[T_SOUTH];
+		else
+			info->cur_tex = info->texture.textures[T_NORTH];
 	}
 	return (draw);
 }
