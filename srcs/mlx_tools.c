@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 20:50:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/27 02:20:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ static void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)temp = color;
 }
 
+void	ft_put_color(t_info *info, int x, int y, int color)
+{
+	ft_put_pixel(&info->mlx, x, y, color);
+}
+
 void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 {
 	int	i;
@@ -41,15 +46,10 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 	{
 		if (i < b->draw_start && i < HEIGHT / 2)
 			temp[i * WIDTH + cur_x] = info->texture.ceiling;
-		else if (b->draw_end <= i)
+		else if (b->draw_end <= i && (HEIGHT / 2) <= i)
 			temp[i * WIDTH + cur_x] = info->texture.floor;
 		i++;
 	}
-}
-
-void	ft_put_color(t_info *info, int x, int y, int color)
-{
-	ft_put_pixel(&info->mlx, x, y, color);
 }
 
 void	ft_mlx_init(t_mlx *org)
@@ -65,8 +65,7 @@ void	ft_mlx_init(t_mlx *org)
 	mlx.img = mlx_new_image(mlx.mlx, WIDTH, HEIGHT);
 	if (!mlx.img)
 		ft_exit("mlx image error", 1);
-	mlx.img_data = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size, \
-															&mlx.endian);
+	mlx.img_data = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size, &mlx.endian);
 	if (!mlx.img_data || mlx.bpp != 32 || mlx.endian != 0)
 		ft_exit("mlx image_data error", 1);
 	*org = mlx;

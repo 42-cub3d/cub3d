@@ -6,23 +6,23 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:20:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 22:19:02 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/27 02:29:56 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_EVENT_H
 # define KEY_EVENT_H
 
-typedef enum e_mouse
+enum e_mouse
 {
 	LEFT_CLICK		= 1,
 	RIGHT_CLICK,
 	MIDDLE_CLICK,
 	SCROLL_UP,
 	SCROLL_DOWN
-}		t_mouse;
+};
 
-typedef enum e_key
+enum e_key
 {
 	KC_A		=	0x00,
 	KC_S		=	0x01,
@@ -137,7 +137,7 @@ typedef enum e_key
 	KC_RIGHT	=	0x7C,
 	KC_DOWN		=	0x7D,
 	KC_UP		=	0x7E
-}					t_key;
+};
 
 typedef enum e_x11_event
 {

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/26 20:50:49 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/27 02:27:06 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,21 @@ typedef struct s_mlx
 	int		endian;
 }			t_mlx;
 
+typedef struct s_mouse
+{
+	int		mouse_x;
+	int		mouse_y;
+	int		mouse_init;
+	int		mouse_toggle;
+}			t_mouse;
+
 typedef struct s_info
 {
 	t_texture	texture;
 	t_map		map;
 	t_mlx		mlx;
 	t_ray		ray;
+	t_mouse		mouse;
 	int			*cur_tex;
 }				t_info;
 

@@ -6,12 +6,12 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 22:04:06 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/27 02:35:29 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key_event.h"
 #include "cub3d.h"
+#include "key_event.h"
 #include "mlx.h"
 
 static int	_close_cube_three_d(t_info *info)
@@ -19,6 +19,20 @@ static int	_close_cube_three_d(t_info *info)
 	ft_flush_info(info);
 	exit(0);
 	return (1);
+}
+
+static void	_toggle_mouse_view(t_info *info)
+{
+	if (info->mouse.mouse_toggle == 0)
+	{
+		mlx_mouse_show();
+		info->mouse.mouse_toggle = 1;
+	}
+	else
+	{
+		mlx_mouse_hide();
+		info->mouse.mouse_toggle = 0;
+	}
 }
 
 static int	_key_press(int key, t_info *info)
@@ -32,19 +46,51 @@ static int	_key_press(int key, t_info *info)
 		key_rotate_view(key, info);
 	else if (key == KC_M)
 		_print_info(info);
+	else if (key == KC_N)
+		_toggle_mouse_view(info);
 	return (1);
 }
 
-static int	_mouse_press(int key, t_info *info)
+// static int	_test_mouse_move(t_info *info)
+// {
+
+// 	(void)info;
+// 	// mlx_mouse_get_pos(info->mlx.win, &x, &y);
+// 	// printf("x: %d, y: %d\n", x, y);
+
+// 	return (1);
+// }
+
+void	_check_mouse_init(t_info *info)
 {
-	(void)info;
-	printf("%d, mouse press detected\n", key);
+	printf("get pos by click!!!!!!!!\n");
+	if (info->mouse.mouse_init == 0)
+	{
+		printf("hi\n");
+		// mlx_mouse_get_pos(info->mlx.win, &x, &y);
+		// printf("%d %d\n", x, y);
+	}
+
+}
+
+int	_mouse_press_init(int key, t_info *info)
+{
+	printf("hello %d %p\n", key, info);
+	printf("%d %d\n", info->mouse.mouse_init, info->mouse.mouse_toggle);
+	printf("hi\n");
+	if ((info->mouse.mouse_init) && (key == LEFT_CLICK || key == RIGHT_CLICK))
+	{
+		printf("hi2\n");
+		_check_mouse_init(info);
+	}
 	return (1);
 }
 
 void	ft_event_handler(t_info *info)
 {
-	mlx_hook(info->mlx.win, KEY_PRESS, (1L<<0), _key_press, info);
-	mlx_hook(info->mlx.win, DESTROY_NOTIFY, (1L<<0), _close_cube_three_d, info);
-	mlx_hook(info->mlx.win, BUTTON_PRESS, (1L<<0), _mouse_press, info);
+	mlx_mouse_hide();
+	mlx_hook(info->mlx.win, KEY_PRESS, 0, _key_press, info);
+	mlx_hook(info->mlx.win, DESTROY_NOTIFY, 0, _close_cube_three_d, info);
+	mlx_hook(info->mlx.win, BUTTON_PRESS, 0, _mouse_press_init, info);
+	// mlx_loop_hook(info->mlx.mlx, _test_mouse_move, info);
 }

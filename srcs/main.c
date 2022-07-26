@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 22:09:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/27 02:28:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	_print_info(t_info *info)
 	}
 	printf("\nfield value     : ( %c )\n", info->map.map[(int)info->ray.p_y] \
 														[(int)info->ray.p_x]);
-	printf("Player pos: (x  :%f, y  :%f)\n", info->ray.p_x, info->ray.p_y);
-	printf("Player dir: (x_d:%f, y_d:%f)\n", info->ray.dir_x, info->ray.dir_y);
+	printf("P_pos: (x  :%10f, y  :%10f)\n", info->ray.p_x, info->ray.p_y);
+	printf("P_dir: (x_d:%10f, y_d:%10f)\n", info->ray.dir_x, info->ray.dir_y);
 }
 
 void	ft_exit(char *err_msg, int errno_mode)
@@ -71,6 +71,14 @@ void	ft_flush_info(t_info *info)
 	free(info->mlx.mlx);
 }
 
+static void	_set_mouse_info(t_mouse *org)
+{
+	org->mouse_x = 0;
+	org->mouse_y = 0;
+	org->mouse_init = 0;
+	org->mouse_toggle = 0;
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	info;
@@ -79,6 +87,7 @@ int	main(int argc, char **argv)
 		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);
 	ft_mlx_init(&info.mlx);
+	_set_mouse_info(&info.mouse);
 	set_texture_img(&info);
 	ft_event_handler(&info);
 	ft_ray_setting(&info);
