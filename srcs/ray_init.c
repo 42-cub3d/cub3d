@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 02:11:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 17:40:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 19:05:50 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static void	_vector_init(t_info *info)
 		info->ray.dir_y = -1;
 		info->ray.plane_x = 0.66;
 	}
+	else
+		ft_exit("player dir error occured in ray_setting", 0);
 }
 
 void	ft_ray_setting(t_info *info)

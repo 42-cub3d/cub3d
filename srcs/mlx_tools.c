@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 03:32:31 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 20:50:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,19 @@ static void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)temp = color;
 }
 
-void	ft_img_clear(t_info *info)
+void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 {
 	int	i;
-	int	size;
 	int	*temp;
 
 	i = 0;
-	size = WIDTH * HEIGHT;
 	temp = (int *)(info->mlx.img_data);
-	while (i < size)
+	while (i < HEIGHT)
 	{
-		if (i < size / 2)
-			temp[i] = info->texture.ceiling;
-		else
-			temp[i] = info->texture.floor;
+		if (i < b->draw_start && i < HEIGHT / 2)
+			temp[i * WIDTH + cur_x] = info->texture.ceiling;
+		else if (b->draw_end <= i)
+			temp[i * WIDTH + cur_x] = info->texture.floor;
 		i++;
 	}
 }

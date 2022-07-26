@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/25 17:42:14 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 20:50:49 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@
 # define HEIGHT 900
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
-# define ROT_SPEED 0.09
+# define ROT_SPEED 0.15
 # define MOVE_SPEED 0.25
 # define INIT 1
 # define RENDER 2
-# define X_HIT 0
-# define Y_HIT 1
 
 typedef struct s_mlx
 {
@@ -68,7 +66,7 @@ void	ft_flush_info(t_info *info);
 void	ft_mlx_init(t_mlx *org);
 void	ft_put_color(t_info *info, int x, int y, int color);
 void	ft_re_render(t_info *info);
-void	ft_img_clear(t_info *info);
+void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x);
 void	ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
 void	key_rotate_view(int key, t_info *info);
