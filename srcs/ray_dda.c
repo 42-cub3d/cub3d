@@ -6,16 +6,16 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 19:57:53 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 20:53:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	_set_draw_position(t_info *info, t_cast_info *b)
+static void	_set_draw_position(t_info *info, t_ray_beam *b)
 {
 	b->line_height = (int)(HEIGHT / b->perp_wall_dist);
-	b->start = -b->line_height / 2 + HEIGHT / 2;
+	b->draw_start = -b->line_height / 2 + HEIGHT / 2;
 	if (b->draw_start < 0)
 		b->draw_start = 0;
 	b->draw_end = b->line_height / 2 + HEIGHT / 2;
@@ -25,10 +25,10 @@ static void	_set_draw_position(t_info *info, t_cast_info *b)
 		b->wallx = info->ray.p_y + b->perp_wall_dist * b->ray_dir_y;
 	else
 		b->wallx = info->ray.p_x + b->perp_wall_dist * b->ray_dir_x;
-	b->wallx -= floor(bwallx);
+	b->wallx -= floor(b->wallx);
 }
 
-static void	_dda_working(t_info *info, t_cast_info *b)
+static void	_dda_working(t_info *info, t_ray_beam *b)
 {
 	while (!b->hit)
 	{
@@ -47,12 +47,12 @@ static void	_dda_working(t_info *info, t_cast_info *b)
 		if (info->map.map[b->map_y][b->map_x] == '1')
 			b->hit = 1;
 	}
-	if (b->side == X_HIT)
+	if (b->hit_side == X_HIT)
 		b->perp_wall_dist = \
 				(b->map_x - info->ray.p_x + (1 - b->step_x) / 2) / b->ray_dir_x;
 	else
 		b->perp_wall_dist = \
-				(b->map_y - info->ray.p_y +	(1 - b->step_y) / 2) / b->ray_dir_y;
+				(b->map_y - info->ray.p_y + (1 - b->step_y) / 2) / b->ray_dir_y;
 }
 
 static void	_set_dda_step(t_info *info, t_ray_beam *b)
@@ -79,11 +79,11 @@ static void	_set_dda_step(t_info *info, t_ray_beam *b)
 	}
 }
 
-static void	_set_ray_beam(t_info *info, t_ray_beam *b)
+static void	_set_ray_beam(t_info *info, t_ray_beam *b, int cur_x)
 {
-	b->cam = 2 * x / (double)WIDTH - 1;
-	b->ray_dir_x = info->ray.dir_x + info->ray.plane_x * b.cam;
-	b->ray_dir_y = info->ray.dir_y + info->ray.plane_y * b.cam;
+	b->cam = 2 * cur_x / (double)WIDTH - 1;
+	b->ray_dir_x = info->ray.dir_x + info->ray.plane_x * b->cam;
+	b->ray_dir_y = info->ray.dir_y + info->ray.plane_y * b->cam;
 	b->map_x = (int)info->ray.p_x;
 	b->map_y = (int)info->ray.p_y;
 	b->delta_dist_x = fabs(1 / b->ray_dir_x);
@@ -91,11 +91,11 @@ static void	_set_ray_beam(t_info *info, t_ray_beam *b)
 	b->hit = 0;
 }
 
-t_ray_beam	get_ray_beam_per_verline(t_info *info)
+t_ray_beam	get_ray_beam_per_verline(t_info *info, int cur_x)
 {
 	t_ray_beam	b;
 
-	_set_ray_beam(info, &b);
+	_set_ray_beam(info, &b, cur_x);
 	_set_dda_step(info, &b);
 	_dda_working(info, &b);
 	_set_draw_position(info, &b);

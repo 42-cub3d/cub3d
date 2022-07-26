@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/26 19:40:49 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 20:50:49 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_flush_info(t_info *info);
 void	ft_mlx_init(t_mlx *org);
 void	ft_put_color(t_info *info, int x, int y, int color);
 void	ft_re_render(t_info *info);
-void	ft_img_clear(t_info *info);
+void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x);
 void	ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
 void	key_rotate_view(int key, t_info *info);
