@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 11:04:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 22:04:06 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,16 @@ static int	_key_press(int key, t_info *info)
 	return (1);
 }
 
+static int	_mouse_press(int key, t_info *info)
+{
+	(void)info;
+	printf("%d, mouse press detected\n", key);
+	return (1);
+}
+
 void	ft_event_handler(t_info *info)
 {
-	mlx_hook(info->mlx.win, KEY_PRESS, 0, _key_press, info);
-	mlx_hook(info->mlx.win, DESTROY_NOTIFY, 0, _close_cube_three_d, info);
+	mlx_hook(info->mlx.win, KEY_PRESS, (1L<<0), _key_press, info);
+	mlx_hook(info->mlx.win, DESTROY_NOTIFY, (1L<<0), _close_cube_three_d, info);
+	mlx_hook(info->mlx.win, BUTTON_PRESS, (1L<<0), _mouse_press, info);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 16:03:43 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/26 22:09:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int	main(int argc, char **argv)
 	ft_event_handler(&info);
 	ft_ray_setting(&info);
 	ft_ray_casting(&info);
+
+
+
 	_print_info(&info);
 	mlx_loop(info.mlx.mlx);
 	ft_flush_info(&info);

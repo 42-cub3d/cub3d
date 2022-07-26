@@ -6,12 +6,21 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:20:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/21 20:20:17 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/26 22:19:02 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEY_EVENT_H
 # define KEY_EVENT_H
+
+typedef enum e_mouse
+{
+	LEFT_CLICK		= 1,
+	RIGHT_CLICK,
+	MIDDLE_CLICK,
+	SCROLL_UP,
+	SCROLL_DOWN
+}		t_mouse;
 
 typedef enum e_key
 {
@@ -128,12 +137,104 @@ typedef enum e_key
 	KC_RIGHT	=	0x7C,
 	KC_DOWN		=	0x7D,
 	KC_UP		=	0x7E
-}				t_key;
+}					t_key;
 
 typedef enum e_x11_event
 {
 	KEY_PRESS		=	2,
-	DESTROY_NOTIFY	=	17
+	KEY_RELEASE,
+	BUTTON_PRESS,
+	BUTTON_RELEASE,
+	MOTION_NITOFY,
+	ENTER_NOTIFY,
+	LEAVE_NOTIFY,
+	FOCUS_IN,
+	FOCUS_OUT,
+	KEY_MAP_NOTIFY,
+	EXPOSE,
+	GRAPHICS_EXPOSE,
+	NO_EXPOSE,
+	VISIBILITY_NOTIFY,
+	CREATE_NOTIFY,
+	DESTROY_NOTIFY,
+	UNMAP_NOTIFY,
+	MAP_NOTIFY,
+	MAP_REQUEST,
+	REPARENT_NOTIFY,
+	CONFIGURE_NOTIFY,
+	CONFIGURE_REQUEST,
+	GRAVITY_NOTIFY,
+	RESIZE_REQUEST,
+	CIRCULATE_NOTIFY,
+	CIRCULATE_REQUEST,
+	PROPERTY_NOTIFY,
+	SELECTION_CLEAR,
+	SELECTION_REQUEST,
+	SELECTION_NOTIFY,
+	COLORMAP_NOTIFY,
+	CLIENT_MESSAGE,
+	MAPPING_NOTIFY,
+	GENERIC_EVENT,
+	LAST_EVENT
 }				t_x11_event;
+
+// for Unix OS mask
+// 0L		NoEventMask
+// (1L<<0)	KeyPressMask
+// (1L<<1)	KeyReleaseMask
+// (1L<<2)	ButtonPressMask
+// (1L<<3)	ButtonReleaseMask
+// (1L<<4)	EnterWindowMask
+// (1L<<5)	LeaveWindowMask
+// (1L<<6)	PointerMotionMask
+// (1L<<7)	PointerMotionHintMask
+// (1L<<8)	Button1MotionMask
+// (1L<<9)	Button2MotionMask
+// (1L<<10)	Button3MotionMask
+// (1L<<11)	Button4MotionMask
+// (1L<<12)	Button5MotionMask
+// (1L<<13)	ButtonMotionMask
+// (1L<<14)	KeymapStateMask
+// (1L<<15)	ExposureMask
+// (1L<<16)	VisibilityChangeMask
+// (1L<<17)	StructureNotifyMask
+// (1L<<18)	ResizeRedirectMask
+// (1L<<19)	SubstructureNotifyMask
+// (1L<<20)	SubstructureRedirectMask
+// (1L<<21)	FocusChangeMask
+// (1L<<22)	PropertyChangeMask
+// (1L<<23)	ColormapChangeMask
+// (1L<<24)	OwnerGrabButtonMask
+
+// int mlx_mouse_hide();
+// int mlx_mouse_show();
+// int mlx_mouse move(void *win_ptr, int x, int y);
+// int mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
+
+// #define KeyPressMask	(1L<<0)
+// #define KeyReleaseMask	(1L<<1)
+// #define Button3MotionMask	(1L<<10)
+// #define Button4MotionMask	(1L<<11)
+// #define Button5MotionMask	(1L<<12)
+// #define ButtonMotionMask	(1L<<13)
+// #define KeymapStateMask	(1L<<14)
+// #define ExposureMask	(1L<<15)
+// #define VisibilityChangeMask	(1L<<16)
+// #define StructureNotifyMask	(1L<<17)
+// #define ResizeRedirectMask	(1L<<18)
+// #define SubstructureNotifyMask	(1L<<19)
+// #define ButtonPressMask	(1L<<2)
+// #define SubstructureRedirectMask	(1L<<20)
+// #define FocusChangeMask	(1L<<21)
+// #define PropertyChangeMask	(1L<<22)
+// #define ColormapChangeMask	(1L<<23)
+// #define OwnerGrabButtonMask	(1L<<24)
+// #define ButtonReleaseMask	(1L<<3)
+// #define EnterWindowMask	(1L<<4)
+// #define LeaveWindowMask	(1L<<5)
+// #define PointerMotionMask	(1L<<6)
+// #define PointerMotionHintMask	(1L<<7)
+// #define Button1MotionMask	(1L<<8)
+// #define Button2MotionMask	(1L<<9)
 
 #endif
