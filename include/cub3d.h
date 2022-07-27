@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/27 02:27:06 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 02:24:26 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define ROT_SPEED 0.15
+# define MOUSE_SPEED 0.05
 # define MOVE_SPEED 0.25
 # define INIT 1
 # define RENDER 2
@@ -47,7 +48,6 @@ typedef struct s_mlx
 typedef struct s_mouse
 {
 	int		mouse_x;
-	int		mouse_y;
 	int		mouse_init;
 	int		mouse_toggle;
 }			t_mouse;
@@ -78,6 +78,7 @@ void	ft_re_render(t_info *info);
 void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x);
 void	ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
-void	key_rotate_view(int key, t_info *info);
+void	key_rotate_view(int key, t_info *info, double rot_speed);
+int		check_mouse_move(t_info *info);
 
 #endif

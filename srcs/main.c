@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/27 02:28:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 02:24:29 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_flush_info(t_info *info)
 static void	_set_mouse_info(t_mouse *org)
 {
 	org->mouse_x = 0;
-	org->mouse_y = 0;
 	org->mouse_init = 0;
 	org->mouse_toggle = 0;
 }
