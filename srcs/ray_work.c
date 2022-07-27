@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 20:55:14 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 03:16:47 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	_draw_texture_workhorse(\
 		t->color = info->cur_tex[t->tex_x + t->tex_y * TEXTURE_WIDTH];
 		if (b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
-		ft_put_color(info, cur_x, b->draw_start, t->color);
+		ft_put_pixel(&info->mlx, cur_x, b->draw_start, t->color);
 		b->draw_start++;
 	}
 }
@@ -76,5 +76,6 @@ void	ft_ray_casting(t_info *info)
 		_draw_texture_verline(info, get_ray_beam_per_verline(info, x), x);
 		x++;
 	}
+	test_map_draw(info);
 	ft_re_render(info);
 }

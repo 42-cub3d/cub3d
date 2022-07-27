@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/27 02:20:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 03:16:29 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_re_render(t_info *info)
 	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
 }
 
-static void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
+void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*temp;
 	int		idx;
@@ -30,24 +30,38 @@ static void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)temp = color;
 }
 
-void	ft_put_color(t_info *info, int x, int y, int color)
+void	test_map_draw(t_info *info)
 {
-	ft_put_pixel(&info->mlx, x, y, color);
-}
+	int	x;
+	int	y;
+	int	*canvas;
 
+	canvas = (int *)info->mlx.img_data;
+	y = 0;
+	while (y < M_HEIGHT)
+	{
+		x = 0;
+		while (x < M_WIDTH)
+		{
+			canvas[y * WIDTH + x] = 0xFFFFFF;
+			x++;
+		}
+		y++;
+	}
+}
 void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 {
 	int	i;
-	int	*temp;
+	int	*canvas;
 
 	i = 0;
-	temp = (int *)(info->mlx.img_data);
+	canvas = (int *)(info->mlx.img_data);
 	while (i < HEIGHT)
 	{
 		if (i < b->draw_start && i < HEIGHT / 2)
-			temp[i * WIDTH + cur_x] = info->texture.ceiling;
+			canvas[i * WIDTH + cur_x] = info->texture.ceiling;
 		else if (b->draw_end <= i && (HEIGHT / 2) <= i)
-			temp[i * WIDTH + cur_x] = info->texture.floor;
+			canvas[i * WIDTH + cur_x] = info->texture.floor;
 		i++;
 	}
 }
