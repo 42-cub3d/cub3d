@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 02:24:19 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 02:33:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static int	_mouse_press_handle(int key, int x, int y, t_info *info)
 		mlx_mouse_get_pos(info->mlx.win, &x, &y);
 		info->mouse.mouse_x = x;
 	}
+	else if (key == LEFT_CLICK || key == RIGHT_CLICK)
+		_toggle_mouse_view(info);
 	return (1);
 }
 

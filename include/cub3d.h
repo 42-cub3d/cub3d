@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/28 02:24:26 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 02:31:52 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define ROT_SPEED 0.15
-# define MOUSE_SPEED 0.05
+# define MOUSE_SPEED 0.02
 # define MOVE_SPEED 0.25
 # define INIT 1
 # define RENDER 2
