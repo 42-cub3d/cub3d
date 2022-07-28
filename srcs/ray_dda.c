@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 20:53:41 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 20:38:44 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	_dda_working(t_info *info, t_ray_beam *b)
 			b->map_y += b->step_y;
 			b->hit_side = Y_HIT;
 		}
-		if (info->map.map[b->map_y][b->map_x] == '1')
+		if (ft_strchr("12", info->map.map[b->map_y][b->map_x]))
 			b->hit = 1;
 	}
 	if (b->hit_side == X_HIT)

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:34:31 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 20:36:07 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	_check_error_case(t_map *map, t_player *p)
 	char	monad;
 
 	monad = map->map[p->py][p->px];
-	if (monad == '0')
+	if (monad == '0' || monad == '2' || monad == '3')
 	{
 		if ((!p->px || !p->py \
 			|| p->px == map->width - 1 || p->py == map->height - 1))
@@ -72,7 +72,7 @@ static void	_check_error_case(t_map *map, t_player *p)
 		if (_check_player(p, map, monad))
 			ft_exit("map player error", 0);
 	}
-	else if (!ft_strchr("1", monad))
+	else if (!ft_strchr("123", monad))
 		ft_exit("map invalid character", 0);
 }
 
