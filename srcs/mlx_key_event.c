@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 16:34:36 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 21:38:49 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,38 @@ static int	_close_cube_three_d(t_info *info)
 	return (1);
 }
 
-static void	_toggle_mouse_view(t_info *info)
+static void	_toggle_mouse_view(t_info *info, int *toggle, int mode)
 {
-	if (info->bonus.mouse_toggle == 0)
+	if (*toggle == 0)
 	{
-		mlx_mouse_show();
-		info->bonus.mouse_toggle = 1;
+		if (mode == LEFT_CLICK)
+			mlx_mouse_show();
+		*toggle = 1;
 	}
 	else
 	{
-		mlx_mouse_hide();
-		info->bonus.mouse_toggle = 0;
+		if (mode == LEFT_CLICK)
+			mlx_mouse_hide();
+		*toggle = 0;
 	}
+	if (mode == RIGHT_CLICK)
+		ft_ray_casting(info);
 }
 
 static int	_key_press(int key, t_info *info)
 {
 	if (key == KC_ESC)
 		_close_cube_three_d(info);
-	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D)
+	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D \
+																|| key == KC_E)
 		key_move(key, info);
 	else if (key == KC_LEFT || key == KC_RIGHT \
 	|| key == KC_I || key == KC_J || key == KC_K || key == KC_L)
 		key_rotate_view(key, info, ROT_SPEED);
-	else if (key == KC_E)
+	else if (key == KC_F)
 		_print_info(info);
-	else if (key == KC_N)
-		_toggle_mouse_view(info);
+	else if (key == KC_M)
+		_toggle_mouse_view(info, &info->bonus.map_toggle, RIGHT_CLICK);
 	return (1);
 }
 
@@ -61,15 +66,9 @@ static int	_mouse_press_handle(int key, int x, int y, t_info *info)
 		info->bonus.mouse_x = x;
 	}
 	else if (key == LEFT_CLICK)
-		_toggle_mouse_view(info);
+		_toggle_mouse_view(info, &info->bonus.mouse_toggle, LEFT_CLICK);
 	else if (key == RIGHT_CLICK)
-	{
-		if (info->bonus.map_toggle == 0)
-			info->bonus.map_toggle = 1;
-		else
-			info->bonus.map_toggle = 0;
-		ft_ray_casting(info);
-	}
+		_toggle_mouse_view(info, &info->bonus.map_toggle, RIGHT_CLICK);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/28 17:17:00 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 20:52:51 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_mini_map
 {
 	int		m_x;
 	int		m_y;
+	int		m_ratio;
 }			t_mini_map;
 
 typedef struct s_info

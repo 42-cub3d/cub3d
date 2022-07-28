@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:12:28 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:02:12 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 20:43:11 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ t_map	get_map(int fd)
 	info.gnl_check = get_next_line(fd, &info.temp);
 	while (info.gnl_check > 0)
 	{
-		if (info.temp)
+		if (info.temp && !info.cur && !info.temp[0])
+			free(info.temp);
+		else if (info.temp)
 		{
 			_append_map(&info, info.cur);
 			info.temp_length = ft_strlen(info.temp);

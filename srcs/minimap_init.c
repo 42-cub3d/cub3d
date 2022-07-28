@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:44:06 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 17:16:49 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 21:54:45 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 void	mini_map_init(t_info *info)
 {
-	info->mini_map.m_x = info->map.width * MAP_RATIO;
-	info->mini_map.m_y = info->map.height * MAP_RATIO;
+	if ((WIDTH / info->map.width) / 1.3 > (HEIGHT / info->map.height) / 1.3)
+		info->mini_map.m_ratio = (HEIGHT / info->map.height) / 1.3;
+	else
+		info->mini_map.m_ratio = (WIDTH / info->map.width) / 1.3;
+	if (info->mini_map.m_ratio > MAP_RATIO)
+		info->mini_map.m_ratio = MAP_RATIO;
+	info->mini_map.m_x = info->map.width * info->mini_map.m_ratio;
+	info->mini_map.m_y = info->map.height * info->mini_map.m_ratio;
 }
 
 int	is_in_mini_map(t_info *info, int x, int y)
@@ -31,6 +37,10 @@ static int	_set_color(char monad)
 		color = 0x4C3A51;
 	else if (monad == ' ')
 		color = 0x000000;
+	else if (monad == '2')
+		color = 0x3AB4F2;
+	else if (monad == '4')
+		color = 0x0078AA;
 	else
 		color = 0xE7AB79;
 	return (color);
@@ -43,12 +53,12 @@ static void	_draw_player(t_info *info)
 	int	e_x;
 	int	e_y;
 
-	e_x = (info->ray.p_x + 0.3) * MAP_RATIO;
-	e_y = (info->ray.p_y + 0.3) * MAP_RATIO;
-	s_y = (info->ray.p_y - 0.3) * MAP_RATIO;
+	e_x = (info->ray.p_x + 0.3) * info->mini_map.m_ratio;
+	e_y = (info->ray.p_y + 0.3) * info->mini_map.m_ratio;
+	s_y = (info->ray.p_y - 0.3) * info->mini_map.m_ratio;
 	while (s_y < e_y)
 	{
-		s_x = (info->ray.p_x - 0.3) * MAP_RATIO;
+		s_x = (info->ray.p_x - 0.3) * info->mini_map.m_ratio;
 		while (s_x < e_x)
 		{
 			if (is_in_mini_map(info, s_x, s_y))
@@ -71,8 +81,9 @@ void	mini_map_draw(t_info *info)
 		x = 0;
 		while (x < info->mini_map.m_x)
 		{
-			if (x % MAP_RATIO == 0)
-				color = _set_color(info->map.map[y / MAP_RATIO][x / MAP_RATIO]);
+			if (x % info->mini_map.m_ratio == 0)
+				color = _set_color(info->map.map[y / info->mini_map.m_ratio]\
+												[x / info->mini_map.m_ratio]);
 			ft_put_pixel(&info->mlx, x, y, color);
 			x++;
 		}

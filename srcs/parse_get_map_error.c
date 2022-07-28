@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/24 18:34:31 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 21:41:04 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	_check_error_case(t_map *map, t_player *p)
 	char	monad;
 
 	monad = map->map[p->py][p->px];
-	if (monad == '0')
+	if (ft_strchr("0234", monad))
 	{
 		if ((!p->px || !p->py \
 			|| p->px == map->width - 1 || p->py == map->height - 1))

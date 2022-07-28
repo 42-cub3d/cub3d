@@ -6,14 +6,14 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:36:17 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 02:07:03 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 21:31:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_event.h"
 #include "cub3d.h"
 
-static void	_rotate_right(t_info *info, double rot_speed)
+static void	_rotate_dir(t_info *info, double rot_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -28,23 +28,6 @@ static void	_rotate_right(t_info *info, double rot_speed)
 										info->ray.plane_y * sin(rot_speed);
 	info->ray.plane_y = old_plane_x * sin(rot_speed) + \
 										info->ray.plane_y * cos(rot_speed);
-}
-
-static void	_rotate_left(t_info *info, double rot_speed)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = info->ray.dir_x;
-	info->ray.dir_x = info->ray.dir_x * cos(-rot_speed) - \
-										info->ray.dir_y * sin(-rot_speed);
-	info->ray.dir_y = old_dir_x * sin(-rot_speed) + \
-										info->ray.dir_y * cos(-rot_speed);
-	old_plane_x = info->ray.plane_x;
-	info->ray.plane_x = info->ray.plane_x * cos(-rot_speed) - \
-										info->ray.plane_y * sin(-rot_speed);
-	info->ray.plane_y = old_plane_x * sin(-rot_speed) + \
-										info->ray.plane_y * cos(-rot_speed);
 }
 
 static void	_set_dir_vector(int key, t_info *info)
@@ -78,9 +61,9 @@ static void	_set_dir_vector(int key, t_info *info)
 void	key_rotate_view(int key, t_info *info, double rot_speed)
 {
 	if (key == KC_LEFT)
-		_rotate_left(info, rot_speed);
+		_rotate_dir(info, -rot_speed);
 	else if (key == KC_RIGHT)
-		_rotate_right(info, rot_speed);
+		_rotate_dir(info, rot_speed);
 	else
 		_set_dir_vector(key, info);
 	ft_ray_casting(info);
