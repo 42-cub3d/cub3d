@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/07/28 01:40:13 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/07/28 17:17:09 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC					:= main.c\
 					mlx_key_move.c\
 					mlx_key_rotate_view.c\
 					mlx_mouse_event.c\
+					minimap_init.c\
 					ray_dda.c\
 					ray_work.c\
 					ray_init.c\
