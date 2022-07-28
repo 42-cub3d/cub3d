@@ -6,12 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/28 03:17:12 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 15:00:44 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-
 # define CUB3D_H
 
 # include <unistd.h>
