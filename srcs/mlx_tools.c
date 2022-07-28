@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 03:16:29 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 16:32:15 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,6 @@ void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 	*(unsigned int *)temp = color;
 }
 
-void	test_map_draw(t_info *info)
-{
-	int	x;
-	int	y;
-	int	*canvas;
-
-	canvas = (int *)info->mlx.img_data;
-	y = 0;
-	while (y < M_HEIGHT)
-	{
-		x = 0;
-		while (x < M_WIDTH)
-		{
-			canvas[y * WIDTH + x] = 0xFFFFFF;
-			x++;
-		}
-		y++;
-	}
-}
 void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 {
 	int	i;
@@ -58,10 +39,14 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 	canvas = (int *)(info->mlx.img_data);
 	while (i < HEIGHT)
 	{
-		if (i < b->draw_start && i < HEIGHT / 2)
-			canvas[i * WIDTH + cur_x] = info->texture.ceiling;
-		else if (b->draw_end <= i && (HEIGHT / 2) <= i)
-			canvas[i * WIDTH + cur_x] = info->texture.floor;
+		if ((!info->bonus.map_toggle) \
+				|| (info->bonus.map_toggle && !is_in_mini_map(info, cur_x, i)))
+		{
+			if (i < b->draw_start && i < HEIGHT / 2)
+				canvas[i * WIDTH + cur_x] = info->texture.ceiling;
+			else if (b->draw_end <= i && (HEIGHT / 2) <= i)
+				canvas[i * WIDTH + cur_x] = info->texture.floor;
+		}
 		i++;
 	}
 }

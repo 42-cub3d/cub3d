@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 02:49:25 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 16:35:52 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	_set_mouse_info(t_bonus *org)
 	org->mouse_x = 0;
 	org->mouse_init = 0;
 	org->mouse_toggle = 0;
-	org->map_toggle = 0;
+	org->map_toggle = 1;
 }
 
 int	main(int argc, char **argv)
@@ -88,13 +88,11 @@ int	main(int argc, char **argv)
 	parse_map(&info, argv);
 	ft_mlx_init(&info.mlx);
 	_set_mouse_info(&info.bonus);
+	mini_map_init(&info);
 	set_texture_img(&info);
 	ft_event_handler(&info);
 	ft_ray_setting(&info);
 	ft_ray_casting(&info);
-
-
-
 	_print_info(&info);
 	mlx_loop(info.mlx.mlx);
 	ft_flush_info(&info);
