@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:44:06 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 20:58:27 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/28 21:54:45 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ static int	_set_color(char monad)
 		color = 0x4C3A51;
 	else if (monad == ' ')
 		color = 0x000000;
+	else if (monad == '2')
+		color = 0x3AB4F2;
+	else if (monad == '4')
+		color = 0x0078AA;
 	else
 		color = 0xE7AB79;
 	return (color);
