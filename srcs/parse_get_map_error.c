@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 21:41:04 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/07/29 15:09:47 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	_check_player(t_player *p, t_map *map, char dir)
 		map->p_info.pdir = POS_W;
 	else if (dir == 'S')
 		map->p_info.pdir = POS_S;
-	else if (dir == 'N')
+	else
 		map->p_info.pdir = POS_N;
 	return (MAP_SUCCESS);
 }
