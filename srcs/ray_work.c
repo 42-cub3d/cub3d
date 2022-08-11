@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 21:15:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 10:12:35 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 static void	_set_hit_tex(t_info *info, t_ray_beam *b)
 {
-	if (b->hit_side == X_HIT)
+	if (b->hit_type == TYPE_TEXT)
 	{
-		if (info->ray.p_x < b->map_x)
-			info->cur_tex = info->texture.textures[T_EAST];
+		if (b->hit_side == X_HIT)
+		{
+			if (info->ray.p_x < b->map_x)
+				info->cur_tex = info->texture.textures[T_EAST];
+			else
+				info->cur_tex = info->texture.textures[T_WEST];
+		}
 		else
-			info->cur_tex = info->texture.textures[T_WEST];
+		{
+			if (info->ray.p_y < b->map_y)
+				info->cur_tex = info->texture.textures[T_SOUTH];
+			else
+				info->cur_tex = info->texture.textures[T_NORTH];
+		}
 	}
-	else
-	{
-		if (info->ray.p_y < b->map_y)
-			info->cur_tex = info->texture.textures[T_SOUTH];
-		else
-			info->cur_tex = info->texture.textures[T_NORTH];
-	}
+	else if (b->hit_type == TYPE_DOOR)
+		info->cur_tex = info->texture.textures[T_DOOR];
 }
 
 static void	_set_tex_step_and_pos(t_tex_pos *t, t_ray_beam *b)
@@ -50,9 +55,7 @@ static void	_draw_texture_workhorse(\
 		t->tex_y = (int)t->tex_pos & (TEXTURE_HEIGHT - 1);
 		t->tex_pos += t->tex_step;
 		t->color = info->cur_tex[t->tex_x + t->tex_y * TEXTURE_WIDTH];
-		if (ft_strchr("2", info->map.map[b->map_y][b->map_x]))
-			t->color = (t->color >> 2) & 0x3F3F3F;
-		else if (b->hit_side == Y_HIT)
+		if (b->hit_type == TYPE_TEXT && b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
 		if ((!info->bonus.map_toggle) \
 		|| (info->bonus.map_toggle \

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 20:38:44 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 10:03:26 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 static void	_set_draw_position(t_info *info, t_ray_beam *b)
 {
+	if (info->map.map[b->map_y][b->map_x] == '1')
+		b->hit_type = TYPE_TEXT;
+	else if (info->map.map[b->map_y][b->map_x] == '2')
+		b->hit_type = TYPE_DOOR;
+	else
+		b->hit_type = TYPE_SPRITE;
 	b->line_height = (int)(HEIGHT / b->perp_wall_dist);
 	b->draw_start = -b->line_height / 2 + HEIGHT / 2;
 	if (b->draw_start < 0)
@@ -44,7 +50,7 @@ static void	_dda_working(t_info *info, t_ray_beam *b)
 			b->map_y += b->step_y;
 			b->hit_side = Y_HIT;
 		}
-		if (ft_strchr("12", info->map.map[b->map_y][b->map_x]))
+		if (ft_strchr("123", info->map.map[b->map_y][b->map_x]))
 			b->hit = 1;
 	}
 	if (b->hit_side == X_HIT)

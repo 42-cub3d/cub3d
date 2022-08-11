@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/28 20:52:51 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 09:59:02 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@
 # define MOVE_SPEED 0.25
 # define INIT 1
 # define RENDER 2
+# define DOOR_SRC "./img/carved_pumpkin.xpm"
+
+enum e_texture_type
+{
+	TYPE_TEXT	= 1,
+	TYPE_DOOR,
+	TYPE_SPRITE
+};
 
 typedef struct s_mlx
 {

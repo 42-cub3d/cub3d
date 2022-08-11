@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/26 20:52:02 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 09:49:23 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_ray_beam
 	int		step_y;
 	double	side_dist_y;
 	int		hit;
+	int		hit_type;
 	int		hit_side;
 	double	perp_wall_dist;
 	int		line_height;
