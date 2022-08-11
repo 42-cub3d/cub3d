@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 01:35:17 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/11 10:13:13 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 22:33:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,20 @@ int	check_mouse_move(t_info *info)
 	int	gap;
 
 	mlx_mouse_get_pos(info->mlx.win, &x, &y);
-	if (x < info->bonus.mouse_x)
+	if ((0 <= x && x <= WIDTH) && (0 <= y && y <= HEIGHT))
 	{
-		gap = info->bonus.mouse_x - x;
-		key_rotate_view(KC_LEFT, info, MOUSE_SPEED * (gap / 2));
+		if (x < info->bonus.mouse_x)
+		{
+			gap = info->bonus.mouse_x - x;
+			key_rotate_view(KC_LEFT, info, MOUSE_SPEED * (gap / 2));
+		}
+		else
+		{
+			gap = x - info->bonus.mouse_x;
+			key_rotate_view(KC_RIGHT, info, MOUSE_SPEED * (gap / 2));
+		}
+		info->bonus.mouse_x = x;
+		mlx_do_sync(info->mlx.mlx);
 	}
-	else
-	{
-		gap = x - info->bonus.mouse_x;
-		key_rotate_view(KC_RIGHT, info, MOUSE_SPEED * (gap / 2));
-	}
-	info->bonus.mouse_x = x;
 	return (1);
 }

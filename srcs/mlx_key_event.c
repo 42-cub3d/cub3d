@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 21:38:49 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 22:28:10 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	_key_press(int key, t_info *info)
 {
 	if (key == KC_ESC)
 		_close_cube_three_d(info);
-	else if (key == KC_W || key == KC_A || key == KC_S || key == KC_D \
-																|| key == KC_E)
+	else if (\
+	key == KC_W || key == KC_A || key == KC_S || key == KC_D || key == KC_E)
 		key_move(key, info);
 	else if (key == KC_LEFT || key == KC_RIGHT \
 	|| key == KC_I || key == KC_J || key == KC_K || key == KC_L)
