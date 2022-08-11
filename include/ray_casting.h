@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/11 09:49:23 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 21:53:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef struct s_ray
 
 typedef struct s_tex_pos
 {
-	int		tex_x;
-	int		tex_y;
-	double	tex_step;
-	double	tex_pos;
+	int		t_x;
+	int		t_y;
+	double	t_step;
+	double	t_pos;
 	int		color;
 }			t_tex_pos;
 
