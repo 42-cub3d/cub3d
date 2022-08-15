@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 01:57:19 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 03:08:02 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	_set_sprite_transform(t_info *info, t_sprite *vec, t_sprite_beam *b)
 	double	sprite_y;
 	double	inv_det;
 
-	sprite_x = vec->x - info->ray.p_x;
-	sprite_y = vec->y - info->ray.p_y;
+	sprite_x = vec->x - info->ray.p_x + 0.5;
+	sprite_y = vec->y - info->ray.p_y + 0.5;
 	inv_det = 1.0 / (info->ray.plane_x * info->ray.dir_y \
 										- info->ray.dir_x * info->ray.plane_y);
 	b->transform_x = inv_det * (info->ray.dir_y * sprite_x \
@@ -34,16 +34,16 @@ static void	_set_sprite_beam(t_sprite_beam *b)
 	b->v_move_screen = (int)(V_MOVE / b->transform_y);
 	b->s_height = ft_abs((int)(HEIGHT / b->transform_y)) / V_DIV;
 	b->draw_start_y = -b->s_height / 2 + HEIGHT / 2 + b->v_move_screen;
-	if (b->draw_start_y < 0)
-		b->draw_start_y = 0;
 	b->draw_end_y = b->s_height / 2 + HEIGHT / 2 + b->v_move_screen;
-	if (b->draw_end_y > HEIGHT)
-		b->draw_end_y = HEIGHT;
 	b->s_width = ft_abs((int)(HEIGHT / b->transform_y)) / U_DIV;
 	b->draw_start_x = -b->s_width / 2 + b->s_screen_x;
+	b->draw_end_x = b->s_width / 2 + b->s_screen_x;
+	if (b->draw_start_y < 0)
+		b->draw_start_y = 0;
+	if (b->draw_end_y > HEIGHT)
+		b->draw_end_y = HEIGHT;
 	if (b->draw_start_x < 0)
 		b->draw_start_x = 0;
-	b->draw_end_x = b->s_width / 2 + b->s_screen_x;
 	if (b->draw_end_x > WIDTH)
 		b->draw_end_x = WIDTH;
 }
@@ -57,7 +57,8 @@ static void	_draw_sprite_verline2(\
 	int				tex_y;
 	int				color;
 
-	if (b->transform_y > 0 && b->transform_y < z_buffer[x])
+	if (b->transform_y > 0 && (0 <= x && x <= WIDTH) \
+												&& b->transform_y < z_buffer[x])
 	{
 		y = b->draw_start_y;
 		while (y < b->draw_end_y)
