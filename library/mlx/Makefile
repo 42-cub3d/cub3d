@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yongmkim <codeyoma@gmail.com>              +#+  +:+       +#+         #
+#    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 14:57:37 by yongmkim          #+#    #+#              #
-#    Updated: 2022/07/19 20:24:21 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/08/15 15:55:25 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ C_SRC		=	mlx_xpm.c\
 				mlx_png.c\
 				mlx_string_put.c
 
-OBJ_DIR		=	
+OBJ_DIR		=
+
+MAIN_DIR	=	../../
 
 MODULE_OBJ	=	$(addprefix $(OBJ_DIR), $(MODULE_SRC:.swift=.swiftmodule))
 OBJ			=	$(addprefix $(OBJ_DIR), $(SRC:.swift=.o))
@@ -108,7 +110,7 @@ clean		:
 
 fclean		: clean
 	@rm -f $(NAME)
-	@rm -f ../../$(NAME)
+	@rm -f $(MAIN_DIR)$(NAME)
 	@printf "   $(_INFO) $(_CLEAN) - fclean $(_DONE)\n"
 
 re			:

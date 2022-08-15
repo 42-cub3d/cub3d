@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 22:03:09 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:12 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "key_event.h"
 
 static void	_key_move(t_info *info, double dir_x, double dir_y)

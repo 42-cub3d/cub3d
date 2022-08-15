@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_get_texture_img.c                            :+:      :+:    :+:   */
+/*   parse_get_texture_img_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/25 16:20:55 by wchae            ###   ########.fr       */
+/*   Updated: 2022/08/15 17:15:17 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "mlx.h"
 
 static void	_set_texture_buffer(int *texture_img, t_img *img)
@@ -25,7 +25,7 @@ static void	_set_texture_buffer(int *texture_img, t_img *img)
 		while (x < TEXTURE_WIDTH)
 		{
 			texture_img[(TEXTURE_WIDTH * y) + x] = \
-								((int *)(img->addr))[(y * TEXTURE_WIDTH) + x];
+								((int *)(img->addr))[(x * TEXTURE_WIDTH) + y];
 			x++;
 		}
 		y++;
@@ -45,6 +45,8 @@ static char	*_get_path(t_texture *texture, t_texture_dir dir)
 		path = texture->south;
 	else if (dir == T_NORTH)
 		path = texture->north;
+	else if (dir == T_DOOR)
+		path = DOOR_SRC;
 	else
 		ft_exit("Texture Direction Error", 1);
 	return (path);
@@ -88,4 +90,5 @@ void	set_texture_img(t_info *info)
 	info->texture.textures[T_WEST] = _load_image(info, T_WEST);
 	info->texture.textures[T_SOUTH] = _load_image(info, T_SOUTH);
 	info->texture.textures[T_NORTH] = _load_image(info, T_NORTH);
+	info->texture.textures[T_DOOR] = _load_image(info, T_DOOR);
 }

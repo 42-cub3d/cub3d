@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 16:35:52 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:01:50 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "mlx.h"
 
 void	_print_info(t_info *info)
@@ -43,7 +43,7 @@ void	_print_info(t_info *info)
 
 void	ft_exit(char *err_msg, int errno_mode)
 {
-	ft_putstr_fd("Error: ", 2);
+	ft_putstr_fd("Error\n", 2);
 	if (errno_mode)
 		perror(err_msg);
 	else
@@ -66,6 +66,11 @@ void	ft_flush_info(t_info *info)
 	free(info->texture.west);
 	free(info->texture.south);
 	free(info->texture.north);
+	free(info->texture.textures[T_EAST]);
+	free(info->texture.textures[T_WEST]);
+	free(info->texture.textures[T_SOUTH]);
+	free(info->texture.textures[T_NORTH]);
+	free(info->texture.textures[T_DOOR]);
 	mlx_destroy_window(info->mlx.mlx, info->mlx.win);
 	mlx_destroy_image(info->mlx.mlx, info->mlx.img);
 	free(info->mlx.mlx);

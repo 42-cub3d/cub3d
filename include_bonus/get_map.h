@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 01:13:16 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:45:32 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/11 09:41:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_texture_dir
 	T_WEST,
 	T_SOUTH,
 	T_NORTH,
+	T_DOOR
 }			t_texture_dir;
 
 enum e_return_code
@@ -90,7 +91,7 @@ typedef struct s_texture
 	char	*west;
 	int		floor;
 	int		ceiling;
-	int		*textures[4];
+	int		*textures[5];
 }			t_texture;
 
 typedef struct s_info	t_info;

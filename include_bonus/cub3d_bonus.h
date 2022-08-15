@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/15 17:12:43 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:13:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <unistd.h>
 # include <stdio.h>
@@ -25,13 +25,23 @@
 
 # define WIDTH 1600
 # define HEIGHT 900
+# define MAP_RATIO 15
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define ROT_SPEED 0.15
+# define MOUSE_SPEED 0.02
 # define MOVE_SPEED 0.25
 # define POV 0.88
 # define INIT 1
 # define RENDER 2
+# define DOOR_SRC "./img/carved_pumpkin.xpm"
+
+enum e_texture_type
+{
+	TYPE_TEXT	= 1,
+	TYPE_DOOR,
+	TYPE_SPRITE
+};
 
 typedef struct s_mlx
 {
@@ -44,12 +54,29 @@ typedef struct s_mlx
 	int		endian;
 }			t_mlx;
 
+typedef struct s_bonus
+{
+	int		mouse_x;
+	int		mouse_init;
+	int		mouse_toggle;
+	int		map_toggle;
+}			t_bonus;
+
+typedef struct s_mini_map
+{
+	int		m_x;
+	int		m_y;
+	int		m_ratio;
+}			t_mini_map;
+
 typedef struct s_info
 {
 	t_texture	texture;
 	t_map		map;
 	t_mlx		mlx;
 	t_ray		ray;
+	t_bonus		bonus;
+	t_mini_map	mini_map;
 	int			*cur_tex;
 }				t_info;
 
@@ -74,5 +101,13 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x);
 void	ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
 void	key_rotate_view(int key, t_info *info, double rot_speed);
+int		check_mouse_move(t_info *info);
+
+/*
+**		mini_map
+*/
+void	mini_map_init(t_info *info);
+void	mini_map_draw(t_info *info);
+int		is_in_mini_map(t_info *info, int x, int y);
 
 #endif

@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:44:06 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/07/28 21:54:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	mini_map_init(t_info *info)
 {
@@ -38,9 +38,9 @@ static int	_set_color(char monad)
 	else if (monad == ' ')
 		color = 0x000000;
 	else if (monad == '2')
-		color = 0x3AB4F2;
+		color = 0x53F3EB;
 	else if (monad == '4')
-		color = 0x0078AA;
+		color = 0x23837B;
 	else
 		color = 0xE7AB79;
 	return (color);
@@ -82,7 +82,7 @@ void	mini_map_draw(t_info *info)
 		while (x < info->mini_map.m_x)
 		{
 			if (x % info->mini_map.m_ratio == 0)
-				color = _set_color(info->map.map[y / info->mini_map.m_ratio]\
+				color = _set_color(info->map.map[y / info->mini_map.m_ratio] \
 												[x / info->mini_map.m_ratio]);
 			ft_put_pixel(&info->mlx, x, y, color);
 			x++;
