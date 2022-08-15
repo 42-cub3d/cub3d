@@ -6,11 +6,18 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 20:30:00 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 00:11:22 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 01:55:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
 
 static void	_ft_lst_add_des(t_list **lst, t_list *new)
 {
@@ -65,14 +72,11 @@ void	sprite_add(t_info *info, t_ray_beam *b)
 			ft_exit("t_sprite malloc error", 1);
 		temp->x = b->map_x;
 		temp->y = b->map_y;
-		temp->dist = pow(b->map_x - info->ray.p_x, 2) \
-										+ pow(b->map_y - info->ray.p_y, 2);
+		temp->dist = sqrt(pow(b->map_x - info->ray.p_x, 2) \
+										+ pow(b->map_y - info->ray.p_y, 2));
 		new = ft_lstnew(temp);
 		if (!new)
 			ft_exit("t_list malloc error", 1);
 		_ft_lst_add_des(&info->sprite_list, new);
 	}
 }
-
-// set texture_sprite
-// info->cur_tex = info->texture.textures[5 + (info->fps / FPS_CNT)];

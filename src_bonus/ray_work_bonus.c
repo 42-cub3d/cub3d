@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 00:07:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 01:37:43 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	_draw_texture_workhorse(\
 }
 
 static void	_draw_texture_verline(\
-				t_info *info, t_ray_beam b, int cur_x, double z_buffer[WIDTH])
+				t_info *info, t_ray_beam b, int cur_x, double *z_buffer)
 {
 	t_tex_pos	t;
 
@@ -77,24 +77,21 @@ static void	_draw_texture_verline(\
 	_draw_texture_workhorse(info, &t, &b, cur_x);
 }
 
-void	ft_ray_casting(t_info *info)
+int	ft_ray_casting(t_info *info)
 {
 	int		x;
 	double	z_buffer[WIDTH];
 
 	x = 0;
+	info->sprite_list = NULL;
 	while (x < WIDTH)
 	{
 		_draw_texture_verline(info, get_ray_beam_verline(info, x), x, z_buffer);
 		x++;
 	}
-	// draw sprite
-	// ft_lstclear(&info->sprite_list, free);
-	// info->sprite_list = NULL;
+	ft_draw_sprite(info, z_buffer);
 	if (info->bonus.map_toggle)
 		mini_map_draw(info);
-	info->fps++;
-	if (info->fps >= FPS_MAX)
-		info->fps = 0;
 	ft_re_render(info);
+	return (0);
 }

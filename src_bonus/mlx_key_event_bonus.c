@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_key_event.c                                    :+:      :+:    :+:   */
+/*   mlx_key_event_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:16 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 01:48:08 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void	ft_event_handler(t_info *info)
 	mlx_hook(info->mlx.win, KEY_PRESS, 0, _key_press, info);
 	mlx_hook(info->mlx.win, DESTROY_NOTIFY, 0, _close_cube_three_d, info);
 	mlx_hook(info->mlx.win, BUTTON_PRESS, 0, _mouse_press_handle, info);
-	mlx_loop_hook(info->mlx.mlx, check_mouse_move, info);
+	mlx_hook(info->mlx.win, MOTION_NITOFY, 0, check_mouse_move, info);
 }
+
+// mlx_loop_hook(info->mlx.mlx, check_mouse_move, info);

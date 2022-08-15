@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 22:43:19 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:05:24 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static t_img	_get_img(t_info *info, t_texture_dir dir)
 				info->mlx.mlx, _get_path(&info->texture, dir), &width, &height);
 	if (!img.img)
 		ft_exit("texture_img : mlx_xpm_file_to_image error", 0);
-	if (width != 64 || height != 64)
+	if (width != TEXTURE_WIDTH || height != TEXTURE_HEIGHT)
 		ft_exit("texture pixel isn't 64 x 64 size", 0);
 	return (img);
 }
@@ -94,14 +94,12 @@ static int	*_load_image(t_info *info, t_texture_dir dir)
 
 void	set_texture_img(t_info *info)
 {
-	info->texture.textures[T_EAST] = _load_image(info, T_EAST);
-	info->texture.textures[T_WEST] = _load_image(info, T_WEST);
-	info->texture.textures[T_SOUTH] = _load_image(info, T_SOUTH);
-	info->texture.textures[T_NORTH] = _load_image(info, T_NORTH);
-	info->texture.textures[T_DOOR] = _load_image(info, T_DOOR);
-	info->texture.textures[T_SP_1] = _load_image(info, T_SP_1);
-	info->texture.textures[T_SP_2] = _load_image(info, T_SP_2);
-	info->texture.textures[T_SP_3] = _load_image(info, T_SP_3);
-	info->texture.textures[T_SP_4] = _load_image(info, T_SP_4);
-	info->texture.textures[T_SP_5] = _load_image(info, T_SP_5);
+	size_t	idx;
+
+	idx = 0;
+	while (idx < 10)
+	{
+		info->texture.textures[idx] = _load_image(info, idx);
+		idx++;
+	}
 }

@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/15 21:41:40 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/16 01:31:48 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRC_B				:=	main_bonus.c\
 						ray_work_bonus.c\
 						ray_init_bonus.c\
 						sprite_init_bonus.c\
+						sprite_work_bonus.c\
 
 OBJ_DIR 			=	obj/
 

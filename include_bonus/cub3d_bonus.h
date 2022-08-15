@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/15 22:46:37 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:00:28 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define POV 0.88
 # define INIT 1
 # define RENDER 2
-# define FPS_MAX 100
-# define FPS_CNT 20
+# define FPS_MAX 50
+# define FPS_CNT 10
 # define DOOR_SRC "./img/carved_pumpkin.xpm"
 # define SPRITE_1 "./img/sprite/sprite1.xpm"
 # define SPRITE_2 "./img/sprite/sprite3.xpm"
@@ -110,7 +110,7 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x);
 void	ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
 void	key_rotate_view(int key, t_info *info, double rot_speed);
-int		check_mouse_move(t_info *info);
+int		check_mouse_move(int x, int y, t_info *info);
 
 /*
 **		mini_map

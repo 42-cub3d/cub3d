@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 00:03:15 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:03:34 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,17 @@ void	ft_flush_info(t_info *info)
 		free(info->map.map[i]);
 		i++;
 	}
+	i = 0;
+	while (i < 10)
+	{
+		free(info->texture.textures[i]);
+		i++;
+	}
 	free(info->map.map);
 	free(info->texture.east);
 	free(info->texture.west);
 	free(info->texture.south);
 	free(info->texture.north);
-	free(info->texture.textures[T_EAST]);
-	free(info->texture.textures[T_WEST]);
-	free(info->texture.textures[T_SOUTH]);
-	free(info->texture.textures[T_NORTH]);
-	free(info->texture.textures[T_DOOR]);
-	free(info->texture.textures[T_SP_1]);
-	free(info->texture.textures[T_SP_2]);
-	free(info->texture.textures[T_SP_3]);
-	free(info->texture.textures[T_SP_4]);
-	free(info->texture.textures[T_SP_5]);
 	mlx_destroy_window(info->mlx.mlx, info->mlx.win);
 	mlx_destroy_image(info->mlx.mlx, info->mlx.img);
 	free(info->mlx.mlx);
@@ -104,6 +100,7 @@ int	main(int argc, char **argv)
 	ft_ray_setting(&info);
 	ft_ray_casting(&info);
 	_print_info(&info);
+	mlx_loop_hook(info.mlx.mlx, ft_ray_casting, &info);
 	mlx_loop(info.mlx.mlx);
 	ft_flush_info(&info);
 	return (EXIT_SUCCESS);
