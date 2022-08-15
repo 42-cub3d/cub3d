@@ -6,18 +6,15 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/15 16:06:37 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/15 16:17:17 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				:=	cub3D
 
-INC_DIR				=	include/
-
 LIB_DIR				= 	library/
 LIB_LNK				=	$(LIBFT_LNK) $(MLX_LNK)
-LIB_INC				=	$(LIBFT_INC) $(MLX_INC) -I $(INC_DIR)
-HDR_INC				=	$(LIB_INC)
+LIB_INC				=	$(LIBFT_INC) $(MLX_INC)
 ###	libft
 LIBFT_DIR			=	$(LIB_DIR)libft/
 LIBFT_INC			=	-I $(LIBFT_DIR)
@@ -27,11 +24,7 @@ MLX_DIR 			=	$(LIB_DIR)mlx/
 MLX_INC				=	-I $(MLX_DIR)
 MLX_LNK				=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
 
-
-
-SRCS_DIR 			=	srcs/
-
-OBJS_DIR 			=	objs/
+OBJ_DIR 			=	obj/
 
 SRC					:=	main.c\
 						parse_init.c\
@@ -51,18 +44,18 @@ SRC					:=	main.c\
 
 SRC_B				:=
 
-OBJ					=	$(addprefix $(OBJS_DIR), $(SRC:.c=.o))
+OBJ					=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
-OBJ_B				=	$(addprefix $(OBJS_DIR), $(SRC_B:.c=.o))
+OBJ_B				=	$(addprefix $(OBJ_DIR), $(SRC_B:.c=.o))
 
 
 ifdef _BONUS
-	SRC_DIR			=	./source_bonus/
-	INC_DIR			=	./include_bonus/
+	SRC_DIR			=	src_bonus/
+	INC_DIR			=	include_bonus/
 	OBJECT			:=	$(OBJ_B)
 else
-	SRC_DIR			=	./source/
-	INC_DIR			=	./include/
+	SRC_DIR			=	src/
+	INC_DIR			=	include/
 	OBJECT			:=	$(OBJ)
 endif
 
@@ -83,7 +76,7 @@ MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
 all					: make_dir lib_make $(NAME)
 
 make_dir			:
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(NAME)				: $(OBJECT)
 	$(CC) $(CFLAGS) $(LIB_LNK) $(OBJECT) -o $@
@@ -101,13 +94,12 @@ lib_re				:
 	@make -C $(LIB_DIR) re
 
 
-$(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
-	$(CC) $(CFLAGS) $(LIB_INC) -c $< -o $@
-
+$(OBJ_DIR)%.o		: $(SRC_DIR)%.c $(INC_DIR)
+	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
 
 .PHONY				: clean lclean fclean lfclean re lre bonus
 clean				:
-	$(RM) $(RMFLAGS)r $(OBJS_DIR)
+	$(RM) -rf $(OBJ_DIR)
 
 lclean			: lib_clean
 
@@ -117,11 +109,12 @@ fclean				: clean
 lfclean			: lib_fclean
 
 re					: fclean
-	make all
+	@make all
 
 lre					: lib_re
 
-bonus				: all
+bonus				:
+	@make _BONUS=1 all
 
 .PHONY				: sntz m mem
 sntz		:	CFLAGS+=$(SNTZ)
