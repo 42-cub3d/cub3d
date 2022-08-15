@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:44:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 00:49:40 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	_set_draw_position(t_info *info, t_ray_beam *b)
 	if (b->draw_start < 0)
 		b->draw_start = 0;
 	b->draw_end = b->line_height / 2 + HEIGHT / 2;
-	if (b->draw_end >= HEIGHT)
+	if (b->draw_end > HEIGHT)
 		b->draw_end = HEIGHT;
 	if (b->hit_side == X_HIT)
 		b->wallx = info->ray.p_y + b->perp_wall_dist * b->ray_dir_y;

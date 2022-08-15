@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_dda.c                                          :+:      :+:    :+:   */
+/*   ray_dda_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:22 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 00:49:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ static void	_set_draw_position(t_info *info, t_ray_beam *b)
 		b->hit_type = TYPE_TEXT;
 	else if (info->map.map[b->map_y][b->map_x] == '2')
 		b->hit_type = TYPE_DOOR;
-	else
-		b->hit_type = TYPE_SPRITE;
 	b->line_height = (int)(HEIGHT / b->perp_wall_dist);
 	b->draw_start = -b->line_height / 2 + HEIGHT / 2;
 	if (b->draw_start < 0)
 		b->draw_start = 0;
 	b->draw_end = b->line_height / 2 + HEIGHT / 2;
-	if (b->draw_end >= HEIGHT)
+	if (b->draw_end > HEIGHT)
 		b->draw_end = HEIGHT;
 	if (b->hit_side == X_HIT)
 		b->wallx = info->ray.p_y + b->perp_wall_dist * b->ray_dir_y;
@@ -52,6 +50,8 @@ static void	_dda_working(t_info *info, t_ray_beam *b)
 		}
 		if (ft_strchr("12", info->map.map[b->map_y][b->map_x]))
 			b->hit = 1;
+		else if (info->map.map[b->map_y][b->map_x] == '3')
+			sprite_add(info, b);
 	}
 	if (b->hit_side == X_HIT)
 		b->perp_wall_dist = \
@@ -97,7 +97,7 @@ static void	_set_ray_beam(t_info *info, t_ray_beam *b, int cur_x)
 	b->hit = 0;
 }
 
-t_ray_beam	get_ray_beam_per_verline(t_info *info, int cur_x)
+t_ray_beam	get_ray_beam_verline(t_info *info, int cur_x)
 {
 	t_ray_beam	b;
 
