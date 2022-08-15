@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 17:15:17 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 20:57:53 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,16 @@ static char	*_get_path(t_texture *texture, t_texture_dir dir)
 		path = texture->north;
 	else if (dir == T_DOOR)
 		path = DOOR_SRC;
+	else if (dir == T_SP_1)
+		path = SPRITE_1;
+	else if (dir == T_SP_2)
+		path = SPRITE_2;
+	else if (dir == T_SP_3)
+		path = SPRITE_3;
+	else if (dir == T_SP_4)
+		path = SPRITE_4;
 	else
-		ft_exit("Texture Direction Error", 1);
+		path = SPRITE_5;
 	return (path);
 }
 
@@ -91,4 +99,9 @@ void	set_texture_img(t_info *info)
 	info->texture.textures[T_SOUTH] = _load_image(info, T_SOUTH);
 	info->texture.textures[T_NORTH] = _load_image(info, T_NORTH);
 	info->texture.textures[T_DOOR] = _load_image(info, T_DOOR);
+	info->texture.textures[T_SP_1] = _load_image(info, T_SP_1);
+	info->texture.textures[T_SP_2] = _load_image(info, T_SP_2);
+	info->texture.textures[T_SP_3] = _load_image(info, T_SP_3);
+	info->texture.textures[T_SP_4] = _load_image(info, T_SP_4);
+	info->texture.textures[T_SP_5] = _load_image(info, T_SP_5);
 }

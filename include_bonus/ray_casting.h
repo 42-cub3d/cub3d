@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/11 21:53:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 21:27:02 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 # define X_HIT 0
 # define Y_HIT 1
+
+typedef struct s_sprite
+{
+	int		x;
+	int		y;
+	double	dist;
+}				t_sprite;
 
 typedef struct s_ray
 {
@@ -62,6 +69,7 @@ typedef struct s_info	t_info;
 
 void		ft_ray_setting(t_info *info);
 void		ft_ray_casting(t_info *info);
-t_ray_beam	get_ray_beam_per_verline(t_info *info, int cur_x);
+t_ray_beam	get_ray_beam_verline(t_info *info, int cur_x);
+void		sprite_init(t_info *info, t_ray_beam *b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/15 17:13:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 21:22:22 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,14 @@
 # define POV 0.88
 # define INIT 1
 # define RENDER 2
+# define FPS_MAX 100
+# define FPS_CNT 20
 # define DOOR_SRC "./img/carved_pumpkin.xpm"
+# define SPRITE_1 "./img/sprite/sprite1.xpm"
+# define SPRITE_2 "./img/sprite/sprite3.xpm"
+# define SPRITE_3 "./img/sprite/sprite5.xpm"
+# define SPRITE_4 "./img/sprite/sprite7.xpm"
+# define SPRITE_5 "./img/sprite/sprite9.xpm"
 
 enum e_texture_type
 {
@@ -77,7 +84,9 @@ typedef struct s_info
 	t_ray		ray;
 	t_bonus		bonus;
 	t_mini_map	mini_map;
+	t_list		sprite_list;
 	int			*cur_tex;
+	int			fps;
 }				t_info;
 
 /*

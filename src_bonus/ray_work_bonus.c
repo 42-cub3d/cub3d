@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 19:19:36 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 21:07:42 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	_set_hit_tex(t_info *info, t_ray_beam *b)
 				info->cur_tex = info->texture.textures[T_NORTH];
 		}
 	}
-	else if (b->hit_type == TYPE_DOOR)
+	else
 		info->cur_tex = info->texture.textures[T_DOOR];
 }
 
@@ -66,10 +66,12 @@ static void	_draw_texture_workhorse(\
 	}
 }
 
-static void	_draw_texture_verline(t_info *info, t_ray_beam b, int cur_x)
+static void	_draw_texture_verline(\
+				t_info *info, t_ray_beam b, int cur_x, double z_buffer[WIDTH])
 {
 	t_tex_pos	t;
 
+	z_buffer[cur_x] = b.perp_wall_dist;
 	_set_hit_tex(info, &b);
 	_set_tex_step_and_pos(&t, &b);
 	_draw_texture_workhorse(info, &t, &b, cur_x);
@@ -78,14 +80,19 @@ static void	_draw_texture_verline(t_info *info, t_ray_beam b, int cur_x)
 void	ft_ray_casting(t_info *info)
 {
 	int		x;
+	double	z_buffer[WIDTH];
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		_draw_texture_verline(info, get_ray_beam_per_verline(info, x), x);
+		_draw_texture_verline(info, get_ray_beam_verline(info, x), x, z_buffer);
 		x++;
 	}
+	// draw sprite
 	if (info->bonus.map_toggle)
 		mini_map_draw(info);
+	info->fps++;
+	if (info->fps >= FPS_MAX)
+		info->fps = 0;
 	ft_re_render(info);
 }
