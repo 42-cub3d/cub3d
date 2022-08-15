@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 02:24:41 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 03:32:53 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	_key_press(int key, t_info *info)
 		_print_info(info);
 	else if (key == KC_M)
 		_toggle_mouse_view(&info->bonus.map_toggle, RIGHT_CLICK);
+	else if (key == KC_Z)
+		_toggle_mouse_view(&info->bonus.sprite_toggle, RIGHT_CLICK);
 	return (1);
 }
 

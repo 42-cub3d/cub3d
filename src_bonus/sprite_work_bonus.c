@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 03:26:42 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 03:34:55 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ void	ft_draw_sprite(t_info *info, double *z_buffer)
 	t_sprite_beam	b;
 
 	temp = info->sprite_list;
+	if (info->bonus.sprite_toggle)
+	{
+		ft_print_sprite_pos(info);
+		info->bonus.sprite_toggle = 0;
+	}
 	while (temp)
 	{
 		_set_sprite_transform(info, temp->content, &b);
