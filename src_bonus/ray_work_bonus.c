@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 18:27:36 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 19:19:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	_set_tex_step_and_pos(t_tex_pos *t, t_ray_beam *b)
 	if ((b->hit_side == X_HIT && b->ray_dir_x > 0) \
 	|| (b->hit_side == Y_HIT && b->ray_dir_y < 0))
 		t->t_x = TEXTURE_WIDTH - t->t_x - 1;
-	t->t_step = 1.0 * TEXTURE_HEIGHT / b->line_height;
+	t->t_step = (double)TEXTURE_HEIGHT / b->line_height;
 	t->t_pos = (b->draw_start - HEIGHT / 2 + b->line_height / 2) * t->t_step;
 }
 
