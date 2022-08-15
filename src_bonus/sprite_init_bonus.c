@@ -6,24 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 20:30:00 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 00:05:33 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 00:11:22 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
-
-void	print_sprite_dist(t_info *info)
-{
-	t_list	*temp;
-
-	temp = info->sprite_list;
-	while (temp)
-	{
-		printf("%5f, ", ((t_sprite *)temp->content)->dist);
-		temp = temp->next;
-	}
-	printf("\n");
-}
 
 static void	_ft_lst_add_des(t_list **lst, t_list *new)
 {
@@ -84,7 +71,6 @@ void	sprite_add(t_info *info, t_ray_beam *b)
 		if (!new)
 			ft_exit("t_list malloc error", 1);
 		_ft_lst_add_des(&info->sprite_list, new);
-		print_sprite_dist(info);
 	}
 }
 
