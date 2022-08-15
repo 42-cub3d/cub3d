@@ -6,23 +6,86 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 20:30:00 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 21:42:08 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 00:05:33 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	sprite_init(t_info *info, t_ray_beam *b)
+void	print_sprite_dist(t_info *info)
 {
-	(void)info;
-	(void)b;
-	// if (!_find_sprite(info, b))
-	// {
-	// 	// create new t_sprite
-	// 	// get perp_wall_dist
-	// 	// ((map_x - ray.p_x) + (map_y - ray_p_y)) / ray_dir_x / 2;
-	// 	// add descending order
-	// }
+	t_list	*temp;
+
+	temp = info->sprite_list;
+	while (temp)
+	{
+		printf("%5f, ", ((t_sprite *)temp->content)->dist);
+		temp = temp->next;
+	}
+	printf("\n");
+}
+
+static void	_ft_lst_add_des(t_list **lst, t_list *new)
+{
+	t_list	*temp;
+	t_list	*pre;
+
+	if (!lst || !new)
+		return ;
+	pre = NULL;
+	temp = *lst;
+	while (temp \
+	&& ((t_sprite *)temp->content)->dist > ((t_sprite *)new->content)->dist)
+	{
+		pre = temp;
+		temp = temp->next;
+	}
+	if (!pre)
+	{
+		new->next = *lst;
+		*lst = new;
+		return ;
+	}
+	pre->next = new;
+	new->next = temp;
+}
+
+static int	_find_sprite(t_info *info, t_ray_beam *b)
+{
+	t_list		*temp;
+	t_sprite	*sprite_temp;
+
+	temp = info->sprite_list;
+	while (temp)
+	{
+		sprite_temp = temp->content;
+		if (sprite_temp->x == b->map_x && sprite_temp->y == b->map_y)
+			return (1);
+		temp = temp->next;
+	}
+	return (0);
+}
+
+void	sprite_add(t_info *info, t_ray_beam *b)
+{
+	t_sprite	*temp;
+	t_list		*new;
+
+	if (!_find_sprite(info, b))
+	{
+		temp = malloc(sizeof(t_sprite));
+		if (!temp)
+			ft_exit("t_sprite malloc error", 1);
+		temp->x = b->map_x;
+		temp->y = b->map_y;
+		temp->dist = pow(b->map_x - info->ray.p_x, 2) \
+										+ pow(b->map_y - info->ray.p_y, 2);
+		new = ft_lstnew(temp);
+		if (!new)
+			ft_exit("t_list malloc error", 1);
+		_ft_lst_add_des(&info->sprite_list, new);
+		print_sprite_dist(info);
+	}
 }
 
 // set texture_sprite

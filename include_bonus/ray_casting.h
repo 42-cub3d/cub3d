@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 21:27:02 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 22:47:27 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ typedef struct s_info	t_info;
 void		ft_ray_setting(t_info *info);
 void		ft_ray_casting(t_info *info);
 t_ray_beam	get_ray_beam_verline(t_info *info, int cur_x);
-void		sprite_init(t_info *info, t_ray_beam *b);
+void		sprite_add(t_info *info, t_ray_beam *b);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_init.c                                     :+:      :+:    :+:   */
+/*   minimap_init_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:44:06 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:16 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 22:57:47 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static int	_set_color(char monad)
 		color = 0x53F3EB;
 	else if (monad == '4')
 		color = 0x23837B;
+	else if (monad == '3')
+		color = 0xFA2FB5;
 	else
 		color = 0xE7AB79;
 	return (color);

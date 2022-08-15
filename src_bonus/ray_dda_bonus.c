@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 21:25:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 22:47:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	_dda_working(t_info *info, t_ray_beam *b)
 		if (ft_strchr("12", info->map.map[b->map_y][b->map_x]))
 			b->hit = 1;
 		else if (info->map.map[b->map_y][b->map_x] == '3')
-			sprite_init(info, b);
+			sprite_add(info, b);
 	}
 	if (b->hit_side == X_HIT)
 		b->perp_wall_dist = \

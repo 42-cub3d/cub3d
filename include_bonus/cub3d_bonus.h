@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/15 21:22:22 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 22:46:37 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_info
 	t_ray		ray;
 	t_bonus		bonus;
 	t_mini_map	mini_map;
-	t_list		sprite_list;
+	t_list		*sprite_list;
 	int			*cur_tex;
 	int			fps;
 }				t_info;

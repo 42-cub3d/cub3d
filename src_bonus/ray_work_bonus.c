@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 21:07:42 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 00:07:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	ft_ray_casting(t_info *info)
 		x++;
 	}
 	// draw sprite
+	// ft_lstclear(&info->sprite_list, free);
+	// info->sprite_list = NULL;
 	if (info->bonus.map_toggle)
 		mini_map_draw(info);
 	info->fps++;
