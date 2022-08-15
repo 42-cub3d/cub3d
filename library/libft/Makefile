@@ -22,7 +22,6 @@ _CLEAN		=	[$(BLUE_PURPLE)$(NAME)$(RESET)]
 _NAME_B		=	[$(GREEN)$(NAME_B)$(RESET)]
 _PROG		=	$(_INFO) [$(ORANGE)$(NAME)$(RESET)] - Compile $(YELLOW)
 _DONE		=	$(GREEN)✓$(RESET)
-_PART		=
 #	Loading bar
 #==============================================================================
 SHELL	=	/bin/bash
@@ -122,6 +121,7 @@ $(NAME)		:	$(OBJECT)
 		fi
 		@$(AR) $(AR_FLAG) $@ $^
 		@printf "$(_SUCCESS) $(_NAME) - $(_PART) $(_DONE)\n"
+
 
 #==============================================================================
 #	Object file, library Make
