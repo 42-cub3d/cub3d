@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 01:48:08 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:24:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	_close_cube_three_d(t_info *info)
 	return (1);
 }
 
-static void	_toggle_mouse_view(t_info *info, int *toggle, int mode)
+static void	_toggle_mouse_view(int *toggle, int mode)
 {
 	if (*toggle == 0)
 	{
@@ -35,8 +35,6 @@ static void	_toggle_mouse_view(t_info *info, int *toggle, int mode)
 			mlx_mouse_hide();
 		*toggle = 0;
 	}
-	if (mode == RIGHT_CLICK)
-		ft_ray_casting(info);
 }
 
 static int	_key_press(int key, t_info *info)
@@ -52,7 +50,7 @@ static int	_key_press(int key, t_info *info)
 	else if (key == KC_F)
 		_print_info(info);
 	else if (key == KC_M)
-		_toggle_mouse_view(info, &info->bonus.map_toggle, RIGHT_CLICK);
+		_toggle_mouse_view(&info->bonus.map_toggle, RIGHT_CLICK);
 	return (1);
 }
 
@@ -66,19 +64,18 @@ static int	_mouse_press_handle(int key, int x, int y, t_info *info)
 		info->bonus.mouse_x = x;
 	}
 	else if (key == LEFT_CLICK)
-		_toggle_mouse_view(info, &info->bonus.mouse_toggle, LEFT_CLICK);
+		_toggle_mouse_view(&info->bonus.mouse_toggle, LEFT_CLICK);
 	else if (key == RIGHT_CLICK)
-		_toggle_mouse_view(info, &info->bonus.map_toggle, RIGHT_CLICK);
+		_toggle_mouse_view(&info->bonus.map_toggle, RIGHT_CLICK);
 	return (1);
 }
 
-void	ft_event_handler(t_info *info)
+int	ft_event_handler(t_info *info)
 {
-	mlx_mouse_hide();
 	mlx_hook(info->mlx.win, KEY_PRESS, 0, _key_press, info);
 	mlx_hook(info->mlx.win, DESTROY_NOTIFY, 0, _close_cube_three_d, info);
 	mlx_hook(info->mlx.win, BUTTON_PRESS, 0, _mouse_press_handle, info);
 	mlx_hook(info->mlx.win, MOTION_NITOFY, 0, check_mouse_move, info);
+	ft_ray_casting(info);
+	return (0);
 }
-
-// mlx_loop_hook(info->mlx.mlx, check_mouse_move, info);

@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/16 01:31:48 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/16 02:27:36 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,11 +129,17 @@ b					: bonus
 bonus				:
 	@make WITH_BONUS=1 all
 
-.PHONY				: sntz m mem
+.PHONY				: sntz m mem norm normr
 sntz		:	CFLAGS+=$(SNTZ)
 sntz		:	all
 
 m			:	mem
 mem			:	CFLAGS+=$(MEM)
 mem			:	all
+
+norm		:
+	norminette include_bonus include src src_bonus library/libft
+
+normr		:
+	norminette -R CheckForbiddenSourceHeader include_bonus include src src_bonus library/libft
 

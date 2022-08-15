@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_key_move.c                                     :+:      :+:    :+:   */
+/*   mlx_key_move_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:12 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:25:37 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,4 @@ void	key_move(int key, t_info *info)
 		_key_move(info, info->ray.plane_x, info->ray.plane_y);
 	else
 		_door_open_and_close(info);
-	ft_ray_casting(info);
 }

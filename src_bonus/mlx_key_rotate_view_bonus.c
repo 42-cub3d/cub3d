@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:36:17 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 17:14:12 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:11:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ void	key_rotate_view(int key, t_info *info, double rot_speed)
 		_rotate_dir(info, rot_speed);
 	else
 		_set_dir_vector(key, info);
-	ft_ray_casting(info);
 }

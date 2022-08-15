@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/16 02:00:28 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 02:18:33 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x);
 /*
 **      mlx event_part
 */
-void	ft_event_handler(t_info *info);
+int		ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
 void	key_rotate_view(int key, t_info *info, double rot_speed);
 int		check_mouse_move(int x, int y, t_info *info);
