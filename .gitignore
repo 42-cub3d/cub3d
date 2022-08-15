@@ -15,3 +15,5 @@ cub3d_en.subject.pdf
 .tests
 *.o
 *.dylib
+
+*.log
