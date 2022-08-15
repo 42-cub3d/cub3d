@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:43:33 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:08:18 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	_draw_texture_workhorse(\
 	{
 		t->t_y = (int)t->t_pos & (TEXTURE_HEIGHT - 1);
 		t->t_pos += t->t_step;
-		t->color = info->cur_tex[t->t_x + t->t_y * TEXTURE_WIDTH];
+		t->color = info->cur_tex[t->t_x * (TEXTURE_WIDTH) + t->t_y];
 		if (b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
 		ft_put_pixel(&info->mlx, cur_x, b->draw_start, t->color);

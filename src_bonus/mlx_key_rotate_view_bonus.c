@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_key_rotate_view.c                              :+:      :+:    :+:   */
+/*   mlx_key_rotate_view_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:36:17 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:13 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:14:12 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,22 @@ static void	_set_dir_vector(int key, t_info *info)
 	if (key == KC_L)
 	{
 		info->ray.dir_x = 1;
-		info->ray.plane_y = 0.66;
+		info->ray.plane_y = POV;
 	}
 	else if (key == KC_J)
 	{
 		info->ray.dir_x = -1;
-		info->ray.plane_y = -0.66;
+		info->ray.plane_y = -POV;
 	}
 	else if (key == KC_K)
 	{
 		info->ray.dir_y = 1;
-		info->ray.plane_x = -0.66;
+		info->ray.plane_x = -POV;
 	}
 	else if (key == KC_I)
 	{
 		info->ray.dir_y = -1;
-		info->ray.plane_x = 0.66;
+		info->ray.plane_x = POV;
 	}
 }
 

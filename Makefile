@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/15 16:57:22 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/15 17:22:18 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,14 +56,18 @@ SRC_B				:=	main_bonus.c\
 
 OBJ_DIR 			=	obj/
 
-ifdef _BONUS
+OBJ_B				:=	$(addprefix $(OBJ_DIR), $(SRC_B:.c=.o))
+
+OBJ					:=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+
+ifdef WITH_BONUS
 	SRC_DIR			:=	src_bonus/
 	INC_DIR			:=	include_bonus/
-	OBJECT			:=	$(addprefix $(OBJ_DIR), $(SRC_B:.c=.o))
+	OBJECT			:=	$(OBJ_B)
 else
 	SRC_DIR			:=	src/
 	INC_DIR			:=	include/
-	OBJECT			:=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
+	OBJECT			:=	$(OBJ)
 endif
 
 RM					=	rm
@@ -121,7 +125,7 @@ lre					: lib_re
 
 b					: bonus
 bonus				:
-	@make _BONUS=1 all
+	@make WITH_BONUS=1 all
 
 .PHONY				: sntz m mem
 sntz		:	CFLAGS+=$(SNTZ)

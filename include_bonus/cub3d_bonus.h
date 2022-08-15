@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/15 16:23:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:13:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define ROT_SPEED 0.15
 # define MOUSE_SPEED 0.02
 # define MOVE_SPEED 0.25
+# define POV 0.88
 # define INIT 1
 # define RENDER 2
 # define DOOR_SRC "./img/carved_pumpkin.xpm"

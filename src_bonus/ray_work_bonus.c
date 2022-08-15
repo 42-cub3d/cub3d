@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_work.c                                         :+:      :+:    :+:   */
+/*   ray_work_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:22:03 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:15:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	_draw_texture_workhorse(\
 	{
 		t->t_y = (int)t->t_pos & (TEXTURE_HEIGHT - 1);
 		t->t_pos += t->t_step;
-		t->color = info->cur_tex[t->t_x + t->t_y * TEXTURE_WIDTH];
+		t->color = info->cur_tex[t->t_x * TEXTURE_WIDTH + t->t_y];
 		if (b->hit_type == TYPE_TEXT && b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
 		if ((!info->bonus.map_toggle) \

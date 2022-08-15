@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:45:53 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:07:25 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	_set_texture_buffer(int *texture_img, t_img *img)
 		while (x < TEXTURE_WIDTH)
 		{
 			texture_img[(TEXTURE_WIDTH * y) + x] = \
-								((int *)(img->addr))[(y * TEXTURE_WIDTH) + x];
+								((int *)(img->addr))[(x * TEXTURE_WIDTH) + y];
 			x++;
 		}
 		y++;

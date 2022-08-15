@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/15 16:51:37 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 17:12:43 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define TEXTURE_HEIGHT 64
 # define ROT_SPEED 0.15
 # define MOVE_SPEED 0.25
+# define POV 0.88
 # define INIT 1
 # define RENDER 2
 
