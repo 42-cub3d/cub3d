@@ -6,11 +6,13 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/16 02:27:36 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/16 03:09:43 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				:=	cub3D
+
+VPATH				:=	$(shell ls -R)
 
 LIB_DIR				= 	library/
 LIB_LNK				=	$(LIBFT_LNK) $(MLX_LNK)
@@ -106,7 +108,7 @@ lib_fclean			:
 lib_re				:
 	@make -C $(LIB_DIR) re
 
-$(OBJ_DIR)%.o		: $(SRC_DIR)%.c $(INC_DIR)
+$(OBJ_DIR)%.o		: %.c $(INC_DIR)
 	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
 
 .PHONY				: clean lclean fclean lfclean re lre bonus b
@@ -131,11 +133,11 @@ bonus				:
 
 .PHONY				: sntz m mem norm normr
 sntz		:	CFLAGS+=$(SNTZ)
-sntz		:	all
+sntz		:	bonus
 
 m			:	mem
 mem			:	CFLAGS+=$(MEM)
-mem			:	all
+mem			:	bonus
 
 norm		:
 	norminette include_bonus include src src_bonus library/libft

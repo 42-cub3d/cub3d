@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 01:52:20 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 03:34:17 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int			ft_ray_casting(t_info *info);
 t_ray_beam	get_ray_beam_verline(t_info *info, int cur_x);
 void		sprite_add(t_info *info, t_ray_beam *b);
 void		ft_draw_sprite(t_info *info, double *z_buffer);
+void		ft_print_sprite_pos(t_info *info);
 int			ft_abs(int n);
 
 #endif

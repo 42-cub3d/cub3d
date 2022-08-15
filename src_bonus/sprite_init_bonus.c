@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 20:30:00 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 01:55:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 03:39:42 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,23 @@ int	ft_abs(int n)
 	if (n < 0)
 		return (-n);
 	return (n);
+}
+
+void	ft_print_sprite_pos(t_info *info)
+{
+	t_list		*lst;
+	t_sprite	*temp;
+
+	lst = info->sprite_list;
+	if (lst)
+		printf("\n");
+	while (lst)
+	{
+		temp = lst->content;
+		printf("(%d, %d) : %f\n", temp->x, temp->y, temp->dist);
+		lst = lst->next;
+	}
+	printf("\n");
 }
 
 static void	_ft_lst_add_des(t_list **lst, t_list *new)
