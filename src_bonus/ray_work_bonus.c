@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 17:15:41 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 18:27:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,14 @@ static void	_set_tex_step_and_pos(t_tex_pos *t, t_ray_beam *b)
 static void	_draw_texture_workhorse(\
 						t_info *info, t_tex_pos *t, t_ray_beam *b, int cur_x)
 {
+	const size_t	arr_tex_x = t->t_x * TEXTURE_WIDTH;
+
 	ft_fill_floor_ceiling(info, b, cur_x);
 	while (b->draw_start < b->draw_end)
 	{
 		t->t_y = (int)t->t_pos & (TEXTURE_HEIGHT - 1);
 		t->t_pos += t->t_step;
-		t->color = info->cur_tex[t->t_x * TEXTURE_WIDTH + t->t_y];
+		t->color = info->cur_tex[arr_tex_x + t->t_y];
 		if (b->hit_type == TYPE_TEXT && b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
 		if ((!info->bonus.map_toggle) \
