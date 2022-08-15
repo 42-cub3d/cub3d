@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/15 16:04:05 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/15 16:06:37 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,10 +66,10 @@ else
 	OBJECT			:=	$(OBJ)
 endif
 
-RM					= rm
-RMFLAGS				= -f
-CC					= cc
-CFLAGS				= -Wall -Wextra -Werror
+RM					=	rm
+RMFLAGS				=	-f
+CC					=	cc
+CFLAGS				=	-Wall -Wextra -Werror
 
 SNTZ				=	-g -fsanitize=address -fno-omit-frame-pointer
 MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
@@ -79,8 +79,11 @@ MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
 
 
 
-.PHONY				: all lib_make
-all					: lib_make $(NAME)
+.PHONY				: all lib_make make_dir lib_clean lib_fclean lib_re
+all					: make_dir lib_make $(NAME)
+
+make_dir			:
+	@mkdir -p $(OBJS_DIR)
 
 $(NAME)				: $(OBJECT)
 	$(CC) $(CFLAGS) $(LIB_LNK) $(OBJECT) -o $@
@@ -102,25 +105,22 @@ $(OBJS_DIR)%.o		: $(SRCS_DIR)%.c $(INC_DIR)
 	$(CC) $(CFLAGS) $(LIB_INC) -c $< -o $@
 
 
-.PHONY				: clean lclean
+.PHONY				: clean lclean fclean lfclean re lre bonus
 clean				:
 	$(RM) $(RMFLAGS)r $(OBJS_DIR)
 
 lclean			: lib_clean
 
-.PHONY				: fclean lfclean
 fclean				: clean
 	$(RM) $(RMFLAGS) $(NAME)
 
 lfclean			: lib_fclean
 
-.PHONY				: re lre
 re					: fclean
 	make all
 
 lre					: lib_re
 
-.PHONY				: bonus
 bonus				: all
 
 .PHONY				: sntz m mem
