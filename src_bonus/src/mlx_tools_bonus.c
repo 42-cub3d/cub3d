@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:50:47 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:17 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "mlx.h"
 
 void	ft_re_render(t_info *info)
@@ -39,10 +39,14 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 	canvas = (int *)(info->mlx.img_data);
 	while (i < HEIGHT)
 	{
-		if (i < b->draw_start && i < HEIGHT / 2)
-			canvas[i * WIDTH + cur_x] = info->texture.ceiling;
-		else if (b->draw_end <= i && (HEIGHT / 2) <= i)
-			canvas[i * WIDTH + cur_x] = info->texture.floor;
+		if ((!info->bonus.map_toggle) \
+				|| (info->bonus.map_toggle && !is_in_mini_map(info, cur_x, i)))
+		{
+			if (i < b->draw_start && i < HEIGHT / 2)
+				canvas[i * WIDTH + cur_x] = info->texture.ceiling;
+			else if (b->draw_end <= i && (HEIGHT / 2) <= i)
+				canvas[i * WIDTH + cur_x] = info->texture.floor;
+		}
 		i++;
 	}
 }

@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:57:06 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:15 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "mlx.h"
 
 void	_print_info(t_info *info)
@@ -43,7 +43,7 @@ void	_print_info(t_info *info)
 
 void	ft_exit(char *err_msg, int errno_mode)
 {
-	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd("Error: ", 2);
 	if (errno_mode)
 		perror(err_msg);
 	else
@@ -66,13 +66,17 @@ void	ft_flush_info(t_info *info)
 	free(info->texture.west);
 	free(info->texture.south);
 	free(info->texture.north);
-	free(info->texture.textures[T_EAST]);
-	free(info->texture.textures[T_WEST]);
-	free(info->texture.textures[T_SOUTH]);
-	free(info->texture.textures[T_NORTH]);
 	mlx_destroy_window(info->mlx.mlx, info->mlx.win);
 	mlx_destroy_image(info->mlx.mlx, info->mlx.img);
 	free(info->mlx.mlx);
+}
+
+static void	_set_mouse_info(t_bonus *org)
+{
+	org->mouse_x = 0;
+	org->mouse_init = 0;
+	org->mouse_toggle = 0;
+	org->map_toggle = 1;
 }
 
 int	main(int argc, char **argv)
@@ -83,6 +87,8 @@ int	main(int argc, char **argv)
 		ft_exit("./cub3D <map_file>", 0);
 	parse_map(&info, argv);
 	ft_mlx_init(&info.mlx);
+	_set_mouse_info(&info.bonus);
+	mini_map_init(&info);
 	set_texture_img(&info);
 	ft_event_handler(&info);
 	ft_ray_setting(&info);

@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/15 16:17:17 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/15 16:57:22 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,6 @@ MLX_DIR 			=	$(LIB_DIR)mlx/
 MLX_INC				=	-I $(MLX_DIR)
 MLX_LNK				=	-L $(MLX_DIR) -l mlx -framework OpenGL -framework AppKit
 
-OBJ_DIR 			=	obj/
-
 SRC					:=	main.c\
 						parse_init.c\
 						parse_get_texture.c\
@@ -36,27 +34,36 @@ SRC					:=	main.c\
 						mlx_key_event.c\
 						mlx_key_move.c\
 						mlx_key_rotate_view.c\
-						mlx_mouse_event.c\
-						minimap_init.c\
 						ray_dda.c\
 						ray_work.c\
 						ray_init.c\
 
-SRC_B				:=
+SRC_B				:=	main_bonus.c\
+						parse_init_bonus.c\
+						parse_get_texture_bonus.c\
+						parse_get_map_bonus.c\
+						parse_get_map_error_bonus.c\
+						parse_get_texture_img_bonus.c\
+						mlx_tools_bonus.c\
+						mlx_key_event_bonus.c\
+						mlx_key_move_bonus.c\
+						mlx_key_rotate_view_bonus.c\
+						mlx_mouse_event_bonus.c\
+						minimap_init_bonus.c\
+						ray_dda_bonus.c\
+						ray_work_bonus.c\
+						ray_init_bonus.c\
 
-OBJ					=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
-
-OBJ_B				=	$(addprefix $(OBJ_DIR), $(SRC_B:.c=.o))
-
+OBJ_DIR 			=	obj/
 
 ifdef _BONUS
-	SRC_DIR			=	src_bonus/
-	INC_DIR			=	include_bonus/
-	OBJECT			:=	$(OBJ_B)
+	SRC_DIR			:=	src_bonus/
+	INC_DIR			:=	include_bonus/
+	OBJECT			:=	$(addprefix $(OBJ_DIR), $(SRC_B:.c=.o))
 else
-	SRC_DIR			=	src/
-	INC_DIR			=	include/
-	OBJECT			:=	$(OBJ)
+	SRC_DIR			:=	src/
+	INC_DIR			:=	include/
+	OBJECT			:=	$(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 endif
 
 RM					=	rm
@@ -93,11 +100,10 @@ lib_fclean			:
 lib_re				:
 	@make -C $(LIB_DIR) re
 
-
 $(OBJ_DIR)%.o		: $(SRC_DIR)%.c $(INC_DIR)
 	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
 
-.PHONY				: clean lclean fclean lfclean re lre bonus
+.PHONY				: clean lclean fclean lfclean re lre bonus b
 clean				:
 	$(RM) -rf $(OBJ_DIR)
 
@@ -113,6 +119,7 @@ re					: fclean
 
 lre					: lib_re
 
+b					: bonus
 bonus				:
 	@make _BONUS=1 all
 

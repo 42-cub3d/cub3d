@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:46:50 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:18 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	_check_wall(size_t x, size_t y, t_map map)
 {
@@ -53,7 +53,7 @@ static void	_check_error_case(t_map *map, t_player *p)
 	char	monad;
 
 	monad = map->map[p->py][p->px];
-	if (ft_strchr("0", monad))
+	if (ft_strchr("0234", monad))
 	{
 		if ((!p->px || !p->py \
 			|| p->px == map->width - 1 || p->py == map->height - 1))

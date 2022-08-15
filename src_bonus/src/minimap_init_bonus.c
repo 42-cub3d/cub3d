@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:44:06 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/11 10:20:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	mini_map_init(t_info *info)
 {

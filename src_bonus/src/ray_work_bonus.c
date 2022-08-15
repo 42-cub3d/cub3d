@@ -6,28 +6,33 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:43:33 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:03 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	_set_hit_tex(t_info *info, t_ray_beam *b)
 {
-	if (b->hit_side == X_HIT)
+	if (b->hit_type == TYPE_TEXT)
 	{
-		if (info->ray.p_x < b->map_x)
-			info->cur_tex = info->texture.textures[T_EAST];
+		if (b->hit_side == X_HIT)
+		{
+			if (info->ray.p_x < b->map_x)
+				info->cur_tex = info->texture.textures[T_EAST];
+			else
+				info->cur_tex = info->texture.textures[T_WEST];
+		}
 		else
-			info->cur_tex = info->texture.textures[T_WEST];
+		{
+			if (info->ray.p_y < b->map_y)
+				info->cur_tex = info->texture.textures[T_SOUTH];
+			else
+				info->cur_tex = info->texture.textures[T_NORTH];
+		}
 	}
-	else
-	{
-		if (info->ray.p_y < b->map_y)
-			info->cur_tex = info->texture.textures[T_SOUTH];
-		else
-			info->cur_tex = info->texture.textures[T_NORTH];
-	}
+	else if (b->hit_type == TYPE_DOOR)
+		info->cur_tex = info->texture.textures[T_DOOR];
 }
 
 static void	_set_tex_step_and_pos(t_tex_pos *t, t_ray_beam *b)
@@ -49,9 +54,12 @@ static void	_draw_texture_workhorse(\
 		t->t_y = (int)t->t_pos & (TEXTURE_HEIGHT - 1);
 		t->t_pos += t->t_step;
 		t->color = info->cur_tex[t->t_x + t->t_y * TEXTURE_WIDTH];
-		if (b->hit_side == Y_HIT)
+		if (b->hit_type == TYPE_TEXT && b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
-		ft_put_pixel(&info->mlx, cur_x, b->draw_start, t->color);
+		if ((!info->bonus.map_toggle) \
+		|| (info->bonus.map_toggle \
+			&& !is_in_mini_map(info, cur_x, b->draw_start)))
+			ft_put_pixel(&info->mlx, cur_x, b->draw_start, t->color);
 		b->draw_start++;
 	}
 }
@@ -75,5 +83,7 @@ void	ft_ray_casting(t_info *info)
 		_draw_texture_verline(info, get_ray_beam_per_verline(info, x), x);
 		x++;
 	}
+	if (info->bonus.map_toggle)
+		mini_map_draw(info);
 	ft_re_render(info);
 }

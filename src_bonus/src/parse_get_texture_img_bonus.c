@@ -6,11 +6,11 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 00:47:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:45:53 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/15 16:22:20 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include "mlx.h"
 
 static void	_set_texture_buffer(int *texture_img, t_img *img)
@@ -45,6 +45,8 @@ static char	*_get_path(t_texture *texture, t_texture_dir dir)
 		path = texture->south;
 	else if (dir == T_NORTH)
 		path = texture->north;
+	else if (dir == T_DOOR)
+		path = DOOR_SRC;
 	else
 		ft_exit("Texture Direction Error", 1);
 	return (path);
@@ -88,4 +90,5 @@ void	set_texture_img(t_info *info)
 	info->texture.textures[T_WEST] = _load_image(info, T_WEST);
 	info->texture.textures[T_SOUTH] = _load_image(info, T_SOUTH);
 	info->texture.textures[T_NORTH] = _load_image(info, T_NORTH);
+	info->texture.textures[T_DOOR] = _load_image(info, T_DOOR);
 }
