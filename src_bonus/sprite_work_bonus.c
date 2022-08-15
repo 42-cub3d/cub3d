@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 03:08:02 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 03:26:42 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ static void	_draw_sprite_verline2(\
 			tex_y = ((d * TEXTURE_HEIGHT) / b->s_height) / 256;
 			info->cur_tex = info->texture.textures[5 + (info->fps / FPS_CNT)];
 			color = info->cur_tex[arr_tex_x + tex_y];
-			if ((0x000000 <= color && color <= 0xffffff) \
+			if ((0 <= color) \
 			&& ((!info->bonus.map_toggle) \
 				|| (info->bonus.map_toggle \
-				&& !is_in_mini_map(info, b->draw_start_x, b->draw_start_y))))
+				&& !is_in_mini_map(info, b->draw_start_x, y))))
 				ft_put_pixel(&info->mlx, b->draw_start_x, y, color);
 			y++;
 		}
