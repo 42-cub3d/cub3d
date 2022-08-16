@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/16 15:24:17 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 18:53:54 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef struct s_info
 	t_list		*sprite_list;
 	int			*cur_tex;
 	int			fps;
+	t_ray_beam	b;
+	t_tex_pos	t;
 }				t_info;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:57:06 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 18:45:07 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,17 @@ void	ft_flush_info(t_info *info)
 		free(info->map.map[i]);
 		i++;
 	}
+	i = 0;
+	while (i < 4)
+	{
+		free(info->texture.textures[i]);
+		i++;
+	}
 	free(info->map.map);
 	free(info->texture.east);
 	free(info->texture.west);
 	free(info->texture.south);
 	free(info->texture.north);
-	free(info->texture.textures[T_EAST]);
-	free(info->texture.textures[T_WEST]);
-	free(info->texture.textures[T_SOUTH]);
-	free(info->texture.textures[T_NORTH]);
 	mlx_destroy_window(info->mlx.mlx, info->mlx.win);
 	mlx_destroy_image(info->mlx.mlx, info->mlx.img);
 	free(info->mlx.mlx);

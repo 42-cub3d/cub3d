@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 14:59:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 18:54:49 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,10 @@ static void	_set_ray_beam(t_info *info, t_ray_beam *b, int cur_x)
 	b->hit = 0;
 }
 
-t_ray_beam	get_ray_beam_verline(t_info *info, int cur_x)
+void	get_ray_beam_verline(t_info *info, int cur_x)
 {
-	t_ray_beam	b;
-
-	_set_ray_beam(info, &b, cur_x);
-	_set_dda_step(info, &b);
-	_dda_working(info, &b);
-	_set_draw_position(info, &b);
-	return (b);
+	_set_ray_beam(info, &info->b, cur_x);
+	_set_dda_step(info, &info->b);
+	_dda_working(info, &info->b);
+	_set_draw_position(info, &info->b);
 }

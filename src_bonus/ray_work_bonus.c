@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 15:02:29 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 18:54:06 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,26 +70,24 @@ static void	_draw_texture_workhorse(\
 	}
 }
 
-static void	_draw_texture_verline(\
-				t_info *info, t_ray_beam b, int cur_x, double *z_buffer)
+static void	_draw_texture_verline(t_info *info, int cur_x, double *z_buffer)
 {
-	t_tex_pos	t;
-
-	z_buffer[cur_x] = b.perp_wall_dist;
-	_set_hit_tex(info, &b);
-	_set_tex_step_and_pos(&t, &b);
-	_draw_texture_workhorse(info, &t, &b, cur_x);
+	z_buffer[cur_x] = info->b.perp_wall_dist;
+	_set_hit_tex(info, &info->b);
+	_set_tex_step_and_pos(&info->t, &info->b);
+	_draw_texture_workhorse(info, &info->t, &info->b, cur_x);
 }
 
 int	ft_ray_casting(t_info *info)
 {
-	int		x;
-	double	z_buffer[WIDTH];
+	int			x;
+	double		z_buffer[WIDTH];
 
 	x = 0;
 	while (x < WIDTH)
 	{
-		_draw_texture_verline(info, get_ray_beam_verline(info, x), x, z_buffer);
+		get_ray_beam_verline(info, x);
+		_draw_texture_verline(info, x, z_buffer);
 		x++;
 	}
 	if (info->sprite_list)
