@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 03:34:55 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 13:58:53 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ static void	_set_sprite_beam(t_sprite_beam *b)
 		b->draw_end_x = WIDTH;
 }
 
-static void	_draw_sprite_verline2(\
+static void	_draw_sprite_verline_y(\
 					t_info *info, t_sprite_beam *b, double *z_buffer, int x)
 {
-	const size_t	arr_tex_x = x * TEXTURE_WIDTH;
+	const size_t	arr_tex_x = b->tex_x * TEXTURE_WIDTH;
 	int				y;
 	int				d;
 	int				tex_y;
 	int				color;
 
-	if (b->transform_y > 0 && (0 <= x && x <= WIDTH) \
-												&& b->transform_y < z_buffer[x])
+	if ((b->transform_y > 0) \
+		&& (0 <= x && x <= WIDTH) \
+		&& (b->transform_y < z_buffer[x]))
 	{
 		y = b->draw_start_y;
 		while (y < b->draw_end_y)
@@ -70,23 +71,22 @@ static void	_draw_sprite_verline2(\
 			if ((0 <= color) \
 			&& ((!info->bonus.map_toggle) \
 				|| (info->bonus.map_toggle \
-				&& !is_in_mini_map(info, b->draw_start_x, y))))
-				ft_put_pixel(&info->mlx, b->draw_start_x, y, color);
+				&& !is_in_mini_map(info, x, y))))
+				ft_put_pixel(&info->mlx, x, y, color);
 			y++;
 		}
 	}
 }
 
 static void	_draw_sprite_verline(\
-						t_info *info, t_sprite_beam *b, double *z_buffer)
+							t_info *info, t_sprite_beam *b, double *z_buffer)
 {
-	int	x;
-
 	while (b->draw_start_x < b->draw_end_x)
 	{
-		x = (int)(256 * (b->draw_start_x - (-b->s_width / 2 + b->s_screen_x)) \
-											* TEXTURE_WIDTH / b->s_width) / 256;
-		_draw_sprite_verline2(info, b, z_buffer, x);
+		b->tex_x = (int)(256 \
+					* (b->draw_start_x - (-b->s_width / 2 + b->s_screen_x)) \
+					* TEXTURE_WIDTH / b->s_width) / 256;
+		_draw_sprite_verline_y(info, b, z_buffer, b->draw_start_x);
 		b->draw_start_x++;
 	}
 }
@@ -98,10 +98,7 @@ void	ft_draw_sprite(t_info *info, double *z_buffer)
 
 	temp = info->sprite_list;
 	if (info->bonus.sprite_toggle)
-	{
 		ft_print_sprite_pos(info);
-		info->bonus.sprite_toggle = 0;
-	}
 	while (temp)
 	{
 		_set_sprite_transform(info, temp->content, &b);
@@ -110,6 +107,8 @@ void	ft_draw_sprite(t_info *info, double *z_buffer)
 		ft_lstdelone(temp, free);
 		temp = temp->next;
 	}
+	if (info->bonus.sprite_toggle)
+		info->bonus.sprite_toggle = 0;
 	info->fps++;
 	if (info->fps >= FPS_MAX)
 		info->fps = 0;

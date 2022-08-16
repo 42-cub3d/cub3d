@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 03:32:53 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 13:31:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static int	_key_press(int key, t_info *info)
 	|| key == KC_I || key == KC_J || key == KC_K || key == KC_L)
 		key_rotate_view(key, info, ROT_SPEED);
 	else if (key == KC_F)
-		_print_info(info);
+		_print_info(info, 1);
+	else if (key == KC_G)
+		_print_info(info, 0);
 	else if (key == KC_M)
 		_toggle_mouse_view(&info->bonus.map_toggle, RIGHT_CLICK);
 	else if (key == KC_Z)
@@ -78,6 +80,7 @@ int	ft_event_handler(t_info *info)
 	mlx_hook(info->mlx.win, DESTROY_NOTIFY, 0, _close_cube_three_d, info);
 	mlx_hook(info->mlx.win, BUTTON_PRESS, 0, _mouse_press_handle, info);
 	mlx_hook(info->mlx.win, MOTION_NITOFY, 0, check_mouse_move, info);
-	ft_ray_casting(info);
+	mlx_loop_hook(info->mlx.mlx, ft_ray_casting, info);
 	return (0);
 }
+	// ft_ray_casting(info);

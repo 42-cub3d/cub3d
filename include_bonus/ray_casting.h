@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 03:34:17 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 13:54:25 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_sprite_beam
 	int			draw_end_x;
 	int			draw_start_y;
 	int			draw_end_y;
+	int			tex_x;
 }				t_sprite_beam;
 
 typedef struct s_ray_beam

@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/16 03:09:43 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/16 13:11:54 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,11 +133,13 @@ bonus				:
 
 .PHONY				: sntz m mem norm normr
 sntz		:	CFLAGS+=$(SNTZ)
-sntz		:	bonus
+sntz		:
+	@make lfclean fclean bonus
 
 m			:	mem
 mem			:	CFLAGS+=$(MEM)
-mem			:	bonus
+mem			:
+	@make lfclean fclean bonus
 
 norm		:
 	norminette include_bonus include src src_bonus library/libft
