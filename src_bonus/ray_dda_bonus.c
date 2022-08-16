@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 18:46:18 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 00:49:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:59:45 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ static void	_set_draw_position(t_info *info, t_ray_beam *b)
 		b->hit_type = TYPE_DOOR;
 	b->line_height = (int)(HEIGHT / b->perp_wall_dist);
 	b->draw_start = -b->line_height / 2 + HEIGHT / 2;
-	if (b->draw_start < 0)
-		b->draw_start = 0;
 	b->draw_end = b->line_height / 2 + HEIGHT / 2;
-	if (b->draw_end > HEIGHT)
-		b->draw_end = HEIGHT;
+	set_overflow_min(&b->draw_start, 0);
+	set_overflow_max(&b->draw_end, HEIGHT);
 	if (b->hit_side == X_HIT)
 		b->wallx = info->ray.p_y + b->perp_wall_dist * b->ray_dir_y;
 	else

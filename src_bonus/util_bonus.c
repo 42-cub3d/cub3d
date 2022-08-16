@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:25:48 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 14:44:11 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:56:52 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	set_overflow_min(int *org, int cmp_low)
 
 void	set_overflow_max(int *org, int cmp_high)
 {
-	if (*org >= cmp_high)
+	if (cmp_high <= *org)
 		*org = cmp_high - 1;
 }
 

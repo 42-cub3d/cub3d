@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 14:54:52 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:57:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,10 @@ static void	_set_sprite_beam(t_sprite_beam *b)
 	b->s_width = ft_abs((int)(HEIGHT / b->transform_y)) / U_DIV;
 	b->draw_start_x = -b->s_width / 2 + b->s_screen_x;
 	b->draw_end_x = b->s_width / 2 + b->s_screen_x;
-	if (b->draw_start_y < 0)
-		b->draw_start_y = 0;
-	if (b->draw_end_y >= HEIGHT)
-		b->draw_end_y = HEIGHT - 1;
-	if (b->draw_start_x < 0)
-		b->draw_start_x = 0;
-	if (b->draw_end_x >= WIDTH)
-		b->draw_end_x = WIDTH - 1;
+	set_overflow_min(&b->draw_start_y, 0);
+	set_overflow_min(&b->draw_start_x, 0);
+	set_overflow_max(&b->draw_end_y, HEIGHT);
+	set_overflow_max(&b->draw_end_x, WIDTH);
 }
 
 static void	_draw_sprite_verline_y(\
