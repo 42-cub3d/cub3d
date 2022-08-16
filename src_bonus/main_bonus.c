@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 13:30:40 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 15:24:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static void	_set_mouse_info(t_bonus *org)
 	org->mouse_toggle = 0;
 	org->map_toggle = 1;
 	org->sprite_toggle = 0;
+	org->move_speed = MOVE_SPEED;
+	org->shift_toggle = 0;
 }
 
 int	main(int argc, char **argv)

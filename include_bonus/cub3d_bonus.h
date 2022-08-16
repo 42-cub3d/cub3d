@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/16 14:42:04 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 15:24:17 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct s_bonus
 	int		mouse_toggle;
 	int		map_toggle;
 	int		sprite_toggle;
+	int		shift_toggle;
+	double	move_speed;
 }			t_bonus;
 
 typedef struct s_mini_map

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 02:25:37 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 15:23:00 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	_key_move(t_info *info, double dir_x, double dir_y)
 	size_t	x;
 	size_t	y;
 
-	x = (size_t)(info->ray.p_x + dir_x * MOVE_SPEED);
-	y = (size_t)(info->ray.p_y + dir_y * MOVE_SPEED);
+	x = (size_t)(info->ray.p_x + dir_x * info->bonus.move_speed);
+	y = (size_t)(info->ray.p_y + dir_y * info->bonus.move_speed);
 	if (0 <= x && 0 <= y && x < info->map.width && y < info->map.height)
 	{
 		if (!ft_strchr("12", info->map.map[y][x]))
 		{
-			info->ray.p_x += dir_x * MOVE_SPEED;
-			info->ray.p_y += dir_y * MOVE_SPEED;
+			info->ray.p_x += dir_x * info->bonus.move_speed;
+			info->ray.p_y += dir_y * info->bonus.move_speed;
 		}
 	}
 }
