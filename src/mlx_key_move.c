@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:47:48 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 23:30:09 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	_key_move(t_info *info, double dir_x, double dir_y)
 {
 	size_t	x;
 	size_t	y;
+	int		idx;
+	double	temp_x;
+	double	temp_y;
 
 	x = (size_t)(info->ray.p_x + dir_x * MOVE_SPEED);
 	y = (size_t)(info->ray.p_y + dir_y * MOVE_SPEED);
@@ -24,8 +27,16 @@ static void	_key_move(t_info *info, double dir_x, double dir_y)
 	{
 		if (!ft_strchr("12", info->map.map[y][x]))
 		{
-			info->ray.p_x += dir_x * MOVE_SPEED;
-			info->ray.p_y += dir_y * MOVE_SPEED;
+			idx = 0;
+			temp_x = (dir_x * MOVE_SPEED) / 2;
+			temp_y = (dir_y * MOVE_SPEED) / 2;
+			while (idx < 2)
+			{
+				info->ray.p_x += temp_x;
+				info->ray.p_y += temp_y;
+				idx++;
+				ft_ray_casting(info);
+			}
 		}
 	}
 }
@@ -40,5 +51,4 @@ void	key_move(int key, t_info *info)
 		_key_move(info, -info->ray.plane_x, -info->ray.plane_y);
 	else if (key == KC_D)
 		_key_move(info, info->ray.plane_x, info->ray.plane_y);
-	ft_ray_casting(info);
 }

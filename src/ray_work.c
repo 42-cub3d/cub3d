@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 14:24:16 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 22:56:26 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	_draw_texture_verline(t_info *info, t_ray_beam b, int cur_x)
 	_draw_texture_workhorse(info, &t, &b, cur_x);
 }
 
-void	ft_ray_casting(t_info *info)
+int	ft_ray_casting(t_info *info)
 {
 	int		x;
 
@@ -84,4 +84,5 @@ void	ft_ray_casting(t_info *info)
 		x++;
 	}
 	ft_re_render(info);
+	return (0);
 }

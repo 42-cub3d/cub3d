@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/16 18:53:54 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 02:18:51 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,24 @@
 
 # define WIDTH 1600
 # define HEIGHT 900
-# define MAP_RATIO 15
+# define H_HEIGHT 450
+# define MAP_RATIO 10
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define ROT_SPEED 0.15
-# define MOUSE_SPEED 0.02
+# define MOUSE_SPEED 0.01
 # define MOVE_SPEED 0.25
 # define POV 0.88
 # define INIT 1
 # define RENDER 2
-# define FPS_MAX 50
-# define FPS_CNT 10
+# define FPS_MAX 75
+# define FPS_CNT 15
 # define DOOR_SRC "./img/carved_pumpkin.xpm"
-# define SPRITE_1 "./img/sprite/sprite1.xpm"
-# define SPRITE_2 "./img/sprite/sprite3.xpm"
-# define SPRITE_3 "./img/sprite/sprite5.xpm"
-# define SPRITE_4 "./img/sprite/sprite7.xpm"
-# define SPRITE_5 "./img/sprite/sprite9.xpm"
+# define SPRITE_1 "./img/sprite/sprite3.xpm"
+# define SPRITE_2 "./img/sprite/sprite5.xpm"
+# define SPRITE_3 "./img/sprite/sprite7.xpm"
+# define SPRITE_4 "./img/sprite/sprite6.xpm"
+# define SPRITE_5 "./img/sprite/sprite4.xpm"
 
 enum e_texture_type
 {
@@ -57,6 +58,7 @@ typedef struct s_mlx
 	void	*img;
 	char	*img_data;
 	int		bpp;
+	int		bpp_shift;
 	int		size;
 	int		endian;
 }			t_mlx;
@@ -69,6 +71,7 @@ typedef struct s_bonus
 	int		map_toggle;
 	int		sprite_toggle;
 	int		shift_toggle;
+	int		x_toggle;
 	double	move_speed;
 }			t_bonus;
 
@@ -76,7 +79,8 @@ typedef struct s_mini_map
 {
 	int		m_x;
 	int		m_y;
-	int		m_ratio;
+	size_t	m_ratio;
+	double	m_median;
 }			t_mini_map;
 
 typedef struct s_info
@@ -116,6 +120,9 @@ int		ft_event_handler(t_info *info);
 void	key_move(int key, t_info *info);
 void	key_rotate_view(int key, t_info *info, double rot_speed);
 int		check_mouse_move(int x, int y, t_info *info);
+int		is_move_or_rotate_key(int key, int mode);
+void	set_toggle_value(\
+			int toggle, double *toggle_value, double scalar1, double scalar2);
 
 /*
 **		mini_map
@@ -131,5 +138,8 @@ size_t	set_sprite_texture(int *cur_fps, size_t min, size_t max);
 void	set_overflow_min(int *org, int cmp_low);
 void	set_overflow_max(int *org, int cmp_high);
 void	set_overflow(int *org, int cmp_low, int cmp_high);
+int		fade_color(int color, double gamma);
+double	get_gamma(double dist, double median);
+double	get_gamma_tex(double dist, double median);
 
 #endif

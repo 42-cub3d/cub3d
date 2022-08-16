@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 18:46:34 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 00:37:43 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	_print_info(t_info *info, int mode)
 									info->map.p_info.px, info->map.p_info.py);
 		printf("\n[map]\nwidth: %zu\nheight: %zu\n", info->map.width, \
 															info->map.height);
+		printf("\n[mini_map]\nratio %zu\n", info->mini_map.m_ratio);
 		idx = 0;
 		while (info->map.map[idx])
 		{
@@ -86,6 +87,7 @@ static void	_set_bonus_info(t_bonus *org)
 	org->sprite_toggle = 0;
 	org->move_speed = MOVE_SPEED;
 	org->shift_toggle = 0;
+	org->x_toggle = 0;
 }
 
 int	main(int argc, char **argv)
@@ -101,8 +103,6 @@ int	main(int argc, char **argv)
 	set_texture_img(&info);
 	ft_ray_setting(&info);
 	ft_ray_casting(&info);
-	mlx_mouse_hide();
-	_print_info(&info, 0);
 	ft_event_handler(&info);
 	mlx_loop(info.mlx.mlx);
 	ft_flush_info(&info);

@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 12:45:07 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 02:26:22 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,26 @@ void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
 
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
 		return ;
-	idx = (y * mlx->size) + (x * (mlx->bpp / 8));
+	idx = (y * mlx->size) + (x * (mlx->bpp_shift));
 	temp = mlx->img_data + idx;
 	*(unsigned int *)temp = color;
 }
 
 void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 {
-	int	i;
-	int	*canvas;
+	int		i;
+	int		*canvas;
+	double	gamma;
 
 	i = 0;
 	canvas = (int *)(info->mlx.img_data);
-	while (i < HEIGHT)
+	while (i < b->draw_start)
 	{
-		if ((!info->bonus.map_toggle) \
-				|| (info->bonus.map_toggle && !is_in_mini_map(info, cur_x, i)))
-		{
-			if (i < b->draw_start && i < HEIGHT / 2)
-				canvas[i * WIDTH + cur_x] = info->texture.ceiling;
-			else if (b->draw_end <= i && (HEIGHT / 2) <= i)
-				canvas[i * WIDTH + cur_x] = info->texture.floor;
-		}
+		gamma = get_gamma(i, HEIGHT);
+		canvas[i * WIDTH + cur_x] = \
+								fade_color(info->texture.ceiling, 1.5 - gamma);
+		canvas[(HEIGHT - 1 - i) * WIDTH + cur_x] = \
+										fade_color(info->texture.floor, gamma);
 		i++;
 	}
 }
@@ -69,5 +67,6 @@ void	ft_mlx_init(t_mlx *org)
 	mlx.img_data = mlx_get_data_addr(mlx.img, &mlx.bpp, &mlx.size, &mlx.endian);
 	if (!mlx.img_data || mlx.bpp != 32 || mlx.endian != 0)
 		ft_exit("mlx image_data error", 1);
+	mlx.bpp_shift = mlx.bpp / 8;
 	*org = mlx;
 }

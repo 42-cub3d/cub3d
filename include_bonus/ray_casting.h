@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 18:51:58 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 01:16:25 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,15 @@ typedef struct s_tex_pos
 	int		color;
 }			t_tex_pos;
 
+typedef struct s_sprite_tex_pos
+{
+	int		tex_pos;
+	int		d;
+	int		tex_y;
+	int		color;
+	double	gamma;
+}			t_sprite_tex_pos;
+
 typedef struct s_sprite_beam
 {
 	double		transform_x;
@@ -58,6 +67,7 @@ typedef struct s_sprite_beam
 	int			draw_start_y;
 	int			draw_end_y;
 	int			tex_x;
+	double		perp_wall_dist;
 }				t_sprite_beam;
 
 typedef struct s_ray_beam

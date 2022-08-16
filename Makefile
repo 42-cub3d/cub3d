@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/16 21:55:24 by yongmkim         ###   ########.fr        #
+#    Updated: 2022/08/17 01:09:36 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC_B				:=	main_bonus.c\
 						sprite_init_bonus.c\
 						sprite_work_bonus.c\
 						util_bonus.c\
+						gamma_bonus.c\
 
 OBJ_DIR 			=	obj/
 
@@ -127,7 +128,7 @@ lib_re				:
 $(OBJ_DIR)%.o		: %.c $(INC_DIR)
 	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
 
-.PHONY				: clean lclean fclean lfclean re lre bonus b ff
+.PHONY				: clean lclean fclean lfclean re lre bonus b ff rr
 clean				:
 	$(RM) -rf $(OBJ_DIR)
 
@@ -148,6 +149,8 @@ bonus				:
 	@make WITH_BONUS=1 all
 
 ff					:	lfclean fclean
+
+rr					:	lre re
 
 .PHONY				: sntz m mem norm normr opt opti
 opti				:	opt

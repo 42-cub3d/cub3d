@@ -6,12 +6,13 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:36:17 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 02:11:05 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 23:58:18 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "key_event.h"
 #include "cub3d_bonus.h"
+#include "mlx.h"
 
 static void	_rotate_dir(t_info *info, double rot_speed)
 {
@@ -28,6 +29,7 @@ static void	_rotate_dir(t_info *info, double rot_speed)
 										info->ray.plane_y * sin(rot_speed);
 	info->ray.plane_y = old_plane_x * sin(rot_speed) + \
 										info->ray.plane_y * cos(rot_speed);
+	mlx_do_sync(info->mlx.mlx);
 }
 
 static void	_set_dir_vector(int key, t_info *info)

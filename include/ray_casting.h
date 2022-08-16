@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:39:12 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/11 21:53:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 22:56:11 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_ray_beam
 typedef struct s_info	t_info;
 
 void		ft_ray_setting(t_info *info);
-void		ft_ray_casting(t_info *info);
+int			ft_ray_casting(t_info *info);
 t_ray_beam	get_ray_beam_per_verline(t_info *info, int cur_x);
 
 #endif

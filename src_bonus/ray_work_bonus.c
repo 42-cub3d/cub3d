@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 18:54:06 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 02:18:44 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,15 @@ static void	_set_tex_step_and_pos(t_tex_pos *t, t_ray_beam *b)
 	|| (b->hit_side == Y_HIT && b->ray_dir_y < 0))
 		t->t_x = TEXTURE_WIDTH - t->t_x - 1;
 	t->t_step = (double)TEXTURE_HEIGHT / b->line_height;
-	t->t_pos = (b->draw_start - HEIGHT / 2 + b->line_height / 2) * t->t_step;
+	t->t_pos = (b->draw_start - H_HEIGHT + b->line_height / 2) * t->t_step;
 }
 
 static void	_draw_texture_workhorse(\
 						t_info *info, t_tex_pos *t, t_ray_beam *b, int cur_x)
 {
-	int	tex_pos;
-	int	y;
+	int		tex_pos;
+	int		y;
+	double	gamma;
 
 	ft_fill_floor_ceiling(info, b, cur_x);
 	y = b->draw_start;
@@ -60,12 +61,12 @@ static void	_draw_texture_workhorse(\
 		tex_pos = t->t_x * TEXTURE_WIDTH + t->t_y;
 		set_overflow(&tex_pos, 0, TEXTURE_WIDTH * TEXTURE_HEIGHT);
 		t->color = info->cur_tex[tex_pos];
+		gamma = get_gamma_tex(b->perp_wall_dist, info->mini_map.m_median);
 		if (b->hit_type == TYPE_TEXT && b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
-		if ((!info->bonus.map_toggle) \
-		|| (info->bonus.map_toggle \
-			&& !is_in_mini_map(info, cur_x, y)))
-			ft_put_pixel(&info->mlx, cur_x, y, t->color);
+		if ((!info->bonus.map_toggle) || (info->bonus.map_toggle \
+											&& !is_in_mini_map(info, cur_x, y)))
+			ft_put_pixel(&info->mlx, cur_x, y, fade_color(t->color, gamma));
 		y++;
 	}
 }

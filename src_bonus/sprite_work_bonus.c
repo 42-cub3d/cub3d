@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 14:57:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 02:18:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	_set_sprite_transform(t_info *info, t_sprite *vec, t_sprite_beam *b)
 												- info->ray.dir_x * sprite_y);
 	b->transform_y = inv_det * (-info->ray.plane_y * sprite_x \
 												+ info->ray.plane_x * sprite_y);
+	b->perp_wall_dist = vec->dist;
 }
 
 static void	_set_sprite_beam(t_sprite_beam *b)
@@ -33,25 +34,22 @@ static void	_set_sprite_beam(t_sprite_beam *b)
 	b->s_screen_x = (int)((WIDTH / 2) * (1 + b->transform_x / b->transform_y));
 	b->v_move_screen = (int)(V_MOVE / b->transform_y);
 	b->s_height = ft_abs((int)(HEIGHT / b->transform_y)) / V_DIV;
-	b->draw_start_y = -b->s_height / 2 + HEIGHT / 2 + b->v_move_screen;
-	b->draw_end_y = b->s_height / 2 + HEIGHT / 2 + b->v_move_screen;
+	b->draw_start_y = -b->s_height / 2 + H_HEIGHT + b->v_move_screen;
+	b->draw_end_y = b->s_height / 2 + H_HEIGHT + b->v_move_screen;
 	b->s_width = ft_abs((int)(HEIGHT / b->transform_y)) / U_DIV;
 	b->draw_start_x = -b->s_width / 2 + b->s_screen_x;
 	b->draw_end_x = b->s_width / 2 + b->s_screen_x;
 	set_overflow_min(&b->draw_start_y, 0);
 	set_overflow_min(&b->draw_start_x, 0);
-	set_overflow_max(&b->draw_end_y, HEIGHT);
-	set_overflow_max(&b->draw_end_x, WIDTH);
+	set_overflow_max(&b->draw_end_y, HEIGHT + 1);
+	set_overflow_max(&b->draw_end_x, WIDTH + 1);
 }
 
 static void	_draw_sprite_verline_y(\
 					t_info *info, t_sprite_beam *b, double *z_buffer, int x)
 {
-	int	tex_pos;
-	int	y;
-	int	d;
-	int	tex_y;
-	int	color;
+	t_sprite_tex_pos	t;
+	int					y;
 
 	if ((b->transform_y > 0) && ((0 <= x && x < WIDTH) \
 											&& (b->transform_y < z_buffer[x])))
@@ -59,15 +57,16 @@ static void	_draw_sprite_verline_y(\
 		y = b->draw_start_y;
 		while (y < b->draw_end_y)
 		{
-			d = (y - b->v_move_screen) * 256 - HEIGHT * 128 + b->s_height * 128;
-			tex_y = ((d * TEXTURE_HEIGHT) / b->s_height) / 256;
-			tex_pos = b->tex_x * TEXTURE_WIDTH + tex_y;
-			set_overflow(&tex_pos, 0, TEXTURE_WIDTH * TEXTURE_HEIGHT);
-			color = info->cur_tex[tex_pos];
-			if ((0 <= color) \
-			&& ((!info->bonus.map_toggle) \
+			t.d = (y - b->v_move_screen) * 256 - HEIGHT * 128 \
+															+ b->s_height * 128;
+			t.tex_y = ((t.d * TEXTURE_HEIGHT) / b->s_height) / 256;
+			t.tex_pos = b->tex_x * TEXTURE_WIDTH + t.tex_y;
+			set_overflow(&t.tex_pos, 0, TEXTURE_WIDTH * TEXTURE_HEIGHT);
+			t.gamma = get_gamma_tex(b->perp_wall_dist, info->mini_map.m_median);
+			t.color = info->cur_tex[t.tex_pos];
+			if ((0 <= t.color) && ((!info->bonus.map_toggle) \
 					|| (info->bonus.map_toggle && !is_in_mini_map(info, x, y))))
-				ft_put_pixel(&info->mlx, x, y, color);
+				ft_put_pixel(&info->mlx, x, y, fade_color(t.color, t.gamma));
 			y++;
 		}
 	}

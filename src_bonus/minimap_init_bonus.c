@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:44:06 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 22:57:47 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 01:37:41 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ void	mini_map_init(t_info *info)
 		info->mini_map.m_ratio = (HEIGHT / info->map.height) / 1.3;
 	else
 		info->mini_map.m_ratio = (WIDTH / info->map.width) / 1.3;
-	if (info->mini_map.m_ratio > MAP_RATIO)
+	if (info->mini_map.m_ratio < 1)
+		info->mini_map.m_ratio = 1;
+	else if (info->mini_map.m_ratio > MAP_RATIO)
 		info->mini_map.m_ratio = MAP_RATIO;
 	info->mini_map.m_x = info->map.width * info->mini_map.m_ratio;
 	info->mini_map.m_y = info->map.height * info->mini_map.m_ratio;
+	info->mini_map.m_median = (info->map.width + info->map.height) / 2.0;
+	if (info->mini_map.m_median > 100)
+		info->mini_map.m_median = 100;
 }
 
 int	is_in_mini_map(t_info *info, int x, int y)

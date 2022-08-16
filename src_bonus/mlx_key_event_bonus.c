@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 15:27:44 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 00:44:34 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	_close_cube_three_d(t_info *info)
 	return (1);
 }
 
-static void	_toggle_mouse_view(int *toggle, int mode)
+static void	_toggle_value(int *toggle, int mode)
 {
 	if (*toggle == 0)
 	{
@@ -41,27 +41,27 @@ static int	_key_press(int key, t_info *info)
 {
 	if (key == KC_ESC)
 		_close_cube_three_d(info);
-	else if (\
-	key == KC_W || key == KC_A || key == KC_S || key == KC_D || key == KC_E)
+	else if (is_move_or_rotate_key(key, 1))
 		key_move(key, info);
-	else if (key == KC_LEFT || key == KC_RIGHT \
-	|| key == KC_I || key == KC_J || key == KC_K || key == KC_L)
+	else if (is_move_or_rotate_key(key, 0))
 		key_rotate_view(key, info, ROT_SPEED);
-	else if (key == KC_F)
-		_print_info(info, 1);
-	else if (key == KC_G)
-		_print_info(info, 0);
+	else if (key == KC_F || key == KC_G)
+		_print_info(info, key & 2);
 	else if (key == KC_M)
-		_toggle_mouse_view(&info->bonus.map_toggle, RIGHT_CLICK);
+		_toggle_value(&info->bonus.map_toggle, RIGHT_CLICK);
 	else if (key == KC_Z)
-		_toggle_mouse_view(&info->bonus.sprite_toggle, RIGHT_CLICK);
+		_toggle_value(&info->bonus.sprite_toggle, RIGHT_CLICK);
 	else if (key == 257)
 	{
-		_toggle_mouse_view(&info->bonus.shift_toggle, RIGHT_CLICK);
-		if (info->bonus.shift_toggle == 1)
-			info->bonus.move_speed = MOVE_SPEED * 1.66;
-		else
-			info->bonus.move_speed = MOVE_SPEED;
+		_toggle_value(&info->bonus.shift_toggle, RIGHT_CLICK);
+		set_toggle_value(info->bonus.shift_toggle, &info->bonus.move_speed, \
+												MOVE_SPEED * 1.66, MOVE_SPEED);
+	}
+	else if (key == KC_X)
+	{
+		_toggle_value(&info->bonus.x_toggle, RIGHT_CLICK);
+		set_toggle_value(info->bonus.x_toggle, &info->bonus.move_speed, \
+												MOVE_SPEED * 30, MOVE_SPEED);
 	}
 	return (1);
 }
@@ -76,9 +76,9 @@ static int	_mouse_press_handle(int key, int x, int y, t_info *info)
 		info->bonus.mouse_x = x;
 	}
 	else if (key == LEFT_CLICK)
-		_toggle_mouse_view(&info->bonus.mouse_toggle, LEFT_CLICK);
+		_toggle_value(&info->bonus.mouse_toggle, LEFT_CLICK);
 	else if (key == RIGHT_CLICK)
-		_toggle_mouse_view(&info->bonus.map_toggle, RIGHT_CLICK);
+		_toggle_value(&info->bonus.map_toggle, RIGHT_CLICK);
 	return (1);
 }
 
