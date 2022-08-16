@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 02:24:44 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 12:45:07 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	ft_re_render(t_info *info)
 {
+	mlx_clear_window(info->mlx.mlx, info->mlx.win);
 	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
 	mlx_do_sync(info->mlx.mlx);
 }

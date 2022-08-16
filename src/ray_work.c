@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 19:19:10 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:24:16 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,19 @@ static void	_draw_texture_workhorse(\
 						t_info *info, t_tex_pos *t, t_ray_beam *b, int cur_x)
 {
 	const size_t	arr_tex_x = t->t_x * TEXTURE_WIDTH;
+	size_t			tex_pos;
 
 	ft_fill_floor_ceiling(info, b, cur_x);
 	while (b->draw_start < b->draw_end)
 	{
 		t->t_y = (int)t->t_pos & (TEXTURE_HEIGHT - 1);
 		t->t_pos += t->t_step;
-		t->color = info->cur_tex[arr_tex_x + t->t_y];
+		tex_pos = arr_tex_x + t->t_y;
+		if (tex_pos < 0)
+			tex_pos = 0;
+		else if (tex_pos >= TEXTURE_HEIGHT * TEXTURE_WIDTH)
+			tex_pos = TEXTURE_HEIGHT * TEXTURE_WIDTH - 1;
+		t->color = info->cur_tex[tex_pos];
 		if (b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
 		ft_put_pixel(&info->mlx, cur_x, b->draw_start, t->color);

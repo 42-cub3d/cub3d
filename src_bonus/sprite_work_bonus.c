@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 23:53:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 03:34:55 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:57:30 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,79 +38,79 @@ static void	_set_sprite_beam(t_sprite_beam *b)
 	b->s_width = ft_abs((int)(HEIGHT / b->transform_y)) / U_DIV;
 	b->draw_start_x = -b->s_width / 2 + b->s_screen_x;
 	b->draw_end_x = b->s_width / 2 + b->s_screen_x;
-	if (b->draw_start_y < 0)
-		b->draw_start_y = 0;
-	if (b->draw_end_y > HEIGHT)
-		b->draw_end_y = HEIGHT;
-	if (b->draw_start_x < 0)
-		b->draw_start_x = 0;
-	if (b->draw_end_x > WIDTH)
-		b->draw_end_x = WIDTH;
+	set_overflow_min(&b->draw_start_y, 0);
+	set_overflow_min(&b->draw_start_x, 0);
+	set_overflow_max(&b->draw_end_y, HEIGHT);
+	set_overflow_max(&b->draw_end_x, WIDTH);
 }
 
-static void	_draw_sprite_verline2(\
+static void	_draw_sprite_verline_y(\
 					t_info *info, t_sprite_beam *b, double *z_buffer, int x)
 {
-	const size_t	arr_tex_x = x * TEXTURE_WIDTH;
-	int				y;
-	int				d;
-	int				tex_y;
-	int				color;
+	int	tex_pos;
+	int	y;
+	int	d;
+	int	tex_y;
+	int	color;
 
-	if (b->transform_y > 0 && (0 <= x && x <= WIDTH) \
-												&& b->transform_y < z_buffer[x])
+	if ((b->transform_y > 0) && ((0 <= x && x < WIDTH) \
+											&& (b->transform_y < z_buffer[x])))
 	{
 		y = b->draw_start_y;
 		while (y < b->draw_end_y)
 		{
 			d = (y - b->v_move_screen) * 256 - HEIGHT * 128 + b->s_height * 128;
 			tex_y = ((d * TEXTURE_HEIGHT) / b->s_height) / 256;
-			info->cur_tex = info->texture.textures[5 + (info->fps / FPS_CNT)];
-			color = info->cur_tex[arr_tex_x + tex_y];
+			tex_pos = b->tex_x * TEXTURE_WIDTH + tex_y;
+			set_overflow(&tex_pos, 0, TEXTURE_WIDTH * TEXTURE_HEIGHT);
+			color = info->cur_tex[tex_pos];
 			if ((0 <= color) \
 			&& ((!info->bonus.map_toggle) \
-				|| (info->bonus.map_toggle \
-				&& !is_in_mini_map(info, b->draw_start_x, y))))
-				ft_put_pixel(&info->mlx, b->draw_start_x, y, color);
+					|| (info->bonus.map_toggle && !is_in_mini_map(info, x, y))))
+				ft_put_pixel(&info->mlx, x, y, color);
 			y++;
 		}
 	}
 }
 
 static void	_draw_sprite_verline(\
-						t_info *info, t_sprite_beam *b, double *z_buffer)
+							t_info *info, t_sprite_beam *b, double *z_buffer)
 {
 	int	x;
 
-	while (b->draw_start_x < b->draw_end_x)
+	x = b->draw_start_x;
+	while (x < b->draw_end_x)
 	{
-		x = (int)(256 * (b->draw_start_x - (-b->s_width / 2 + b->s_screen_x)) \
-											* TEXTURE_WIDTH / b->s_width) / 256;
-		_draw_sprite_verline2(info, b, z_buffer, x);
-		b->draw_start_x++;
+		b->tex_x = (int)(256 \
+					* (x - (-b->s_width / 2 + b->s_screen_x)) \
+					* TEXTURE_WIDTH / b->s_width) / 256;
+		_draw_sprite_verline_y(info, b, z_buffer, x);
+		x++;
 	}
 }
 
 void	ft_draw_sprite(t_info *info, double *z_buffer)
 {
 	t_list			*temp;
+	t_list			*prev;
 	t_sprite_beam	b;
 
 	temp = info->sprite_list;
+	prev = NULL;
 	if (info->bonus.sprite_toggle)
-	{
 		ft_print_sprite_pos(info);
-		info->bonus.sprite_toggle = 0;
-	}
+	info->cur_tex = info->texture.textures[5 + \
+						set_sprite_texture(&info->fps, 0, FPS_MAX / FPS_CNT)];
 	while (temp)
 	{
 		_set_sprite_transform(info, temp->content, &b);
 		_set_sprite_beam(&b);
 		_draw_sprite_verline(info, &b, z_buffer);
-		ft_lstdelone(temp, free);
+		prev = temp;
 		temp = temp->next;
+		ft_lstdelone(prev, free);
 	}
-	info->fps++;
-	if (info->fps >= FPS_MAX)
-		info->fps = 0;
+	info->sprite_list = NULL;
+	if (info->bonus.sprite_toggle)
+		info->bonus.sprite_toggle = 0;
 }

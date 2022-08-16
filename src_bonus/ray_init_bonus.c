@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 02:11:39 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 00:23:35 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:08:53 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	ft_ray_setting(t_info *info)
 	info->ray.plane_y = 0;
 	info->ray.dir_x = 0;
 	info->ray.dir_y = 0;
+	info->sprite_list = NULL;
 	_vector_init(info);
 }

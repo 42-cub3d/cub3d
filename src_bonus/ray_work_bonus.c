@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 01:37:43 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 15:02:29 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,25 @@ static void	_set_tex_step_and_pos(t_tex_pos *t, t_ray_beam *b)
 static void	_draw_texture_workhorse(\
 						t_info *info, t_tex_pos *t, t_ray_beam *b, int cur_x)
 {
-	const size_t	arr_tex_x = t->t_x * TEXTURE_WIDTH;
+	int	tex_pos;
+	int	y;
 
 	ft_fill_floor_ceiling(info, b, cur_x);
-	while (b->draw_start < b->draw_end)
+	y = b->draw_start;
+	while (y < b->draw_end)
 	{
 		t->t_y = (int)t->t_pos & (TEXTURE_HEIGHT - 1);
 		t->t_pos += t->t_step;
-		t->color = info->cur_tex[arr_tex_x + t->t_y];
+		tex_pos = t->t_x * TEXTURE_WIDTH + t->t_y;
+		set_overflow(&tex_pos, 0, TEXTURE_WIDTH * TEXTURE_HEIGHT);
+		t->color = info->cur_tex[tex_pos];
 		if (b->hit_type == TYPE_TEXT && b->hit_side == Y_HIT)
 			t->color = (t->color >> 1) & 0x7F7F7F;
 		if ((!info->bonus.map_toggle) \
 		|| (info->bonus.map_toggle \
-			&& !is_in_mini_map(info, cur_x, b->draw_start)))
-			ft_put_pixel(&info->mlx, cur_x, b->draw_start, t->color);
-		b->draw_start++;
+			&& !is_in_mini_map(info, cur_x, y)))
+			ft_put_pixel(&info->mlx, cur_x, y, t->color);
+		y++;
 	}
 }
 
@@ -83,15 +87,18 @@ int	ft_ray_casting(t_info *info)
 	double	z_buffer[WIDTH];
 
 	x = 0;
-	info->sprite_list = NULL;
 	while (x < WIDTH)
 	{
 		_draw_texture_verline(info, get_ray_beam_verline(info, x), x, z_buffer);
 		x++;
 	}
-	ft_draw_sprite(info, z_buffer);
+	if (info->sprite_list)
+		ft_draw_sprite(info, z_buffer);
 	if (info->bonus.map_toggle)
 		mini_map_draw(info);
 	ft_re_render(info);
+	info->fps++;
+	if (info->fps >= FPS_MAX)
+		info->fps = 0;
 	return (0);
 }
