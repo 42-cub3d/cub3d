@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 16:47:40 by wchae             #+#    #+#             */
-/*   Updated: 2022/08/16 13:27:30 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 14:42:04 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,13 @@ int		check_mouse_move(int x, int y, t_info *info);
 void	mini_map_init(t_info *info);
 void	mini_map_draw(t_info *info);
 int		is_in_mini_map(t_info *info, int x, int y);
+
+/*
+**		util
+*/
+size_t	set_sprite_texture(int *cur_fps, size_t min, size_t max);
+void	set_overflow_min(int *org, int cmp_low);
+void	set_overflow_max(int *org, int cmp_high);
+void	set_overflow(int *org, int cmp_low, int cmp_high);
 
 #endif
