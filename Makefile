@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/16 14:37:44 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/16 21:55:24 by yongmkim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,16 +75,31 @@ else
 	OBJECT			:=	$(OBJ)
 endif
 
+
 RM					=	rm
 RMFLAGS				=	-f
 CC					=	cc
 CFLAGS				=	-Wall -Wextra -Werror
-
+OPTIMIZE			=	-O3
 SNTZ				=	-g -fsanitize=address -fno-omit-frame-pointer
 MEM					=	-g -fsanitize=memory -fsanitize-memory-track-origins \
 						-fPIE -pie -fno-omit-frame-pointer
 
 
+ifdef WITH_SNTZ
+	CFLAGS			+=	$(SNTZ)
+else
+endif
+
+ifdef WITH_OPT
+	CFLAGS			+=	$(OPTIMIZE)
+else
+endif
+
+ifdef WITH_MEM
+	CFLAGS			+=	$(MEM)
+else
+endif
 
 
 
@@ -112,16 +127,16 @@ lib_re				:
 $(OBJ_DIR)%.o		: %.c $(INC_DIR)
 	$(CC) $(CFLAGS) $(LIB_INC) -I $(INC_DIR) -c $< -o $@
 
-.PHONY				: clean lclean fclean lfclean re lre bonus b
+.PHONY				: clean lclean fclean lfclean re lre bonus b ff
 clean				:
 	$(RM) -rf $(OBJ_DIR)
 
-lclean			: lib_clean
+lclean				: lib_clean
 
 fclean				: clean
 	$(RM) $(RMFLAGS) $(NAME)
 
-lfclean			: lib_fclean
+lfclean				: lib_fclean
 
 re					: fclean
 	@make all
@@ -132,19 +147,23 @@ b					: bonus
 bonus				:
 	@make WITH_BONUS=1 all
 
-.PHONY				: sntz m mem norm normr
-sntz		:	CFLAGS+=$(SNTZ)
-sntz		:
-	@make lfclean fclean bonus
+ff					:	lfclean fclean
 
-m			:	mem
-mem			:	CFLAGS+=$(MEM)
-mem			:
-	@make lfclean fclean bonus
+.PHONY				: sntz m mem norm normr opt opti
+opti				:	opt
+opt					:	ff
+	@make WITH_OPT=1 bonus
 
-norm		:
+sntz				:	ff
+	@make WITH_SNTZ=1 bonus
+
+m					:	mem
+mem					:
+	@make WITH_MEM=1 bonus
+
+norm				:
 	norminette include_bonus include src src_bonus library/libft
 
-normr		:
+normr				:
 	norminette -R CheckForbiddenSourceHeader include_bonus include src src_bonus library/libft
 
