@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 15:26:09 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/16 15:27:44 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ int	ft_event_handler(t_info *info)
 	mlx_loop_hook(info->mlx.mlx, ft_ray_casting, info);
 	return (0);
 }
-	// ft_ray_casting(info);
