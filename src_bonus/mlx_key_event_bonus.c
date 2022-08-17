@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:41 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/17 00:44:34 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 09:59:58 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ static int	_key_press(int key, t_info *info)
 
 static int	_mouse_press_handle(int key, int x, int y, t_info *info)
 {
-	if ((info->bonus.mouse_init == 0) \
-							&& (key == LEFT_CLICK || key == RIGHT_CLICK))
+	if ((!info->bonus.mouse_init) && (key == LEFT_CLICK || key == RIGHT_CLICK))
 	{
 		info->bonus.mouse_init |= 1;
 		mlx_mouse_get_pos(info->mlx.win, &x, &y);

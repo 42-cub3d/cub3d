@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/17 01:24:45 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 10:02:11 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ static void	_key_move(t_info *info, double dir_x, double dir_y)
 {
 	size_t	x;
 	size_t	y;
+	double	temp_x;
+	double	temp_y;
+	size_t	i;
 
 	x = (size_t)(info->ray.p_x + dir_x * info->bonus.move_speed);
 	y = (size_t)(info->ray.p_y + dir_y * info->bonus.move_speed);
@@ -45,11 +48,19 @@ static void	_key_move(t_info *info, double dir_x, double dir_y)
 	{
 		if (!ft_strchr("12 ", info->map.map[y][x]))
 		{
-			info->ray.p_x += dir_x * info->bonus.move_speed;
-			info->ray.p_y += dir_y * info->bonus.move_speed;
+			temp_x = dir_x * info->bonus.move_speed;
+			temp_y = dir_y * info->bonus.move_speed;
+			i = 0;
+			while (i < 2)
+			{
+				info->ray.p_x += temp_x / 2;
+				info->ray.p_y += temp_y / 2;
+				i++;
+				if (i & 1)
+					ft_ray_casting(info);
+			}
 		}
 	}
-	mlx_do_sync(info->mlx.mlx);
 }
 
 static void	_door_open_and_close(t_info *info)
@@ -80,5 +91,4 @@ void	key_move(int key, t_info *info)
 		_key_move(info, info->ray.plane_x, info->ray.plane_y);
 	else
 		_door_open_and_close(info);
-	ft_ray_casting(info);
 }

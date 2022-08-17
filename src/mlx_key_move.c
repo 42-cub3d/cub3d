@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:25:53 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/16 23:30:09 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 10:14:23 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,16 @@ static void	_key_move(t_info *info, double dir_x, double dir_y)
 	{
 		if (!ft_strchr("12", info->map.map[y][x]))
 		{
+			temp_x = (dir_x * MOVE_SPEED);
+			temp_y = (dir_y * MOVE_SPEED);
 			idx = 0;
-			temp_x = (dir_x * MOVE_SPEED) / 2;
-			temp_y = (dir_y * MOVE_SPEED) / 2;
 			while (idx < 2)
 			{
-				info->ray.p_x += temp_x;
-				info->ray.p_y += temp_y;
+				info->ray.p_x += temp_x / 2;
+				info->ray.p_y += temp_y / 2;
 				idx++;
-				ft_ray_casting(info);
+				if (idx & 1)
+					ft_ray_casting(info);
 			}
 		}
 	}

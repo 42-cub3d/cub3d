@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:50:47 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 10:08:19 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,10 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 
 	i = 0;
 	canvas = (int *)(info->mlx.img_data);
-	while (i < HEIGHT)
+	while (i < b->draw_start)
 	{
-		if (i < b->draw_start && i < HEIGHT / 2)
-			canvas[i * WIDTH + cur_x] = info->texture.ceiling;
-		else if (b->draw_end <= i && (HEIGHT / 2) <= i)
-			canvas[i * WIDTH + cur_x] = info->texture.floor;
+		canvas[i * WIDTH + cur_x] = info->texture.ceiling;
+		canvas[(HEIGHT - i) * WIDTH + cur_x] = info->texture.floor;
 		i++;
 	}
 }

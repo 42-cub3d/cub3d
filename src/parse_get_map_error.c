@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 17:58:34 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/15 16:46:50 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 10:36:36 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ static int	_check_wall(size_t x, size_t y, t_map map)
 	|| (0 < y && !ft_strchr("1 ", map.map[y - 1][x]))
 	|| (x + 1 < map.width && !ft_strchr("1 ", map.map[y][x + 1]))
 	|| (y + 1 < map.height && !ft_strchr("1 ", map.map[y + 1][x]))
-	|| ((0 < x && 0 < y)
-		&& !ft_strchr("1 ", map.map[y - 1][x - 1]))
-	|| ((x + 1 < map.width && 0 < y)
-		&& !ft_strchr("1 ", map.map[y - 1][x + 1]))
+	|| ((0 < x && 0 < y) && !ft_strchr("1 ", map.map[y - 1][x - 1]))
+	|| ((x + 1 < map.width && 0 < y) && !ft_strchr("1 ", map.map[y - 1][x + 1]))
 	|| ((0 < x && y + 1 < map.height)
 		&& !ft_strchr("1 ", map.map[y + 1][x - 1]))
 	|| ((x + 1 < map.width && y + 1 < map.height)
