@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:07:21 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/17 00:37:43 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/17 13:37:23 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	_print_info(t_info *info, int mode)
 									info->map.p_info.px, info->map.p_info.py);
 		printf("\n[map]\nwidth: %zu\nheight: %zu\n", info->map.width, \
 															info->map.height);
-		printf("\n[mini_map]\nratio %zu\n", info->mini_map.m_ratio);
+		printf("\n[mini_map]\nratio %f\n", info->mini_map.m_ratio);
 		idx = 0;
 		while (info->map.map[idx])
 		{
