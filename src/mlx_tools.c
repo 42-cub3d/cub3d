@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 20:16:38 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/17 10:08:19 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/18 17:53:05 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 void	ft_re_render(t_info *info)
 {
+	mlx_clear_window(info->mlx.mlx, info->mlx.win);
 	mlx_put_image_to_window(info->mlx.mlx, info->mlx.win, info->mlx.img, 0, 0);
+	mlx_do_sync(info->mlx.mlx);
 }
 
 void	ft_put_pixel(t_mlx *mlx, int x, int y, int color)
@@ -40,7 +42,7 @@ void	ft_fill_floor_ceiling(t_info *info, t_ray_beam *b, int cur_x)
 	while (i < b->draw_start)
 	{
 		canvas[i * WIDTH + cur_x] = info->texture.ceiling;
-		canvas[(HEIGHT - i) * WIDTH + cur_x] = info->texture.floor;
+		canvas[(HEIGHT - 1 - i) * WIDTH + cur_x] = info->texture.floor;
 		i++;
 	}
 }

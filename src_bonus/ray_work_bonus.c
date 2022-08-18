@@ -6,7 +6,7 @@
 /*   By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 20:24:55 by yongmkim          #+#    #+#             */
-/*   Updated: 2022/08/17 02:18:44 by yongmkim         ###   ########seoul.kr  */
+/*   Updated: 2022/08/18 16:01:10 by yongmkim         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,16 @@ static void	_draw_texture_verline(t_info *info, int cur_x, double *z_buffer)
 int	ft_ray_casting(t_info *info)
 {
 	int			x;
-	double		z_buffer[WIDTH];
 
 	x = 0;
 	while (x < WIDTH)
 	{
 		get_ray_beam_verline(info, x);
-		_draw_texture_verline(info, x, z_buffer);
+		_draw_texture_verline(info, x, info->bonus.z_buffer);
 		x++;
 	}
 	if (info->sprite_list)
-		ft_draw_sprite(info, z_buffer);
+		ft_draw_sprite(info, info->bonus.z_buffer);
 	if (info->bonus.map_toggle)
 		mini_map_draw(info);
 	ft_re_render(info);

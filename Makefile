@@ -6,7 +6,7 @@
 #    By: yongmkim <yongmkim@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/19 16:53:06 by wchae             #+#    #+#              #
-#    Updated: 2022/08/17 01:09:36 by yongmkim         ###   ########seoul.kr   #
+#    Updated: 2022/08/18 16:22:58 by yongmkim         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -158,7 +158,7 @@ opt					:	ff
 	@make WITH_OPT=1 bonus
 
 sntz				:	ff
-	@make WITH_SNTZ=1 bonus
+	@make WITH_SNTZ=1 all
 
 m					:	mem
 mem					:
